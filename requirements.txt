@@ -1,0 +1,17 @@
+# Data Fetching
+yfinance==0.2.37
+jugaad-data==0.29
+
+# Data Processing & Feature Engineering
+pandas==2.2.1
+numpy==1.26.4
+pandas-ta==0.3.14post0
+scikit-learn==1.4.1.post1
+
+# Database Architecture
+SQLAlchemy==2.0.28
+psycopg2-binary==2.9.9
+
+# Machine Learning Core (Uncomment the one you prefer)
+# torch==2.2.1
+# tensorflow==2.15.0

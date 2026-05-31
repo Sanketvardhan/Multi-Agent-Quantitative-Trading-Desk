@@ -1,0 +1,17 @@
+# Environments
+stock_predictor_env/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Database and weights
+*.db
+weights/
+*.pt
+*.h5
+
+# OS generated files
+.DS_Store
