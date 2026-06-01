@@ -1,11 +1,15 @@
+python-dotenv
+
 # Data Fetching
-yfinance==0.2.37
-jugaad-data==0.29
+yfinance
+nselib
 
 # Data Processing & Feature Engineering
 pandas==2.2.1
 numpy==1.26.4
-pandas-ta==0.3.14post0
+# pandas-ta
+# git+https://github.com/twopirllc/pandas-ta.git
+ta
 scikit-learn==1.4.1.post1
 
 # Database Architecture
