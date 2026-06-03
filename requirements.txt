@@ -17,5 +17,6 @@ SQLAlchemy==2.0.28
 psycopg2-binary==2.9.9
 
 # Machine Learning Core (Uncomment the one you prefer)
-# torch==2.2.1
+scikit-learn
+torch
 # tensorflow==2.15.0

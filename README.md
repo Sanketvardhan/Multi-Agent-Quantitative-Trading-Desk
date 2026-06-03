@@ -1,44 +1,72 @@
-# AI Stock Prediction System
+# AI Stock Prediction System (Version 1)
 
-## Project Overview
+## Project Vision
 
-This project aims to build a quantitative AI-based stock prediction system for the Indian stock market.
+The goal of this project is to build a quantitative AI-powered stock selection system for the Indian stock market.
 
-The long-term goal is to generate profitable trading signals using machine learning, deep learning, uncertainty estimation, and eventually GenAI-based market analysis.
+This is NOT a stock price prediction project.
 
-This is NOT a simple stock-price prediction project.
+This is NOT a chart pattern recognition project.
 
-The objective is to identify the best trading opportunities across NIFTY50 stocks while avoiding low-confidence or potentially loss-making trades.
+The objective is:
+
+> Every evening after market close, predict which NIFTY50 stocks are most likely to generate positive intraday returns on the next trading day.
+
+The system will then rank all stocks and identify the highest-probability trading opportunities.
+
+Long-term objective:
+
+- Generate profitable trading signals
+- Estimate uncertainty and confidence
+- Rank opportunities automatically
+- Build a portfolio selection engine
+- Eventually evolve into a complete AI trading assistant
 
 ---
 
-# Current Project Status
+# Current Status
 
-## Phase 1: Data Ingestion & Feature Engineering ✅ COMPLETED
+## Phase 1 — Data Ingestion & Feature Engineering ✅ COMPLETED
 
-Historical data has been collected for all NIFTY50 stocks from:
+Historical data has been collected for all NIFTY50 stocks.
+
+Period:
 
 2015 → Present
 
-The dataset contains engineered features organized into multiple layers.
+Each stock-day contains engineered features from multiple feature layers.
 
 ---
 
 # Dataset Structure
 
-Each row represents a single stock on a single trading day.
+Each row represents:
 
-## Layer 1: OHLCV
-
-- Open
-- High
-- Low
-- Close
-- Volume
+```text
+One Stock
++
+One Trading Day
+```
 
 ---
 
-## Layer 2: Price Derived Features
+## Layer 1 — OHLCV Features
+
+Raw market data.
+
+Features:
+
+- open
+- high
+- low
+- close
+- volume
+
+---
+
+## Layer 2 — Price Derived Features
+
+Features:
 
 - daily_return
 - open_gap
@@ -48,17 +76,21 @@ Each row represents a single stock on a single trading day.
 
 ---
 
-## Layer 3: Trend Features
+## Layer 3 — Trend Features
 
-- SMA ratios
-- EMA ratios
+Features:
+
 - close_ema20_ratio
 - close_ema50_ratio
 - ema20_ema50_ratio
+- SMA ratios
+- EMA ratios
 
 ---
 
-## Layer 4: Momentum Features
+## Layer 4 — Momentum Features
+
+Features:
 
 - RSI14
 - MACD
@@ -70,7 +102,9 @@ Each row represents a single stock on a single trading day.
 
 ---
 
-## Layer 5: Volatility Features
+## Layer 5 — Volatility Features
+
+Features:
 
 - ATR14
 - ATR20
@@ -81,7 +115,9 @@ Each row represents a single stock on a single trading day.
 
 ---
 
-## Layer 6: Volume Features
+## Layer 6 — Volume Features
+
+Features:
 
 - volume_ratio
 - volume_change
@@ -90,7 +126,9 @@ Each row represents a single stock on a single trading day.
 
 ---
 
-## Layer 7: Market Context Features
+## Layer 7 — Market Context Features
+
+Features:
 
 - BANKNIFTY return
 - FINNIFTY return
@@ -101,7 +139,9 @@ Each row represents a single stock on a single trading day.
 
 ---
 
-## Layer 8: Time Features
+## Layer 8 — Time Features
+
+Features:
 
 - day_of_week
 - month
@@ -111,7 +151,9 @@ Each row represents a single stock on a single trading day.
 
 ---
 
-## Layer 9: Regime Features
+## Layer 9 — Market Regime Features
+
+Features:
 
 - trend_strength
 - volatility_regime
@@ -119,288 +161,467 @@ Each row represents a single stock on a single trading day.
 
 ---
 
-# Project Goal (Version 1)
+# Trading Strategy
 
-The objective is NOT to predict exact stock prices.
+## Prediction Timing
+
+Predictions are generated:
+
+```text
+After market close
+(~4 PM)
+```
+
+using only information available up to that moment.
+
+The model predicts:
+
+```text
+Tomorrow's trading session
+```
+
+---
+
+## Trade Execution
+
+The intended Version 1 strategy:
+
+```text
+Buy at next day's market open
+↓
+Hold throughout the day
+↓
+Sell at next day's market close
+```
+
+No overnight holding.
+
+No multi-day positions.
+
+No options trading.
+
+No leverage.
+
+Version 1 is strictly:
+
+```text
+Open → Close Intraday Trading
+```
+
+---
+
+# Prediction Target
+
+The primary target is:
+
+```python
+target_return = (
+    next_day_close - next_day_open
+) / next_day_open
+```
+
+Example:
+
+Today:
+
+```text
+Prediction generated after market close
+```
+
+Tomorrow:
+
+```text
+Open = 1000
+Close = 1030
+```
+
+Target:
+
+```text
+(1030 - 1000) / 1000
+
+= 0.03
+
+= +3%
+```
+
+The model learns to predict this value.
+
+---
+
+# Why This Target?
+
+The project's objective is not:
+
+```text
+Will the stock go up tomorrow?
+```
 
 The objective is:
 
-For each NIFTY50 stock, predict:
+```text
+Can we make money
+buying at open
+and selling at close?
+```
 
-1. Expected Next-Day Return
-2. Probability of Price Going Up
-3. Trend Strength
-4. Prediction Confidence / Uncertainty
-
-These predictions will later be used to rank stocks and generate trading decisions.
+The target directly measures the profitability of that strategy.
 
 ---
 
-# Trading Philosophy
+# Model Outputs
 
-At market open:
+Version 1 should produce four outputs for every stock.
 
-The system evaluates all NIFTY50 stocks.
+---
 
-Example output:
+## Output 1 — Expected Intraday Return
 
+Example:
+
+```text
 Reliance
 
-- Expected Return: +2.8%
-- Up Probability: 81%
-- Confidence: High
-
-TCS
-
-- Expected Return: +0.2%
-- Up Probability: 54%
-- Confidence: Low
-
-The system ranks stocks and selects the highest-quality opportunities.
-
-Goal:
-
-Maximize portfolio return while avoiding low-confidence trades.
+Expected Return = +2.4%
+```
 
 ---
 
-# Why Not Only Predict Up/Down?
+## Output 2 — Direction Probability
 
-A stock can move:
+Example:
 
-+0.05%
+```text
+Probability(Return > 0)
 
-and technically be classified as "UP".
+= 81%
+```
 
-That prediction has little trading value.
+Meaning:
 
-Therefore Version 1 focuses primarily on:
-
-Expected Return Prediction
-
-while also deriving:
-
-- Direction
-- Trend Strength
-- Confidence
-
-from model outputs.
+```text
+81% chance
+that the stock closes above its opening price.
+```
 
 ---
 
-# Version 1 Architecture
+## Output 3 — Confidence / Uncertainty
 
-Initial approach:
+Example:
 
-Input:
+```text
+Predicted Return = 2.4%
 
-Past 30 trading days
+Uncertainty = ±0.5%
+```
 
-Features:
+Meaning:
 
-~40-60 engineered features
+```text
+Prediction is relatively reliable.
+```
 
-Output:
+---
 
-Expected Next-Day Return
+## Output 4 — Trade Score
 
-Future outputs:
+A ranking score used to compare opportunities.
 
+Example:
+
+```text
+Trade Score
+
+=
+Expected Return
+/
+Uncertainty
+```
+
+Higher score:
+
+- Higher expected reward
+- Lower uncertainty
+
+Better trade candidate.
+
+---
+
+# Daily Workflow
+
+Every trading day:
+
+## Step 1
+
+After market close:
+
+Generate predictions for all NIFTY50 stocks.
+
+---
+
+## Step 2
+
+For each stock predict:
+
+- Expected Return
 - Direction Probability
-- Confidence Estimate
-- Trend Strength Score
+- Uncertainty
+- Trade Score
 
 ---
 
-# Phase 2 (CURRENT PHASE)
+## Step 3
 
-The next phase is NOT LSTM training.
+Rank all stocks.
 
-The next phase is:
+Example:
 
-Target Engineering
-+
-Sequence Generation
-+
-Baseline Models
-+
-Backtesting Framework
+```text
+1. Reliance
+2. SBI
+3. ICICI Bank
+4. HDFC Bank
+5. Infosys
+```
 
 ---
 
-# Phase 2 Tasks
+## Step 4
 
-## Task 1: Create Prediction Target
+Select top N opportunities.
 
-For each stock-day:
+Example:
 
-next_day_return
+```text
+Top 5 stocks
+```
 
-= (close[t+1] - close[t]) / close[t]
+---
+
+## Step 5
+
+Execute strategy:
+
+```text
+Buy at open
+Sell at close
+```
+
+---
+
+# Phase 2 — CURRENT PHASE
+
+The objective of Phase 2 is:
+
+```text
+Convert raw feature dataset
+into a supervised learning dataset.
+```
+
+---
+
+## Task 1 — Create Target Variable
+
+For every stock-day:
+
+```python
+target_return = (
+    next_day_close - next_day_open
+) / next_day_open
+```
 
 Store as:
 
+```text
 target_return
-
-Example:
-
-Today Close = 1000
-
-Tomorrow Close = 1020
-
-target_return = 0.02
+```
 
 ---
 
-## Task 2: Generate Rolling Sequences
+## Task 2 — Generate Training Sequences
 
-Create LSTM-ready windows.
+Create rolling windows.
 
 Example:
 
-Days 1-30
-→ Predict Day 31 Return
+```text
+Days 1–30
+→ Predict Day 31 target_return
 
-Days 2-31
-→ Predict Day 32 Return
+Days 2–31
+→ Predict Day 32 target_return
 
-Days 3-32
-→ Predict Day 33 Return
-
-Input shape:
-
-(window_size, num_features)
+Days 3–32
+→ Predict Day 33 target_return
+```
 
 Recommended:
 
-(30, N)
+```text
+Window Size = 30 Days
+```
 
 ---
 
-## Task 3: Dataset Split
+## Task 3 — Chronological Dataset Split
 
-Use chronological split.
+Use time-based splitting only.
 
 Example:
 
 Train:
-2015 - 2022
+
+```text
+2015–2022
+```
 
 Validation:
+
+```text
 2023
+```
 
 Test:
-2024 - Present
 
-NO random shuffling allowed.
+```text
+2024–Present
+```
+
+No random shuffling.
 
 ---
 
-## Task 4: Baseline Models
+## Task 4 — Train Baseline Models
 
-Before training LSTM:
+Before deep learning:
 
-Train simple models:
+Train:
 
 - Linear Regression
-- Random Forest
-- XGBoost
+- Random Forest Regressor
+- XGBoost Regressor
 
 Purpose:
 
-Establish baseline performance.
-
-Deep learning must outperform these baselines.
+Determine whether the engineered features contain predictive signal.
 
 ---
 
-## Task 5: Evaluation Metrics
+## Task 5 — Evaluate Predictions
 
-Evaluate:
+Metrics:
 
 Regression:
 
 - MAE
 - RMSE
+- R²
 
-Directional Metrics:
+Direction:
 
-- Direction Accuracy
+- Accuracy
+- Precision
+- Recall
 
-Financial Metrics:
+Financial:
 
-- Portfolio Return
+- Average Return
 - Sharpe Ratio
-- Maximum Drawdown
 - Win Rate
+- Maximum Drawdown
 
 ---
 
-## Task 6: Build Backtesting Engine
+## Task 6 — Build Backtesting Engine
 
-For every day:
+Simulate real trading.
 
-1. Generate predictions
-2. Rank stocks
-3. Select top N stocks
-4. Simulate trades
-5. Measure profitability
+Daily process:
 
-Example:
+```text
+Predict
+↓
+Rank
+↓
+Select Top N
+↓
+Buy Open
+↓
+Sell Close
+↓
+Record Return
+```
 
-Select Top 5 predicted returns each day.
-
-Backtest on unseen data.
+Backtesting must be performed on unseen data only.
 
 ---
 
-# Phase 3 (After Phase 2 Validation)
+# Phase 3
 
-Only after proving profitability using baseline models:
+Only after baseline models are validated:
 
-Train:
+Train deep learning models.
 
-CNN + LSTM
+Candidate architectures:
 
-Architecture:
+- LSTM
+- GRU
+- CNN + LSTM
 
-Input
-→ 1D CNN
-→ LSTM
-→ Dense Layers
-→ Return Prediction
+Initial recommendation:
 
-Future additions:
+```text
+CNN
+↓
+LSTM
+↓
+Dense Layers
+↓
+Return Prediction
+```
+
+---
+
+# Future Versions
+
+Planned additions:
 
 - Monte Carlo Dropout
 - Bayesian Neural Networks
-- Ensemble Models
-
-for uncertainty estimation.
-
----
-
-# Success Criteria For Version 1
-
-The system should be able to:
-
-1. Evaluate all NIFTY50 stocks daily.
-2. Predict next-day expected return.
-3. Estimate confidence.
-4. Rank opportunities.
-5. Avoid weak/uncertain trades.
-6. Produce profitable backtest results.
-
-Only after achieving this should more advanced architectures be explored.
+- Model Ensembles
+- News Sentiment
+- Earnings Analysis
+- GenAI Explanations
+- Portfolio Optimization
+- Position Sizing Engine
 
 ---
 
-# Important Principle
+# Success Criteria
+
+Version 1 is successful if:
+
+1. The system predicts next-day intraday returns.
+2. Stocks can be ranked effectively.
+3. High-confidence opportunities are identified.
+4. Backtesting outperforms naive selection methods.
+5. Risk-adjusted returns are positive.
+
+---
+
+# Core Principle
 
 The project goal is NOT:
 
-"Predict stock prices."
+```text
+Predict stock prices.
+```
 
 The project goal is:
 
-"Generate high-confidence trading decisions that outperform naive market strategies."
+```text
+Every evening,
+identify tomorrow's highest-probability
+intraday trading opportunities.
+```

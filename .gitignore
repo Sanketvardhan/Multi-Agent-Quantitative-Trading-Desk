@@ -10,8 +10,19 @@ __pycache__/
 # Database and weights
 *.db
 weights/
+*.npy
+*.pkl
 *.pt
 *.h5
+model_training/data_tensors/
+model_training/runs/
 
 # OS generated files
 .DS_Store
+
+# Large Data Caches & Temp Files
+*.csv
+tempCodeRunnerFile.py
+
+# Plots and Images
+*.png
