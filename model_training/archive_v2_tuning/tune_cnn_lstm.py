@@ -5,7 +5,6 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import optuna
-from optuna.trial import TrialState
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -24,21 +23,19 @@ class StockCNNLSTM(nn.Module):
     def __init__(self, input_dim, cnn_out_channels, kernel_size, hidden_dim, num_layers, dropout_rate):
         super(StockCNNLSTM, self).__init__()
         
-        # Calculate padding to keep the 30-day sequence length exactly the same
         pad = kernel_size // 2 
         
         self.conv1 = nn.Conv1d(in_channels=input_dim, out_channels=cnn_out_channels, kernel_size=kernel_size, padding=pad)
         self.relu = nn.ReLU()
         
-        # The LSTM now takes the CNN's output channels as its input
         self.lstm = nn.LSTM(cnn_out_channels, hidden_dim, num_layers, batch_first=True, dropout=dropout_rate)
         self.fc = nn.Linear(hidden_dim, 1)
         
     def forward(self, x):
-        x = x.permute(0, 2, 1) # To (Batch, Features, Time) for CNN
+        x = x.permute(0, 2, 1) 
         x = self.conv1(x)
         x = self.relu(x)
-        x = x.permute(0, 2, 1) # Back to (Batch, Time, Features) for LSTM
+        x = x.permute(0, 2, 1) 
         
         h0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(device)
         c0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(device)
@@ -49,7 +46,7 @@ class StockCNNLSTM(nn.Module):
 def objective(trial):
     # 1. The Search Space
     cnn_channels = trial.suggest_categorical('cnn_channels', [32, 64, 128])
-    kernel_size = trial.suggest_categorical('kernel_size', [3, 5]) # Look at 3-day or 5-day clusters
+    kernel_size = trial.suggest_categorical('kernel_size', [3, 5]) 
     hidden_dim = trial.suggest_categorical('hidden_dim', [32, 64, 128])
     num_layers = trial.suggest_int('num_layers', 1, 3)
     dropout_rate = trial.suggest_float('dropout', 0.2, 0.6) if num_layers > 1 else 0.0
@@ -64,9 +61,9 @@ def objective(trial):
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
 
-    # 3. Model Init
+    # 3. Model Init (CRITICAL: input_dim changed to 52)
     model = StockCNNLSTM(
-        input_dim=47, 
+        input_dim=52, 
         cnn_out_channels=cnn_channels, 
         kernel_size=kernel_size,
         hidden_dim=hidden_dim, 
@@ -77,7 +74,7 @@ def objective(trial):
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
     
-    epochs = 15 # Shorter runs for the tuning phase
+    epochs = 15 
     best_val_acc = 0.0
     
     for epoch in range(epochs):
@@ -113,12 +110,12 @@ def objective(trial):
     return best_val_acc
 
 if __name__ == "__main__":
-    print("Initializing CNN+LSTM Optuna Study...")
-    study = optuna.create_study(direction='maximize', study_name="CNN_LSTM_Tuning")
-    study.optimize(objective, n_trials=25) # Give it 25 tries to find the optimal architecture
+    print("Initializing CNN+LSTM Optuna Study (52 Features)...")
+    study = optuna.create_study(direction='maximize', study_name="CNN_LSTM_Tuning_V3")
+    study.optimize(objective, n_trials=25) 
     
     print("\n======================================")
-    print("🏆 BEST HYBRID PARAMETERS FOUND 🏆")
+    print("🏆 BEST V3 HYBRID PARAMETERS FOUND 🏆")
     print("======================================")
     print(f"Best Validation Accuracy: {study.best_value:.2f}%")
     for key, value in study.best_trial.params.items():

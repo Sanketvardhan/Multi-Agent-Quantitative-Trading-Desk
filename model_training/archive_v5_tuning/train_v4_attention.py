@@ -18,63 +18,81 @@ class StockSequenceDataset(Dataset):
     def __getitem__(self, idx):
         return self.X[idx], self.y[idx]
 
-class StockCNNLSTM(nn.Module):
+# ==========================================
+# V4 COMPONENT: THE ATTENTION MECHANISM
+# ==========================================
+class Attention(nn.Module):
+    def __init__(self, hidden_dim):
+        super(Attention, self).__init__()
+        self.attention = nn.Linear(hidden_dim, 1, bias=False)
+
+    def forward(self, lstm_outputs):
+        attn_weights = torch.softmax(self.attention(lstm_outputs), dim=1) 
+        context_vector = torch.sum(attn_weights * lstm_outputs, dim=1) 
+        return context_vector, attn_weights
+
+# ==========================================
+# THE V4 ARCHITECTURE
+# ==========================================
+class StockCNNLSTMAttention(nn.Module):
     def __init__(self, input_dim, cnn_out_channels, kernel_size, hidden_dim, num_layers, dropout_rate):
-        super(StockCNNLSTM, self).__init__()
-        
-        # Calculate padding dynamically based on kernel size
+        super(StockCNNLSTMAttention, self).__init__()
         pad = kernel_size // 2 
         
         self.conv1 = nn.Conv1d(in_channels=input_dim, out_channels=cnn_out_channels, kernel_size=kernel_size, padding=pad)
         self.relu = nn.ReLU()
         
         self.lstm = nn.LSTM(cnn_out_channels, hidden_dim, num_layers, batch_first=True, dropout=dropout_rate)
+        
+        self.attention = Attention(hidden_dim)
         self.fc = nn.Linear(hidden_dim, 1)
         
     def forward(self, x):
-        x = x.permute(0, 2, 1) # Prep for CNN
+        x = x.permute(0, 2, 1) 
         x = self.conv1(x)
         x = self.relu(x)
-        x = x.permute(0, 2, 1) # Prep for LSTM
+        x = x.permute(0, 2, 1) 
         
         h0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(device)
         c0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(device)
-        out, _ = self.lstm(x, (h0, c0))
-        out = self.fc(out[:, -1, :])
+        
+        lstm_out, _ = self.lstm(x, (h0, c0))
+        context_vector, _ = self.attention(lstm_out)
+        
+        out = self.fc(context_vector)
         return out.squeeze(-1)
 
-def train_final_hybrid():
-    print(f"Deploying Final CNN+LSTM to: {device}")
+def train_v4():
+    print(f"Deploying V4 Attention Architecture to: {device}")
     
-    # 1. Load Tensors
+    # 1. Load Tensors (All 52 Features)
     tensor_dir = 'model_training/data_tensors/'
     train_dataset = StockSequenceDataset(f'{tensor_dir}X_train.npy', f'{tensor_dir}y_train.npy')
     val_dataset = StockSequenceDataset(f'{tensor_dir}X_val.npy', f'{tensor_dir}y_val.npy')
     test_dataset = StockSequenceDataset(f'{tensor_dir}X_test.npy', f'{tensor_dir}y_test.npy')
     
-    # Inject Optuna's Winning Batch Size
     batch_size = 512
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-    # 2. Inject Optuna's Winning Architecture Parameters
-    model = StockCNNLSTM(
-        input_dim=47, 
-        cnn_out_channels=64, 
+    # 2. Inject Optuna's Winning Parameters
+    model = StockCNNLSTMAttention(
+        input_dim=52, 
+        cnn_out_channels=128, 
         kernel_size=5,
         hidden_dim=64, 
         num_layers=2, 
-        dropout_rate=0.514322973738394
+        dropout_rate=0.32768562460671624
     ).to(device)
     
     criterion = nn.MSELoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.00023481377736202206)
+    optimizer = optim.Adam(model.parameters(), lr=0.00016701085473169497)
     
     epochs = 30
     best_val_acc = 0.0
     
-    print("Training Final Hybrid Model...")
+    print("Training Final V4 Attention Model...")
     for epoch in range(epochs):
         model.train()
         for batch_X, batch_y in train_loader:
@@ -103,10 +121,11 @@ def train_final_hybrid():
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             os.makedirs('weights', exist_ok=True)
-            torch.save(model.state_dict(), 'weights/best_cnn_lstm_final.pth')
+            # Safe, unique filename
+            torch.save(model.state_dict(), 'weights/best_attention_V4.pth')
             
     print("\n--- FINAL TEST SET EVALUATION ---")
-    model.load_state_dict(torch.load('weights/best_cnn_lstm_final.pth', weights_only=True))
+    model.load_state_dict(torch.load('weights/best_attention_V4.pth', weights_only=True))
     model.eval()
     
     correct_directions = 0
@@ -121,7 +140,7 @@ def train_final_hybrid():
             
     test_acc = (correct_directions / total_samples) * 100
     print(f"Unseen 2024 Test Set Directional Accuracy: {test_acc:.2f}%")
-    print("Final model architecture frozen and saved to /weights/best_cnn_lstm_final.pth")
+    print("Final V4 model frozen and saved to /weights/best_attention_V4.pth")
 
 if __name__ == "__main__":
-    train_final_hybrid()
+    train_v4()

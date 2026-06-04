@@ -37,7 +37,7 @@ class StockCNNLSTM(nn.Module):
 
 def run_hybrid_simulation():
     # NEW CACHE FILE so it doesn't read the old LSTM data
-    CACHE_FILE = 'model_training/hybrid_mc_cache.csv'
+    CACHE_FILE = 'model_training/cache/hybrid_mc_cache_V2.csv'
     
     if os.path.exists(CACHE_FILE):
         print(f"Loading cached Hybrid predictions from {CACHE_FILE}...")
@@ -62,16 +62,17 @@ def run_hybrid_simulation():
         
         print("3. Generating Hybrid Probabilistic Predictions (50 passes per day)...")
         # INJECTING OPTUNA'S WINNING PARAMETERS
+        # INJECTING OPTUNA'S V3 WINNING PARAMETERS
         model = StockCNNLSTM(
-            input_dim=47, 
-            cnn_out_channels=64, 
+            input_dim=52, 
+            cnn_out_channels=128, 
             kernel_size=5,
             hidden_dim=64, 
             num_layers=2, 
-            dropout_rate=0.514322973738394
+            dropout_rate=0.3132467352180914
         ).to(device)
         
-        model.load_state_dict(torch.load('weights/best_cnn_lstm_final.pth', weights_only=True))
+        model.load_state_dict(torch.load('weights/best_cnn_lstm_final_V2.pth', weights_only=True))
         model.train() # KEEP DROPOUT ACTIVE FOR BAYESIAN UNCERTAINTY
         
         WINDOW_SIZE = 30
@@ -207,7 +208,7 @@ def run_hybrid_simulation():
     plt.ylabel('Portfolio Value (₹)')
     plt.grid(True, alpha=0.3)
     plt.legend()
-    plt.savefig('model_training/hybrid_equity_curve.png')   
+    plt.savefig('model_training/cache/hybrid_equity_curve.png')   
 
 if __name__ == "__main__":
     run_hybrid_simulation()
