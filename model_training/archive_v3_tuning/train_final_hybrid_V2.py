@@ -121,7 +121,7 @@ def train_final_hybrid():
             
     test_acc = (correct_directions / total_samples) * 100
     print(f"Unseen 2024 Test Set Directional Accuracy: {test_acc:.2f}%")
-    print("Final model architecture frozen and saved to /weights/best_cnn_lstm_final.pth")
+    print("Final model architecture frozen and saved to /weights/best_cnn_lstm_final__v2.pth")
 
 if __name__ == "__main__":
     train_final_hybrid()

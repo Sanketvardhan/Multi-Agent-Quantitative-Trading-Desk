@@ -74,6 +74,37 @@ def add_time_and_regime_features():
     
     # Now that the dirty warmup rows are deleted, we can drop the temporary sma_200 column
     df.drop(columns=['sma_200'], inplace=True)
+
+    # =================================================================
+    # LAYER 10: CANDLESTICK EXTREMES (INSTITUTIONAL PRESSURE FLAGS)
+    # =================================================================
+    print("Calculating Layer 10: Candlestick Extremes...")
+    
+    # 1 if open is exactly the low (Massive immediate buying pressure)
+    df['open_equals_low'] = (df['open'] == df['low']).astype(int)
+    
+    # 1 if open is exactly the high (Massive immediate selling pressure)
+    df['open_equals_high'] = (df['open'] == df['high']).astype(int)
+    
+    # =================================================================
+    # LAYER 11: INSTITUTIONAL PIVOT POINTS (SUPPORT & RESISTANCE)
+    # =================================================================
+    print("Calculating Layer 11: Pivot Points & Psychological Levels...")
+    
+    # 1. Calculate the core Pivot Point (PP) based on the day's HLC
+    df['pivot_point'] = (df['high'] + df['low'] + df['close']) / 3
+    
+    # 2. Calculate Support 1 (S1) and Resistance 1 (R1)
+    df['support_1'] = (2 * df['pivot_point']) - df['high']
+    df['resistance_1'] = (2 * df['pivot_point']) - df['low']
+    
+    # 3. Calculate distance from Close to these psychological levels
+    df['dist_to_pivot'] = (df['close'] - df['pivot_point']) / df['close']
+    df['dist_to_s1'] = (df['close'] - df['support_1']) / df['close']
+    df['dist_to_r1'] = (df['close'] - df['resistance_1']) / df['close']
+    
+    # Drop the raw absolute prices since the AI only needs the relative distances
+    df.drop(columns=['pivot_point', 'support_1', 'resistance_1'], inplace=True)
     
     print("5. Saving Final Master Dataset to PostgreSQL...")
     table_name = 'master_features_final'
