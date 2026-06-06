@@ -1,0 +1,22 @@
+{
+  "BAJAJ-AUTO": {
+    "directive": "SHORT",
+    "confidence_tier": "HIGH",
+    "reasoning": "BAJAJ-AUTO shows a negative AI swing expected return of -0.0056 with an uncertainty of 0.0027. The return is more than double the uncertainty, indicating a high confidence short trade. The company has a reasonable forward P/E of 22.27 and a profit margin of 16.51%."
+  },
+  "TATASTEEL": {
+    "directive": "SHORT",
+    "confidence_tier": "HIGH",
+    "reasoning": "TATASTEEL presents a strong negative AI swing expected return of -0.0089 with an uncertainty of 0.0016. The expected return is significantly larger than the uncertainty, supporting a high confidence short position. The company has a low profit margin of 4.65%."
+  },
+  "ONGC": {
+    "directive": "SHORT",
+    "confidence_tier": "HIGH",
+    "reasoning": "ONGC has an AI swing expected return of -0.0030 and an uncertainty of 0.0011. The expected return is nearly three times the uncertainty, justifying a high confidence short trade. The company's profit margin is 6.25%."
+  },
+  "JSWSTEEL": {
+    "directive": "SHORT",
+    "confidence_tier": "HIGH",
+    "reasoning": "JSWSTEEL has an AI swing expected return of -0.0031 with an uncertainty of 0.0012. The expected return is more than 2.5 times the uncertainty, indicating a high confidence short trade. The company's profit margin is 12.03%."
+  }
+}

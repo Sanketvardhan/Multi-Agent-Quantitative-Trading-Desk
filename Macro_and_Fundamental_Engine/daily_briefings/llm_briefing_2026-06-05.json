@@ -1,0 +1,510 @@
+{
+  "system_status": "PRE-MARKET BRIEFING",
+  "macro_environment": {
+    "date": "2026-06-05",
+    "india_vix": 15.67,
+    "market_sentiment": "Stable"
+  },
+  "company_fundamentals": {
+    "ADANIENT": {
+      "sector": "Energy",
+      "forward_PE": 53.259697,
+      "trailing_PE": 40.87481,
+      "profit_margin_pct": 9.3,
+      "debt_to_equity": 119.56,
+      "current_price": 3013.7,
+      "AI_Swing_Expected_Return": -0.0041,
+      "AI_Swing_Uncertainty": 0.0016
+    },
+    "ADANIPORTS": {
+      "sector": "Industrials",
+      "forward_PE": 23.438978,
+      "trailing_PE": 31.21993,
+      "profit_margin_pct": 33.06,
+      "debt_to_equity": 64.051,
+      "current_price": 1817.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "APOLLOHOSP": {
+      "sector": "Healthcare",
+      "forward_PE": 38.783142,
+      "trailing_PE": 61.2877,
+      "profit_margin_pct": 7.7,
+      "debt_to_equity": 85.146,
+      "current_price": 8291.0,
+      "AI_Swing_Expected_Return": -0.0028,
+      "AI_Swing_Uncertainty": 0.0029
+    },
+    "ASIANPAINT": {
+      "sector": "Basic Materials",
+      "forward_PE": 46.03672,
+      "trailing_PE": 59.917744,
+      "profit_margin_pct": 12.15,
+      "debt_to_equity": 17.847,
+      "current_price": 2695.1,
+      "AI_Swing_Expected_Return": -0.0035,
+      "AI_Swing_Uncertainty": 0.0018
+    },
+    "AXISBANK": {
+      "sector": "Financial Services",
+      "forward_PE": 10.031746,
+      "trailing_PE": 14.963892,
+      "profit_margin_pct": 35.41,
+      "debt_to_equity": "N/A",
+      "current_price": 1264.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "BAJAJ-AUTO": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 22.273338,
+      "trailing_PE": 26.951591,
+      "profit_margin_pct": 16.51,
+      "debt_to_equity": 56.289,
+      "current_price": 10361.0,
+      "AI_Swing_Expected_Return": -0.0056,
+      "AI_Swing_Uncertainty": 0.0027
+    },
+    "BAJFINANCE": {
+      "sector": "Financial Services",
+      "forward_PE": 18.012486,
+      "trailing_PE": 29.200523,
+      "profit_margin_pct": 43.38,
+      "debt_to_equity": 313.407,
+      "current_price": 891.2,
+      "AI_Swing_Expected_Return": -0.0014,
+      "AI_Swing_Uncertainty": 0.0014
+    },
+    "BAJAJFINSV": {
+      "sector": "Financial Services",
+      "forward_PE": 18.574713,
+      "trailing_PE": 28.006226,
+      "profit_margin_pct": 6.57,
+      "debt_to_equity": 256.36,
+      "current_price": 1709.9,
+      "AI_Swing_Expected_Return": -0.0011,
+      "AI_Swing_Uncertainty": 0.0012
+    },
+    "BEL": {
+      "sector": "Industrials",
+      "forward_PE": 35.750813,
+      "trailing_PE": 49.057976,
+      "profit_margin_pct": 21.96,
+      "debt_to_equity": 0.273,
+      "current_price": 406.2,
+      "AI_Swing_Expected_Return": -0.0021,
+      "AI_Swing_Uncertainty": 0.0011
+    },
+    "BHARTIARTL": {
+      "sector": "Communication Services",
+      "forward_PE": 21.565092,
+      "trailing_PE": 40.543037,
+      "profit_margin_pct": 12.65,
+      "debt_to_equity": 99.718,
+      "current_price": 1799.3,
+      "AI_Swing_Expected_Return": -0.0022,
+      "AI_Swing_Uncertainty": 0.0016
+    },
+    "CIPLA": {
+      "sector": "Healthcare",
+      "forward_PE": 22.10111,
+      "trailing_PE": 29.105877,
+      "profit_margin_pct": 13.94,
+      "debt_to_equity": 1.778,
+      "current_price": 1396.5,
+      "AI_Swing_Expected_Return": -0.0029,
+      "AI_Swing_Uncertainty": 0.001
+    },
+    "COALINDIA": {
+      "sector": "Energy",
+      "forward_PE": 8.287104,
+      "trailing_PE": 9.382924,
+      "profit_margin_pct": 18.46,
+      "debt_to_equity": 11.629,
+      "current_price": 473.65,
+      "AI_Swing_Expected_Return": -0.002,
+      "AI_Swing_Uncertainty": 0.0009
+    },
+    "DRREDDY": {
+      "sector": "Healthcare",
+      "forward_PE": 19.891642,
+      "trailing_PE": 24.935871,
+      "profit_margin_pct": 12.76,
+      "debt_to_equity": 20.328,
+      "current_price": 1283.2,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "EICHERMOT": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 26.690943,
+      "trailing_PE": 35.296757,
+      "profit_margin_pct": 23.56,
+      "debt_to_equity": 2.048,
+      "current_price": 7077.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "ETERNAL": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 62.775005,
+      "trailing_PE": 670.9211,
+      "profit_margin_pct": 0.67,
+      "debt_to_equity": 14.826,
+      "current_price": 254.95,
+      "AI_Swing_Expected_Return": 0.0006,
+      "AI_Swing_Uncertainty": 0.0011
+    },
+    "GRASIM": {
+      "sector": "Basic Materials",
+      "forward_PE": 20.989199,
+      "trailing_PE": 42.08083,
+      "profit_margin_pct": 2.83,
+      "debt_to_equity": 134.138,
+      "current_price": 3082.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "HCLTECH": {
+      "sector": "Technology",
+      "forward_PE": 14.344323,
+      "trailing_PE": 18.731659,
+      "profit_margin_pct": 12.8,
+      "debt_to_equity": 6.935,
+      "current_price": 1149.0,
+      "AI_Swing_Expected_Return": -0.0021,
+      "AI_Swing_Uncertainty": 0.0017
+    },
+    "HDFCBANK": {
+      "sector": "Financial Services",
+      "forward_PE": 11.936395,
+      "trailing_PE": 16.742188,
+      "profit_margin_pct": 26.83,
+      "debt_to_equity": "N/A",
+      "current_price": 750.05,
+      "AI_Swing_Expected_Return": -0.0027,
+      "AI_Swing_Uncertainty": 0.0012
+    },
+    "HDFCLIFE": {
+      "sector": "Financial Services",
+      "forward_PE": 47.377647,
+      "trailing_PE": 65.63276,
+      "profit_margin_pct": 1.92,
+      "debt_to_equity": 17.46,
+      "current_price": 580.85,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "HINDALCO": {
+      "sector": "Basic Materials",
+      "forward_PE": 10.258982,
+      "trailing_PE": 18.173365,
+      "profit_margin_pct": 4.87,
+      "debt_to_equity": 72.598,
+      "current_price": 1094.4,
+      "AI_Swing_Expected_Return": -0.0024,
+      "AI_Swing_Uncertainty": 0.0011
+    },
+    "HINDUNILVR": {
+      "sector": "Consumer Defensive",
+      "forward_PE": 39.38052,
+      "trailing_PE": 46.54754,
+      "profit_margin_pct": 23.33,
+      "debt_to_equity": 3.016,
+      "current_price": 2110.0,
+      "AI_Swing_Expected_Return": -0.0018,
+      "AI_Swing_Uncertainty": 0.0016
+    },
+    "ICICIBANK": {
+      "sector": "Financial Services",
+      "forward_PE": 13.861955,
+      "trailing_PE": 16.871403,
+      "profit_margin_pct": 24.93,
+      "debt_to_equity": "N/A",
+      "current_price": 1260.8,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "INDIGO": {
+      "sector": "Industrials",
+      "forward_PE": 19.282282,
+      "trailing_PE": "N/A",
+      "profit_margin_pct": 3.79,
+      "debt_to_equity": 866.462,
+      "current_price": 4452.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "INFY": {
+      "sector": "Technology",
+      "forward_PE": 14.634932,
+      "trailing_PE": 15.751049,
+      "profit_margin_pct": 16.43,
+      "debt_to_equity": 9.827,
+      "current_price": 1199.6,
+      "AI_Swing_Expected_Return": -0.0025,
+      "AI_Swing_Uncertainty": 0.0013
+    },
+    "ITC": {
+      "sector": "Consumer Defensive",
+      "forward_PE": 15.839472,
+      "trailing_PE": 16.983646,
+      "profit_margin_pct": 26.23,
+      "debt_to_equity": 3.292,
+      "current_price": 280.4,
+      "AI_Swing_Expected_Return": -0.0021,
+      "AI_Swing_Uncertainty": 0.0014
+    },
+    "JIOFIN": {
+      "sector": "Financial Services",
+      "forward_PE": 54.01139,
+      "trailing_PE": 98.79583,
+      "profit_margin_pct": 57.77,
+      "debt_to_equity": 16.286,
+      "current_price": 237.11,
+      "AI_Swing_Expected_Return": -0.0021,
+      "AI_Swing_Uncertainty": 0.0008
+    },
+    "JSWSTEEL": {
+      "sector": "Basic Materials",
+      "forward_PE": 17.55889,
+      "trailing_PE": 13.999562,
+      "profit_margin_pct": 12.03,
+      "debt_to_equity": 94.155,
+      "current_price": 1276.9,
+      "AI_Swing_Expected_Return": -0.0031,
+      "AI_Swing_Uncertainty": 0.0012
+    },
+    "KOTAKBANK": {
+      "sector": "Financial Services",
+      "forward_PE": 13.523214,
+      "trailing_PE": 19.528107,
+      "profit_margin_pct": 26.05,
+      "debt_to_equity": "N/A",
+      "current_price": 378.65,
+      "AI_Swing_Expected_Return": -0.0013,
+      "AI_Swing_Uncertainty": 0.0012
+    },
+    "LT": {
+      "sector": "Industrials",
+      "forward_PE": 21.597502,
+      "trailing_PE": 33.950638,
+      "profit_margin_pct": 5.51,
+      "debt_to_equity": 97.64,
+      "current_price": 3961.7,
+      "AI_Swing_Expected_Return": -0.0013,
+      "AI_Swing_Uncertainty": 0.0021
+    },
+    "M&M": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 18.925808,
+      "trailing_PE": 19.893639,
+      "profit_margin_pct": 8.46,
+      "debt_to_equity": 125.066,
+      "current_price": 3030.0,
+      "AI_Swing_Expected_Return": 0.0003,
+      "AI_Swing_Uncertainty": 0.0021
+    },
+    "MARUTI": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 21.099665,
+      "trailing_PE": 28.073673,
+      "profit_margin_pct": 8.01,
+      "debt_to_equity": 0.096,
+      "current_price": 13093.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "MAXHEALTH": {
+      "sector": "Healthcare",
+      "forward_PE": 39.96344,
+      "trailing_PE": 65.6157,
+      "profit_margin_pct": 17.23,
+      "debt_to_equity": 32.367,
+      "current_price": 969.8,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "NESTLEIND": {
+      "sector": "Consumer Defensive",
+      "forward_PE": 58.123363,
+      "trailing_PE": 75.987854,
+      "profit_margin_pct": 15.11,
+      "debt_to_equity": 8.613,
+      "current_price": 1376.9,
+      "AI_Swing_Expected_Return": -0.0025,
+      "AI_Swing_Uncertainty": 0.0014
+    },
+    "NTPC": {
+      "sector": "Utilities",
+      "forward_PE": 12.765065,
+      "trailing_PE": 11.860427,
+      "profit_margin_pct": 14.44,
+      "debt_to_equity": 118.127,
+      "current_price": 361.15,
+      "AI_Swing_Expected_Return": -0.0019,
+      "AI_Swing_Uncertainty": 0.001
+    },
+    "ONGC": {
+      "sector": "Energy",
+      "forward_PE": 6.0740633,
+      "trailing_PE": 8.020644,
+      "profit_margin_pct": 6.25,
+      "debt_to_equity": 42.548,
+      "current_price": 264.2,
+      "AI_Swing_Expected_Return": -0.003,
+      "AI_Swing_Uncertainty": 0.0011
+    },
+    "POWERGRID": {
+      "sector": "Utilities",
+      "forward_PE": 14.315535,
+      "trailing_PE": 14.172464,
+      "profit_margin_pct": 34.08,
+      "debt_to_equity": 150.993,
+      "current_price": 285.15,
+      "AI_Swing_Expected_Return": -0.0013,
+      "AI_Swing_Uncertainty": 0.001
+    },
+    "RELIANCE": {
+      "sector": "Energy",
+      "forward_PE": 18.011732,
+      "trailing_PE": 21.689835,
+      "profit_margin_pct": 7.64,
+      "debt_to_equity": 36.653,
+      "current_price": 1295.1,
+      "AI_Swing_Expected_Return": -0.002,
+      "AI_Swing_Uncertainty": 0.0012
+    },
+    "SBILIFE": {
+      "sector": "Financial Services",
+      "forward_PE": 51.636738,
+      "trailing_PE": 72.988174,
+      "profit_margin_pct": 2.2,
+      "debt_to_equity": "N/A",
+      "current_price": 1790.4,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "SHRIRAMFIN": {
+      "sector": "Financial Services",
+      "forward_PE": 13.256134,
+      "trailing_PE": 17.316296,
+      "profit_margin_pct": 48.41,
+      "debt_to_equity": 274.993,
+      "current_price": 921.4,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "SBIN": {
+      "sector": "Financial Services",
+      "forward_PE": 9.557078,
+      "trailing_PE": 10.754635,
+      "profit_margin_pct": 22.11,
+      "debt_to_equity": "N/A",
+      "current_price": 980.5,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "SUNPHARMA": {
+      "sector": "Healthcare",
+      "forward_PE": 27.78511,
+      "trailing_PE": 37.58563,
+      "profit_margin_pct": 19.64,
+      "debt_to_equity": 5.517,
+      "current_price": 1799.6,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "TCS": {
+      "sector": "Technology",
+      "forward_PE": 13.337895,
+      "trailing_PE": 16.220686,
+      "profit_margin_pct": 18.43,
+      "debt_to_equity": 10.389,
+      "current_price": 2206.5,
+      "AI_Swing_Expected_Return": -0.0006,
+      "AI_Swing_Uncertainty": 0.0018
+    },
+    "TATACONSUM": {
+      "sector": "Consumer Defensive",
+      "forward_PE": 47.330242,
+      "trailing_PE": 72.61676,
+      "profit_margin_pct": 7.6,
+      "debt_to_equity": 12.159,
+      "current_price": 1135.0,
+      "AI_Swing_Expected_Return": -0.0034,
+      "AI_Swing_Uncertainty": 0.001
+    },
+    "TMPV": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 7.309453,
+      "trailing_PE": "N/A",
+      "profit_margin_pct": 24.55,
+      "debt_to_equity": 65.31,
+      "current_price": 397.85,
+      "AI_Swing_Expected_Return": -0.0011,
+      "AI_Swing_Uncertainty": 0.0012
+    },
+    "TATASTEEL": {
+      "sector": "Basic Materials",
+      "forward_PE": 10.928192,
+      "trailing_PE": 23.751446,
+      "profit_margin_pct": 4.65,
+      "debt_to_equity": 89.017,
+      "current_price": 205.47,
+      "AI_Swing_Expected_Return": -0.0089,
+      "AI_Swing_Uncertainty": 0.0016
+    },
+    "TECHM": {
+      "sector": "Technology",
+      "forward_PE": 17.248259,
+      "trailing_PE": 27.18877,
+      "profit_margin_pct": 8.47,
+      "debt_to_equity": 7.269,
+      "current_price": 1472.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "TITAN": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 49.428383,
+      "trailing_PE": 74.283966,
+      "profit_margin_pct": 5.79,
+      "debt_to_equity": 195.001,
+      "current_price": 4243.1,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "TRENT": {
+      "sector": "Consumer Cyclical",
+      "forward_PE": 55.8825,
+      "trailing_PE": 85.62597,
+      "profit_margin_pct": 8.57,
+      "debt_to_equity": 36.034,
+      "current_price": 2770.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "ULTRACEMCO": {
+      "sector": "Basic Materials",
+      "forward_PE": 24.949121,
+      "trailing_PE": 39.41253,
+      "profit_margin_pct": 9.23,
+      "debt_to_equity": 29.432,
+      "current_price": 10922.0,
+      "AI_Swing_Expected_Return": "No Signal",
+      "AI_Swing_Uncertainty": "N/A"
+    },
+    "WIPRO": {
+      "sector": "Technology",
+      "forward_PE": 13.564337,
+      "trailing_PE": 15.528242,
+      "profit_margin_pct": 14.25,
+      "debt_to_equity": 22.853,
+      "current_price": 195.19,
+      "AI_Swing_Expected_Return": -0.0022,
+      "AI_Swing_Uncertainty": 0.0011
+    }
+  }
+}
