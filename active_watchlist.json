@@ -2,21 +2,16 @@
   "INFY": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "INFY has a strong quant edge with an expected return of -0.004369 significantly larger than its uncertainty of 0.001204, and no negative news sentiment."
-  },
-  "SBIN": {
-    "directive": "SHORT",
-    "confidence_tier": "MEDIUM",
-    "reasoning": "SBIN presents a quant edge with an expected return of -0.003062 compared to its uncertainty of 0.001422, and the news sentiment is neutral."
-  },
-  "ITC": {
-    "directive": "SHORT",
-    "confidence_tier": "HIGH",
-    "reasoning": "ITC shows a significant quant edge as its expected return of -0.002761 is substantially greater than its uncertainty of 0.000862, with no adverse news."
+    "reasoning": "INFY has a strong quant edge with an expected return of -0.004488 significantly larger than its uncertainty of 0.001251, and no negative news sentiment."
   },
   "RELIANCE": {
     "directive": "SHORT",
     "confidence_tier": "MEDIUM",
-    "reasoning": "RELIANCE has a quant edge with an expected return of -0.002656 versus an uncertainty of 0.00119, and the news sentiment is neutral."
+    "reasoning": "RELIANCE presents a quant edge with an expected return of -0.003134 exceeding its uncertainty of 0.00153, and the news sentiment is neutral."
+  },
+  "HDFCBANK": {
+    "directive": "SHORT",
+    "confidence_tier": "MEDIUM",
+    "reasoning": "HDFCBANK shows a quant edge as its expected return of -0.002717 is substantially greater than its uncertainty of 0.001232, with no adverse news."
   }
 }

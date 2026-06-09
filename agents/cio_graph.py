@@ -59,7 +59,7 @@ def run_full_market_sweep_node(state: CIOState):
 
 def generate_decisions_node(state: CIOState):
     """Node 2: Gemini looks at the ENTIRE market and picks the absolute best 4."""
-    print("\n[CIO Agent] 🤖 Waking up Gemini Risk Manager to evaluate entire market...")
+    print("\n[CIO Agent] 🤖 Waking up Gemini CIO to pick top stocks...")
     
     if not state.swing_predictions:
         print("❌ No valid market data generated. Aborting CIO decision.")

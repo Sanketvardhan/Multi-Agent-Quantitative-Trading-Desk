@@ -12,6 +12,9 @@ from pydantic import BaseModel, Field
 from state_schema import IntradayState, TradeAlert
 from tools.model_tools import tool_get_intraday_prediction
 
+import requests
+import re
+
 # --- PORTFOLIO RISK RULES ---
 TOTAL_CAPITAL = 100000.0        # E.g., ₹1 Lakh total account size
 RISK_PER_TRADE = 0.01           # 1% max loss if Stop Loss is hit (₹1000)
@@ -259,6 +262,47 @@ def print_alerts_node(state: IntradayState):
             
     return {}
 
+def route_alerts_node(state: IntradayState):
+    """Node 4: Pushes the EXECUTE alerts to the FastAPI Database."""
+    if state.error_logs or not state.active_alerts:
+        return {}
+        
+    print("\n=========================================================")
+    print("📡 ROUTING TRADE PROPOSALS TO DATABASE")
+    print("=========================================================")
+    
+    for alert in state.active_alerts:
+        if "EXECUTE" in alert.action:
+            # Extract just the integer from the sizing string (e.g., "Buy 15 shares..." -> 15)
+            sizing_match = re.search(r'\d+', alert.position_size_advice)
+            sizing_int = int(sizing_match.group()) if sizing_match else 0
+            
+            payload = {
+                "ticker": alert.ticker,
+                "action": alert.action,
+                "entry_price": alert.entry_price,
+                "take_profit": alert.take_profit,
+                "stop_loss": alert.stop_loss,
+                "sizing": sizing_int
+            }
+            
+            try:
+                # Send the POST request to your FastAPI server
+                response = requests.post("http://127.0.0.1:8000/api/trades/propose", json=payload)
+                
+                if response.status_code == 200:
+                    print(f"   ✅ Successfully sent {alert.ticker} proposal to API.")
+                else:
+                    print(f"   ⚠️ API rejected {alert.ticker}: {response.text}")
+                    
+            except requests.exceptions.ConnectionError:
+                print(f"   ❌ FAILED: Is your FastAPI server running? Could not connect.")
+                
+        else:
+            print(f"   ⏸️ {alert.ticker} | {alert.action} -> Skipped Database")
+            
+    return {}
+
 # ==========================================
 # 2. COMPILE THE STATE GRAPH
 # ==========================================
@@ -268,12 +312,14 @@ workflow.add_node("load_watchlist", load_watchlist_node)
 workflow.add_node("scan_intraday", scan_intraday_node)
 workflow.add_node("generate_alerts", generate_alerts_node)
 workflow.add_node("print_alerts", print_alerts_node)
+workflow.add_node("route_alerts", route_alerts_node)
 
 workflow.set_entry_point("load_watchlist")
 workflow.add_edge("load_watchlist", "scan_intraday")
 workflow.add_edge("scan_intraday", "generate_alerts")
 workflow.add_edge("generate_alerts", "print_alerts")
-workflow.add_edge("print_alerts", END)
+workflow.add_edge("print_alerts", "route_alerts")
+workflow.add_edge("route_alerts", END)
 
 copilot_app = workflow.compile()
 
