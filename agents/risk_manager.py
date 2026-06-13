@@ -176,6 +176,11 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
 
+# AWS LangChain & LangGraph 
+from langchain_aws import ChatBedrock
+
+from langchain_core.output_parsers import PydanticOutputParser
+
 import time
 import pytz
 
@@ -220,12 +225,29 @@ class RiskManagerAgent:
     def __init__(self):
         self.db = SessionLocal()
         # Initialize Gemini with 0.0 temperature for strict logic
-        self.llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash-lite",
-            google_api_key=os.getenv("GOOGLE_API_KEY"),
-            temperature=0.0
+        # self.llm = ChatGoogleGenerativeAI(
+        #     model="gemini-2.5-flash-lite",
+        #     google_api_key=os.getenv("GOOGLE_API_KEY"),
+        #     temperature=0.0
+        # )
+        # self.structured_llm = self.llm.with_structured_output(RiskDecision)
+
+        # Initialize Claude Haiku via Bedrock for fast, cheap intraday monitoring
+        # self.llm = ChatBedrock(
+        #     model_id="meta.llama3-8b-instruct-v1:0", 
+        #     model_kwargs={"temperature": 0.0},
+        #     region_name="us-east-1"
+        # )
+        # self.structured_llm = self.llm.with_structured_output(RiskDecision)
+
+        # Initialize Llama 3 via Bedrock
+        self.llm = ChatBedrock(
+            model_id="meta.llama3-8b-instruct-v1:0", 
+            model_kwargs={"temperature": 0.0},
+            region_name="us-east-1"
         )
-        self.structured_llm = self.llm.with_structured_output(RiskDecision)
+        # --- THE FIX: Initialize the explicit parser ---
+        self.parser = PydanticOutputParser(pydantic_object=RiskDecision)
 
     def fetch_live_technical_context(self, ticker: str) -> dict:
         """Fetches live price and calculates basic intraday indicators for context."""
@@ -360,6 +382,55 @@ class RiskManagerAgent:
             
             print(f"\n -> Analyzing {trade.ticker} | Held for: {minutes_held} mins | Live: ₹{current_price} | PnL: ₹{total_pnl}")
 
+            # # --- LLM COGNITIVE EVALUATION WITH TIME AWARENESS ---
+            # system_instruction = (
+            #     "You are an elite quantitative Risk Manager monitoring an open position.\n"
+            #     "You receive trade details, live indicators, and critical TIME data.\n\n"
+            #     "MANAGEMENT RULES:\n"
+            #     "1. HARD EXITS: If the price has hit or crossed the Take Profit -> 'TAKE_PROFIT'. If it hit the Stop Loss -> 'CUT_LOSS'.\n"
+            #     "2. END OF DAY SQUARING: Indian markets close at 15:30. Brokers auto-square off at 15:15. If the 'current_time' is 15:15 or later, you MUST output 'FORCE_CLOSE' to flatten the book, regardless of PnL.\n"
+            #     "3. TIME DECAY / CONSOLIDATION: If 'minutes_held' is greater than 90 minutes, and the PnL is hovering near 0, and the MACD histogram is flat (meaning zero momentum), output 'FORCE_CLOSE' to free up capital.\n"
+            #     "4. PROTECT PROFITS: If highly profitable but momentum is reversing -> 'FORCE_CLOSE'.\n"
+            #     "5. TRAIL STOPS: If in profit and trend is strong -> 'TRAIL_STOP_LOSS'.\n"
+            #     "6. PATIENCE: If recently opened and indicators are normal -> 'HOLD'.\n\n"
+            #     "Your reasoning must be extremely brief. If closing due to time decay or EOD, state that explicitly."
+            # )
+            
+            # payload = {
+            #     "time_data": {
+            #         "current_market_time_ist": current_ist_time.strftime("%H:%M"),
+            #         "minutes_held": minutes_held
+            #     },
+            #     "trade_details": {
+            #         "action": trade.action,
+            #         "entry_price": trade.entry_price,
+            #         "take_profit": trade.take_profit,
+            #         "current_stop_loss": trade.stop_loss,
+            #         "unrealized_pnl_inr": total_pnl
+            #     },
+            #     "live_market_context": context
+            # }
+            
+            # # Rate Limit Retry Loop
+            # decision = None
+            # for attempt in range(3):
+            #     try:
+            #         decision = self.structured_llm.invoke([
+            #             {"role": "system", "content": system_instruction},
+            #             {"role": "user", "content": f"Evaluate this position:\n{payload}"}
+            #         ])
+            #         break 
+            #     except Exception as e:
+            #         if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+            #             print(f"   ⏳ API Rate Limit Hit (Attempt {attempt + 1}/3). Sleeping 35s...")
+            #             time.sleep(35)
+            #         else:
+            #             print(f"   ❌ Unhandled LLM Error: {e}")
+            #             break
+            
+            # if not decision:
+            #     continue
+
             # --- LLM COGNITIVE EVALUATION WITH TIME AWARENESS ---
             system_instruction = (
                 "You are an elite quantitative Risk Manager monitoring an open position.\n"
@@ -371,7 +442,10 @@ class RiskManagerAgent:
                 "4. PROTECT PROFITS: If highly profitable but momentum is reversing -> 'FORCE_CLOSE'.\n"
                 "5. TRAIL STOPS: If in profit and trend is strong -> 'TRAIL_STOP_LOSS'.\n"
                 "6. PATIENCE: If recently opened and indicators are normal -> 'HOLD'.\n\n"
-                "Your reasoning must be extremely brief. If closing due to time decay or EOD, state that explicitly."
+                "Your reasoning must be extremely brief. If closing due to time decay or EOD, state that explicitly.\n\n"
+                # --- THE FIX: Inject JSON rules ---
+                f"FORMAT REQUIREMENTS:\n{self.parser.get_format_instructions()}\n"
+                "OUTPUT STRICTLY VALID JSON ONLY. DO NOT output any introductory text or markdown blocks."
             )
             
             payload = {
@@ -389,22 +463,25 @@ class RiskManagerAgent:
                 "live_market_context": context
             }
             
-            # Rate Limit Retry Loop
+            # Rate Limit & Parsing Retry Loop
             decision = None
             for attempt in range(3):
                 try:
-                    decision = self.structured_llm.invoke([
+                    # 1. Call the raw LLM
+                    response = self.llm.invoke([
                         {"role": "system", "content": system_instruction},
                         {"role": "user", "content": f"Evaluate this position:\n{payload}"}
                     ])
+                    # 2. Parse the text into the RiskDecision object
+                    decision = self.parser.parse(response.content)
                     break 
                 except Exception as e:
-                    if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
-                        print(f"   ⏳ API Rate Limit Hit (Attempt {attempt + 1}/3). Sleeping 35s...")
-                        import time
-                        time.sleep(35)
+                    # --- THE FIX: Catch AWS errors instead of Google errors ---
+                    if "ThrottlingException" in str(e) or "LimitExceededException" in str(e):
+                        print(f"   ⏳ AWS Rate Limit Hit (Attempt {attempt + 1}/3). Sleeping 5s...")
+                        time.sleep(5)
                     else:
-                        print(f"   ❌ Unhandled LLM Error: {e}")
+                        print(f"   ❌ LLM or JSON Parse Error: {e}")
                         break
             
             if not decision:

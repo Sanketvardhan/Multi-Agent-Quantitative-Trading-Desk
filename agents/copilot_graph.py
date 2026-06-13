@@ -8,6 +8,10 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.graph import StateGraph, END
 from pydantic import BaseModel, Field
 
+from langchain_aws import ChatBedrock
+
+from langchain_core.output_parsers import PydanticOutputParser
+
 # Import our custom schemas and tools
 from state_schema import IntradayState, TradeAlert
 from tools.model_tools import tool_get_intraday_prediction
@@ -188,13 +192,55 @@ def generate_alerts_node(state: IntradayState):
         data['sizing_logic'] = cost_reason
         enriched_predictions[ticker] = data
 
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash-lite",
-        google_api_key=os.getenv("GOOGLE_API_KEY"),
-        temperature=0.0
+    # llm = ChatGoogleGenerativeAI(
+    #     model="gemini-2.5-flash-lite",
+    #     google_api_key=os.getenv("GOOGLE_API_KEY"),
+    #     temperature=0.0
+    # )
+
+    # llm = ChatBedrock(
+    #     model_id="meta.llama3-8b-instruct-v1:0",
+    #     model_kwargs={"temperature": 0.2},
+    #     region_name="us-east-1" # <-- Change this to your specific AWS region if different
+    # )
+    
+    # structured_llm = llm.with_structured_output(AlertList)
+    
+    # system_instruction = (
+    #     "You are an algorithmic execution Copilot. Your job is to trigger trades.\n"
+    #     "You will receive the CIO bias, the live 15m expected return, and pre-calculated Risk Management metrics.\n\n"
+    #     "EXECUTION LOGIC:\n"
+    #     "1. If Daily Directive is SHORT and 15m Return is NEGATIVE -> Action: 'EXECUTE SHORT'\n"
+    #     "2. If Daily Directive is LONG and 15m Return is POSITIVE -> Action: 'EXECUTE LONG'\n"
+    #     "3. If they conflict -> Action: 'HOLD'\n\n"
+    #     "DATA MAPPING (CRITICAL):\n"
+    #     "- entry_price: Use 'current_price'.\n"
+    #     "- stop_loss & take_profit: If LONG, strictly copy 'suggested_long_sl' and 'suggested_long_tp'. If SHORT, strictly copy 'suggested_short_sl' and 'suggested_short_tp'.\n"
+    #     # "- position_size_advice: Strictly output 'Buy [suggested_sizing] shares to risk ₹1000'.\n"
+    #     "- position_size_advice: Strictly copy this format -> 'Buy [suggested_sizing] shares ([sizing_logic])'.\n"
+    #     "- If HOLD, set all numerical values to 0.0."
+    # )
+    
+    # payload = {
+    #     "cio_daily_bias": state.watchlist_config,
+    #     "live_15m_predictions": enriched_predictions
+    # }
+    
+    # decision = structured_llm.invoke([
+    #     {"role": "system", "content": system_instruction},
+    #     {"role": "user", "content": json.dumps(payload, indent=2)}
+    # ])
+    
+    # return {"active_alerts": decision.alerts}
+
+    llm = ChatBedrock(
+        model_id="meta.llama3-8b-instruct-v1:0",
+        model_kwargs={"temperature": 0.2},
+        region_name="us-east-1"
     )
     
-    structured_llm = llm.with_structured_output(AlertList)
+    # --- THE FIX: Explicitly parse the output ---
+    parser = PydanticOutputParser(pydantic_object=AlertList)
     
     system_instruction = (
         "You are an algorithmic execution Copilot. Your job is to trigger trades.\n"
@@ -206,9 +252,11 @@ def generate_alerts_node(state: IntradayState):
         "DATA MAPPING (CRITICAL):\n"
         "- entry_price: Use 'current_price'.\n"
         "- stop_loss & take_profit: If LONG, strictly copy 'suggested_long_sl' and 'suggested_long_tp'. If SHORT, strictly copy 'suggested_short_sl' and 'suggested_short_tp'.\n"
-        # "- position_size_advice: Strictly output 'Buy [suggested_sizing] shares to risk ₹1000'.\n"
         "- position_size_advice: Strictly copy this format -> 'Buy [suggested_sizing] shares ([sizing_logic])'.\n"
-        "- If HOLD, set all numerical values to 0.0."
+        "- If HOLD, set all numerical values to 0.0.\n\n"
+        # Inject the JSON schema instructions dynamically
+        f"FORMAT REQUIREMENTS:\n{parser.get_format_instructions()}\n"
+        "OUTPUT STRICTLY VALID JSON. DO NOT output any introductory text, markdown blocks, or explanations outside the JSON."
     )
     
     payload = {
@@ -216,10 +264,19 @@ def generate_alerts_node(state: IntradayState):
         "live_15m_predictions": enriched_predictions
     }
     
-    decision = structured_llm.invoke([
+    # 1. Call the model normally (using llm instead of structured_llm)
+    response = llm.invoke([
         {"role": "system", "content": system_instruction},
         {"role": "user", "content": json.dumps(payload, indent=2)}
     ])
+    
+    # 2. Parse the raw text back into your AlertList Pydantic object
+    try:
+        decision = parser.parse(response.content)
+    except Exception as e:
+        print(f" ❌ Failed to parse Llama 3 JSON: {e}")
+        print(f" Raw Output: {response.content}")
+        return {"error_logs": ["JSON Parse Error"]}
     
     return {"active_alerts": decision.alerts}
 

@@ -2,16 +2,21 @@
   "INFY": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "INFY has a strong quant edge with an expected return of -0.004488 significantly larger than its uncertainty of 0.001251, and no negative news sentiment."
+    "reasoning": "With an expected return of -0.004996 and uncertainty of 0.00139, the quant edge is significant, and with no negative news headlines, this stock is a strong short candidate."
   },
-  "RELIANCE": {
+  "SBIN": {
     "directive": "SHORT",
-    "confidence_tier": "MEDIUM",
-    "reasoning": "RELIANCE presents a quant edge with an expected return of -0.003134 exceeding its uncertainty of 0.00153, and the news sentiment is neutral."
+    "confidence_tier": "HIGH",
+    "reasoning": "The expected return of -0.003798 and uncertainty of 0.000965 indicate a strong quant edge, and with no negative news headlines, this stock is a strong short candidate."
   },
-  "HDFCBANK": {
+  "HINDALCO": {
     "directive": "SHORT",
-    "confidence_tier": "MEDIUM",
-    "reasoning": "HDFCBANK shows a quant edge as its expected return of -0.002717 is substantially greater than its uncertainty of 0.001232, with no adverse news."
+    "confidence_tier": "HIGH",
+    "reasoning": "With an expected return of -0.002935 and uncertainty of 0.000934, the quant edge is significant, and with no negative news headlines, this stock is a strong short candidate."
+  },
+  "COALINDIA": {
+    "directive": "SHORT",
+    "confidence_tier": "HIGH",
+    "reasoning": "The expected return of -0.002255 and uncertainty of 0.000967 indicate a strong quant edge, and with no negative news headlines, this stock is a strong short candidate."
   }
 }

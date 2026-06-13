@@ -8,6 +8,11 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.graph import StateGraph, END
 
+# AWS LangChain & LangGraph 
+from langchain_aws import ChatBedrock
+
+from langchain_core.output_parsers import PydanticOutputParser
+
 # Import our custom schemas and tools
 from state_schema import CIOState, WatchlistSelection
 from tools.model_tools import tool_get_swing_prediction, tool_get_stock_news
@@ -74,13 +79,21 @@ def generate_decisions_node(state: CIOState):
         reverse=True
     ))
 
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash-lite",
-        google_api_key=os.getenv("GOOGLE_API_KEY"),
-        temperature=0.0
+    # llm = ChatGoogleGenerativeAI(
+    #     model="gemini-2.5-flash-lite",
+    #     google_api_key=os.getenv("GOOGLE_API_KEY"),
+    #     temperature=0.0
+    # )
+ 
+    llm = ChatBedrock(
+        # model_id="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+        model_id="meta.llama3-70b-instruct-v1:0",
+        model_kwargs={"temperature": 0.2},
+        region_name="us-east-1" # <-- Change this to your specific AWS region if different
     )
     
-    structured_llm = llm.with_structured_output(WatchlistSelection)
+    # structured_llm = llm.with_structured_output(WatchlistSelection)
+    parser = PydanticOutputParser(pydantic_object=WatchlistSelection)
     
     system_instruction = (
         "You are the Chief Investment Officer of an elite quantitative hedge fund.\n"
@@ -93,15 +106,30 @@ def generate_decisions_node(state: CIOState):
         "3. ALIGNMENT: 'SHORT' for negative expected returns, 'LONG' for positive.\n"
         "4. CONFIDENCE TIER: Calculate 'HIGH', 'MEDIUM', or 'LOW' strictly based on how much larger the return is than the uncertainty.\n"
         "5. REASONING: Your 1-sentence reasoning must cite BOTH the quant edge (the numbers) AND confirm that the news sentiment aligns (or is neutral)."
+        f"FORMAT REQUIREMENTS:\n{parser.get_format_instructions()}\n"
+        "OUTPUT STRICTLY VALID JSON ONLY. DO NOT output any introductory text or markdown blocks."
     )
     
     # Feed the entire sorted dictionary to Gemini
     user_payload = f"Full Market Data Sweep:\n{json.dumps(sorted_predictions, indent=2)}"
     
-    decision = structured_llm.invoke([
+    # decision = structured_llm.invoke([
+    #     {"role": "system", "content": system_instruction},
+    #     {"role": "user", "content": user_payload}
+    # ])
+
+    response = llm.invoke([
         {"role": "system", "content": system_instruction},
         {"role": "user", "content": user_payload}
     ])
+    
+    # 2. Parse the raw text back into your WatchlistSelection Pydantic object
+    try:
+        decision = parser.parse(response.content)
+    except Exception as e:
+        print(f" ❌ Failed to parse Llama 3 JSON: {e}")
+        print(f" Raw Output: {response.content}")
+        return {"error_logs": ["JSON Parse Error"]}
     
     return {"structured_decision": decision}
 
