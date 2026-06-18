@@ -1,5 +1,7 @@
 import os
 import sys
+import random
+import time
 from langchain.tools import tool
 import yfinance as yf
 import requests
@@ -36,12 +38,23 @@ def tool_get_stock_news(ticker: str) -> dict:
     print(f"   [News Engine] Scraping latest headlines for {ticker}...")
     try:
         # Stealth Mode
-        session = requests.Session()
-        session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'
-        })
+        # session = requests.Session()
+        # session.headers.update({
+        #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0'
+        # })
+
+        # session.headers.update({
+        #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        #     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        #     'Accept-Language': 'en-US,en;q=0.5',
+        #     'Connection': 'keep-alive'
+        # })
         
-        stock = yf.Ticker(f"{ticker}.NS", session=session)
+        # 2. Add the random micro-delay
+        time.sleep(random.uniform(0.5, 2.5))
+        
+        # stock = yf.Ticker(f"{ticker}.NS", session=session)
+        stock = yf.Ticker(f"{ticker}.NS")
         news_items = stock.news
         
         if not news_items:

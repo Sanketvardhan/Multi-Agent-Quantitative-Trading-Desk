@@ -7,7 +7,6 @@
 # import yfinance as yf
 # import ta
 # import warnings
-
 # import requests
 
 # warnings.filterwarnings('ignore', category=FutureWarning)
@@ -74,10 +73,6 @@
 #     })
     
 #     stock = yf.Ticker(f"{ticker}.NS", session=session)
-    
-#     # ... rest of the function remains exactly the same ...
-#     # Fetch 10 days of 15-minute candles to ensure enough warmup for the 21-EMA
-#     # stock = yf.Ticker(f"{ticker}.NS")
 #     df = stock.history(period="10d", interval="15m")
     
 #     if df.empty or len(df) < (window_size + 25):
@@ -142,8 +137,6 @@
     
 #     df.drop(columns=['pivot_point', 'support_1', 'resistance_1'], inplace=True)
     
-#     # Note: We completely skip Layer 9 (Targets) here because we don't have future data!
-    
 #     # Clean up
 #     df.replace([np.inf, -np.inf], 0, inplace=True)
 #     df.dropna(inplace=True) # Drops the warmup periods
@@ -164,11 +157,16 @@
 #     if len(scaled_features) < window_size:
 #         raise ValueError(f"Not enough 15m periods left after dropping NaNs. Have {len(scaled_features)}, need {window_size}.")
         
+#     # --- EXTRACT THE SCALAR VALUES HERE ---
+#     current_price = df['close'].iloc[-1]
+#     current_atr = df['atr_14'].iloc[-1]
+
 #     # Grab the final sequence block
 #     final_sequence = scaled_features[-window_size:]
 #     tensor_input = torch.tensor(final_sequence, dtype=torch.float32).unsqueeze(0).to(device)
     
-#     return tensor_input
+#     # Return all three variables
+#     return tensor_input, current_price, current_atr
 
 # # ==========================================
 # # 3. LIVE INFERENCE ENGINE
@@ -177,7 +175,8 @@
 #     print(f"   [Intraday Engine] Scanning live 15m order flow for {ticker}...")
     
 #     try:
-#         tensor_input = fetch_live_intraday_tensor(ticker, window_size=60)
+#         # Unpack the tuple here
+#         tensor_input, current_price, current_atr = fetch_live_intraday_tensor(ticker, window_size=60)
         
 #         if not os.path.exists(WEIGHTS_PATH):
 #             raise FileNotFoundError(f"Weights not found at {WEIGHTS_PATH}")
@@ -193,7 +192,7 @@
         
 #         model.load_state_dict(torch.load(WEIGHTS_PATH, map_location=device, weights_only=True))
         
-#         model.train() # Keeping standard convention, even if dropout is 0
+#         model.train() 
         
 #         passes = 50
 #         predictions = []
@@ -209,7 +208,9 @@
 #         return {
 #             "ticker": ticker,
 #             "expected_return": round(float(expected_return), 6),
-#             "uncertainty": round(float(uncertainty), 6), # Will be 0.0 for this specific model
+#             "uncertainty": round(float(uncertainty), 6),
+#             "current_price": round(float(current_price), 2),
+#             "current_atr": round(float(current_atr), 2),
 #             "status": "success"
 #         }
         
@@ -221,19 +222,20 @@
 #     print(result)
 
 
-
 import os
 import torch
 import torch.nn as nn
 import joblib
 import numpy as np
 import pandas as pd
-import yfinance as yf
 import ta
 import warnings
-import requests
+from datetime import datetime, timedelta
+from tvDatafeed import TvDatafeed, Interval
 
+# Suppress warnings for cleaner console output
 warnings.filterwarnings('ignore', category=FutureWarning)
+warnings.filterwarnings('ignore', category=UserWarning)
 
 # --- Device Configuration ---
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -290,29 +292,20 @@ class StockCNNLSTMAttention(nn.Module):
 # 2. DATA INGESTION & PREPROCESSING
 # ==========================================
 def fetch_live_intraday_tensor(ticker: str, window_size=60):
-    # --- STEALTH MODE ---
-    session = requests.Session()
-    session.headers.update({
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    })
+    # Initialize TradingView Datafeed (Guest Mode)
+    tv = TvDatafeed()
+    clean_ticker = ticker.replace('.NS', '')
     
-    stock = yf.Ticker(f"{ticker}.NS", session=session)
-    df = stock.history(period="10d", interval="15m")
+    # Fetch directly from TradingView's NSE exchange data stream
+    df = tv.get_hist(symbol=clean_ticker, exchange='NSE', interval=Interval.in_15_minute, n_bars=250)
     
-    if df.empty or len(df) < (window_size + 25):
-        raise ValueError(f"Not enough live intraday data for {ticker}. Need at least 85 periods.")
+    if df is None or df.empty or len(df) < (window_size + 25):
+        raise ValueError(f"Not enough live intraday data for {ticker} from TradingView.")
         
     df.reset_index(inplace=True)
     
-    # Normalize datetime column
-    if 'Datetime' in df.columns:
-        df['Datetime'] = pd.to_datetime(df['Datetime']).dt.tz_localize(None)
-        df.rename(columns={'Datetime': 'date_time'}, inplace=True)
-    elif 'Date' in df.columns:
-        df['Date'] = pd.to_datetime(df['Date']).dt.tz_localize(None)
-        df.rename(columns={'Date': 'date_time'}, inplace=True)
-        
-    df.rename(columns={'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Volume': 'volume'}, inplace=True)
+    # Normalize datetime column name
+    df.rename(columns={'datetime': 'date_time'}, inplace=True)
     df['ticker'] = ticker
     
     # Layer 2: Micro-Structure
@@ -363,10 +356,10 @@ def fetch_live_intraday_tensor(ticker: str, window_size=60):
     
     # Clean up
     df.replace([np.inf, -np.inf], 0, inplace=True)
-    df.dropna(inplace=True) # Drops the warmup periods
+    df.dropna(inplace=True) 
     
     # Define exact features
-    exclude_cols = ['date_time', 'ticker', 'Dividends', 'Stock Splits']
+    exclude_cols = ['date_time', 'ticker', 'symbol']
     feature_cols = [col for col in df.columns if col not in exclude_cols]
     
     if len(feature_cols) != 26:
@@ -381,15 +374,12 @@ def fetch_live_intraday_tensor(ticker: str, window_size=60):
     if len(scaled_features) < window_size:
         raise ValueError(f"Not enough 15m periods left after dropping NaNs. Have {len(scaled_features)}, need {window_size}.")
         
-    # --- EXTRACT THE SCALAR VALUES HERE ---
     current_price = df['close'].iloc[-1]
     current_atr = df['atr_14'].iloc[-1]
 
-    # Grab the final sequence block
     final_sequence = scaled_features[-window_size:]
     tensor_input = torch.tensor(final_sequence, dtype=torch.float32).unsqueeze(0).to(device)
     
-    # Return all three variables
     return tensor_input, current_price, current_atr
 
 # ==========================================
@@ -399,7 +389,6 @@ def get_live_intraday_prediction(ticker: str) -> dict:
     print(f"   [Intraday Engine] Scanning live 15m order flow for {ticker}...")
     
     try:
-        # Unpack the tuple here
         tensor_input, current_price, current_atr = fetch_live_intraday_tensor(ticker, window_size=60)
         
         if not os.path.exists(WEIGHTS_PATH):
@@ -415,7 +404,6 @@ def get_live_intraday_prediction(ticker: str) -> dict:
         ).to(device)
         
         model.load_state_dict(torch.load(WEIGHTS_PATH, map_location=device, weights_only=True))
-        
         model.train() 
         
         passes = 50

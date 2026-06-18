@@ -183,9 +183,13 @@ if __name__ == "__main__":
     print("=========================================================")
     
     # We test with 4 specific stocks. Expand this to the full Nifty 50 when ready!
-    initial_state = CIOState(target_tickers=['RELIANCE', 'TCS', 'HDFCBANK', 'INFY'])
+    # initial_state = CIOState(target_tickers=['RELIANCE', 'TCS', 'HDFCBANK', 'INFY'])/
+    initial_state = CIOState(target_tickers=["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BHARTIARTL","CIPLA","COALINDIA","DRREDDY","EICHERMOT","ETERNAL","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HINDALCO","HINDUNILVR","ICICIBANK","INDIGO","INFY","ITC","JIOFIN","JSWSTEEL","KOTAKBANK","LT","M&M","MARUTI","MAXHEALTH","NESTLEIND","NTPC","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TMPV","TATASTEEL","TECHM","TITAN","TRENT","ULTRACEMCO","WIPRO"])
     
     try:
         cio_app.invoke(initial_state)
     except Exception as e:
         print(f"❌ LangGraph Execution Failed: {e}")
+
+
+

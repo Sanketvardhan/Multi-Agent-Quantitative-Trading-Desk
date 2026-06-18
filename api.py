@@ -108,13 +108,15 @@
 #     return {"message": f"Trade {trade_id} REJECTED."}
 
 import os
-from datetime import datetime
+# from datetime import datetime
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
+# from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, cast, Date
 from sqlalchemy.orm import declarative_base, sessionmaker
 from dotenv import load_dotenv
 from datetime import datetime, time as datetime_time
+from typing import Optional
 
 # --- Load Environment & Database ---
 load_dotenv()
@@ -272,7 +274,9 @@ def get_active_trades():
             "current_pnl": t.current_pnl or 0.0,          
             "live_rsi": t.live_rsi or "Scanning...",
             "live_macd": t.live_macd or "Scanning...",
-            "risk_reasoning": t.risk_reasoning or "Awaiting first Risk Engine scan cycle..."
+            "risk_reasoning": t.risk_reasoning or "Awaiting first Risk Engine scan cycle...",
+            "created_at": t.created_at,
+            "activated_at": t.activated_at
         })
     return enriched_trades
 
@@ -329,6 +333,52 @@ def reject_trade(trade_id: int):
     db.commit()
     db.close()
     return {"message": f"Trade {trade_id} marked as REJECTED (Not Executed)."}
+
+@app.get("/api/trades/closed")
+def get_closed_trades():
+    """React UI uses this to display trades finalized today."""
+    db = SessionLocal()
+    
+    # Calculate the exact start of today in UTC to match your created_at columns
+    today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    # Find any trade that starts with "CLOSED_" and was created today
+    closed_trades = db.query(Trade).filter(
+        Trade.status.like("CLOSED_%"),
+        Trade.created_at >= today_start
+    ).all()
+    
+    db.close()
+    return closed_trades
+
+@app.post("/api/trades/{trade_id}/emergency_stop")
+def emergency_stop_trade(trade_id: int):
+    """React UI uses this to manually kill an active trade."""
+    db = SessionLocal()
+    trade = db.query(Trade).filter(Trade.id == trade_id, Trade.status == "ACTIVE").first()
+    
+    if not trade:
+        db.close()
+        raise HTTPException(status_code=404, detail="Trade not found or already closed")
+        
+    # We use the last known live_price from the risk manager. If it hasn't been scanned yet, we fallback to entry.
+    exit_price = trade.live_price or trade.entry_price
+    
+    # Calculate final locked P&L
+    if "SHORT" in trade.action:
+        pnl_per_share = trade.entry_price - exit_price
+    else:
+        pnl_per_share = exit_price - trade.entry_price
+        
+    final_pnl = round(pnl_per_share * trade.sizing, 2)
+    
+    trade.status = "CLOSED_MANUAL"
+    trade.current_pnl = final_pnl
+    trade.risk_reasoning = "MANUAL OVERRIDE: Position killed via dashboard."
+    
+    db.commit()
+    db.close()
+    return {"message": f"Trade {trade_id} stopped manually."}
 
 # 1. Add this new table schema below your Trade class
 class AccountState(Base):

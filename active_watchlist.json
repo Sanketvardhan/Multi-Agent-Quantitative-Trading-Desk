@@ -1,22 +1,22 @@
 {
-  "INFY": {
+  "TECHM": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "With an expected return of -0.004996 and uncertainty of 0.00139, the quant edge is significant, and with no negative news headlines, this stock is a strong short candidate."
+    "reasoning": "With an expected return of -0.003551 and uncertainty of 0.001077, TECHM has a significant quant edge, and the lack of negative headlines confirms this selection."
   },
-  "SBIN": {
+  "HDFCBANK": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "The expected return of -0.003798 and uncertainty of 0.000965 indicate a strong quant edge, and with no negative news headlines, this stock is a strong short candidate."
+    "reasoning": "HDFCBANK's expected return of -0.003304 and uncertainty of 0.001095 demonstrate a strong quant edge, and the absence of negative news supports this selection."
   },
-  "HINDALCO": {
+  "SHRIRAMFIN": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "With an expected return of -0.002935 and uncertainty of 0.000934, the quant edge is significant, and with no negative news headlines, this stock is a strong short candidate."
+    "reasoning": "SHRIRAMFIN's expected return of -0.002465 and uncertainty of 0.000928 indicate a substantial quant edge, and the lack of negative headlines aligns with this selection."
   },
-  "COALINDIA": {
+  "CIPLA": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "The expected return of -0.002255 and uncertainty of 0.000967 indicate a strong quant edge, and with no negative news headlines, this stock is a strong short candidate."
+    "reasoning": "CIPLA's expected return of -0.002975 and uncertainty of 0.001019 demonstrate a significant quant edge, and the absence of negative news supports this selection."
   }
 }
