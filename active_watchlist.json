@@ -1,22 +1,22 @@
 {
-  "TECHM": {
+  "SBIN": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "With an expected return of -0.003551 and uncertainty of 0.001077, TECHM has a significant quant edge, and the lack of negative headlines confirms this selection."
+    "reasoning": "With an expected return of -0.003563 and uncertainty of 0.001233, SBIN has a strong quant edge, and the absence of negative news headlines supports this short position."
   },
-  "HDFCBANK": {
+  "RELIANCE": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "HDFCBANK's expected return of -0.003304 and uncertainty of 0.001095 demonstrate a strong quant edge, and the absence of negative news supports this selection."
+    "reasoning": "RELIANCE's expected return of -0.003169 and uncertainty of 0.001067 demonstrate a significant quant edge, and the lack of negative news headlines confirms this short position."
   },
-  "SHRIRAMFIN": {
+  "WIPRO": {
     "directive": "SHORT",
     "confidence_tier": "HIGH",
-    "reasoning": "SHRIRAMFIN's expected return of -0.002465 and uncertainty of 0.000928 indicate a substantial quant edge, and the lack of negative headlines aligns with this selection."
+    "reasoning": "WIPRO's expected return of -0.003084 and uncertainty of 0.0011 indicate a strong quant edge, and the absence of negative news headlines supports this short position."
   },
-  "CIPLA": {
-    "directive": "SHORT",
-    "confidence_tier": "HIGH",
-    "reasoning": "CIPLA's expected return of -0.002975 and uncertainty of 0.001019 demonstrate a significant quant edge, and the absence of negative news supports this selection."
+  "HINDUNILVR": {
+    "directive": "LONG",
+    "confidence_tier": "MEDIUM",
+    "reasoning": "HINDUNILVR's expected return of 0.000281 and uncertainty of 0.001534 show a moderate quant edge, and the lack of negative news headlines supports this long position."
   }
 }

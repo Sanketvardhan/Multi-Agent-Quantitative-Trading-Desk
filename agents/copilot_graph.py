@@ -20,9 +20,20 @@ import requests
 import re
 
 # --- PORTFOLIO RISK RULES ---
-TOTAL_CAPITAL = 100000.0        # E.g., ₹1 Lakh total account size
+# TOTAL_CAPITAL = 10000.0        # E.g., ₹1 Lakh total account size
 RISK_PER_TRADE = 0.01           # 1% max loss if Stop Loss is hit (₹1000)
 MAX_ALLOCATION = 0.20           # Never put more than 20% of total capital into one stock (₹20,000)
+
+# --- FETCH LIVE CAPITAL FROM DATABASE/API ---
+try:
+    cap_response = requests.get("http://127.0.0.1:8000/api/account/capital")
+    if cap_response.status_code == 200:
+        total_capital = cap_response.json().get("current_capital", 10000.0)
+    else:
+        total_capital = 10000.0
+except requests.exceptions.ConnectionError:
+    print("   ⚠️ Could not reach API for capital. Defaulting to ₹10000.0")
+    total_capital = 10000.0
 
 # --- Configuration ---
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -152,8 +163,12 @@ def generate_alerts_node(state: IntradayState):
     #     enriched_predictions[ticker] = data
 
     # --- THE FIX: DYNAMIC PORTFOLIO MATH ---
-    max_risk_amount = TOTAL_CAPITAL * RISK_PER_TRADE          # e.g., ₹1000
-    max_capital_per_trade = TOTAL_CAPITAL * MAX_ALLOCATION    # e.g., ₹20,000
+    # max_risk_amount = TOTAL_CAPITAL * RISK_PER_TRADE          # e.g., ₹1000
+    # max_capital_per_trade = TOTAL_CAPITAL * MAX_ALLOCATION    # e.g., ₹20,000
+
+    # --- THE FIX: DYNAMIC PORTFOLIO MATH ---
+    max_risk_amount = total_capital * RISK_PER_TRADE
+    max_capital_per_trade = total_capital * MAX_ALLOCATION
 
     enriched_predictions = {}
     for ticker, data in state.intraday_predictions.items():

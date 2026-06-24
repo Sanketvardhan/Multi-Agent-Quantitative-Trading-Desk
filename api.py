@@ -1,118 +1,9 @@
-# import os
-# from datetime import datetime
-# from fastapi import FastAPI, HTTPException
-# from pydantic import BaseModel
-# from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
-# from sqlalchemy.orm import declarative_base, sessionmaker
-# from dotenv import load_dotenv
-
-# # --- Load Environment & Database ---
-# load_dotenv()
-# DB_PASSWORD = os.getenv('DB_PASSWORD', 'root')
-# # Assuming you are using your existing Nifty database
-# DATABASE_URL = f"postgresql://postgres:{DB_PASSWORD}@localhost:5432/nifty_intraday_db"
-
-# engine = create_engine(DATABASE_URL)
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-# Base = declarative_base()
-
-# # --- Database Schema (The Ledger) ---
-# class Trade(Base):
-#     __tablename__ = "trade_ledger"
-    
-#     id = Column(Integer, primary_key=True, index=True)
-#     ticker = Column(String, index=True)
-#     action = Column(String) # 'EXECUTE LONG' or 'EXECUTE SHORT'
-#     entry_price = Column(Float)
-#     take_profit = Column(Float)
-#     stop_loss = Column(Float)
-#     sizing = Column(Integer)
-#     status = Column(String, default="PENDING") # PENDING, ACTIVE, REJECTED, CLOSED
-#     created_at = Column(DateTime, default=datetime.utcnow)
-
-# # Create the table in Postgres if it doesn't exist
-# Base.metadata.create_all(bind=engine)
-
-# # --- FastAPI App Setup ---
-# app = FastAPI(title="Vib Trader Engine API")
-
-# # --- Pydantic Models for API Requests ---
-# class TradeCreate(BaseModel):
-#     ticker: str
-#     action: str
-#     entry_price: float
-#     take_profit: float
-#     stop_loss: float
-#     sizing: int
-
-# # ==========================================
-# # API ENDPOINTS
-# # ==========================================
-
-# @app.post("/api/trades/propose")
-# def propose_trade(trade: TradeCreate):
-#     """Copilot uses this to submit a new trade proposal."""
-#     db = SessionLocal()
-    
-#     # 1. Memory Check: Ensure we don't already have an ACTIVE or PENDING trade for this stock
-#     existing_trade = db.query(Trade).filter(
-#         Trade.ticker == trade.ticker, 
-#         Trade.status.in_(["PENDING", "ACTIVE"])
-#     ).first()
-    
-#     if existing_trade:
-#         db.close()
-#         return {"message": f"Trade for {trade.ticker} already exists. Ignored."}
-    
-#     # 2. Save the new proposal
-#     db_trade = Trade(**trade.dict())
-#     db.add(db_trade)
-#     db.commit()
-#     db.refresh(db_trade)
-#     db.close()
-    
-#     return {"message": "Trade proposed successfully", "trade_id": db_trade.id}
-
-# @app.get("/api/trades/pending")
-# def get_pending_trades():
-#     """React UI uses this to fetch trades waiting for human approval."""
-#     db = SessionLocal()
-#     trades = db.query(Trade).filter(Trade.status == "PENDING").all()
-#     db.close()
-#     return trades
-
-# @app.post("/api/trades/{trade_id}/approve")
-# def approve_trade(trade_id: int):
-#     """React UI uses this when the human clicks 'YES'."""
-#     db = SessionLocal()
-#     trade = db.query(Trade).filter(Trade.id == trade_id).first()
-#     if not trade:
-#         raise HTTPException(status_code=404, detail="Trade not found")
-        
-#     trade.status = "ACTIVE"
-#     db.commit()
-#     db.close()
-#     return {"message": f"Trade {trade_id} ACTIVE."}
-
-# @app.post("/api/trades/{trade_id}/reject")
-# def reject_trade(trade_id: int):
-#     """React UI uses this when the human clicks 'NO'."""
-#     db = SessionLocal()
-#     trade = db.query(Trade).filter(Trade.id == trade_id).first()
-#     if not trade:
-#         raise HTTPException(status_code=404, detail="Trade not found")
-        
-#     trade.status = "REJECTED"
-#     db.commit()
-#     db.close()
-#     return {"message": f"Trade {trade_id} REJECTED."}
-
 import os
-# from datetime import datetime
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-# from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, cast, Date
+
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, cast, Date, Boolean
 from sqlalchemy.orm import declarative_base, sessionmaker
 from dotenv import load_dotenv
 from datetime import datetime, time as datetime_time
@@ -159,8 +50,9 @@ class Trade(Base):
     live_macd = Column(Float, nullable=True)
     current_pnl = Column(Float, nullable=True)
     risk_reasoning = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
     activated_at = Column(DateTime, nullable=True)
+
+    closed_at = Column(DateTime, nullable=True)
 
 # Create the table in Postgres if it doesn't exist
 Base.metadata.create_all(bind=engine)
@@ -181,6 +73,28 @@ class TradeCreate(BaseModel):
 # API ENDPOINTS
 # ==========================================
 
+# @app.post("/api/trades/propose")
+# def propose_trade(trade: TradeCreate):
+#     """Copilot uses this to submit a new trade proposal."""
+#     db = SessionLocal()
+    
+#     existing_trade = db.query(Trade).filter(
+#         Trade.ticker == trade.ticker, 
+#         Trade.status.in_(["PENDING", "ACTIVE"])
+#     ).first()
+    
+#     if existing_trade:
+#         db.close()
+#         return {"message": f"Trade for {trade.ticker} already exists. Ignored."}
+    
+#     db_trade = Trade(**trade.dict())
+#     db.add(db_trade)
+#     db.commit()
+#     db.refresh(db_trade)
+#     db.close()
+    
+#     return {"message": "Trade proposed successfully", "trade_id": db_trade.id}
+
 @app.post("/api/trades/propose")
 def propose_trade(trade: TradeCreate):
     """Copilot uses this to submit a new trade proposal."""
@@ -195,7 +109,17 @@ def propose_trade(trade: TradeCreate):
         db.close()
         return {"message": f"Trade for {trade.ticker} already exists. Ignored."}
     
+    # --- AUTO DEPLOY CHECK ---
+    account_state = db.query(AccountState).first()
+    is_auto = account_state.auto_deploy if account_state else False
+
     db_trade = Trade(**trade.dict())
+    
+    # If auto-deploy is on, instantly activate it and start the clock
+    if is_auto:
+        db_trade.status = "ACTIVE"
+        db_trade.activated_at = datetime.utcnow()
+
     db.add(db_trade)
     db.commit()
     db.refresh(db_trade)
@@ -210,6 +134,7 @@ def propose_trade(trade: TradeCreate):
 #     trades = db.query(Trade).filter(Trade.status == "PENDING").all()
 #     db.close()
 #     return trades
+
 @app.get("/api/trades/pending")
 def get_pending_trades():
     """React UI uses this to fetch ONLY TODAY'S trades waiting for human approval."""
@@ -375,16 +300,23 @@ def emergency_stop_trade(trade_id: int):
     trade.status = "CLOSED_MANUAL"
     trade.current_pnl = final_pnl
     trade.risk_reasoning = "MANUAL OVERRIDE: Position killed via dashboard."
+    trade.closed_at = datetime.utcnow()
     
     db.commit()
     db.close()
     return {"message": f"Trade {trade_id} stopped manually."}
 
 # 1. Add this new table schema below your Trade class
+# class AccountState(Base):
+#     __tablename__ = "account_state"
+#     id = Column(Integer, primary_key=True, index=True)
+#     current_capital = Column(Float, default=100000.0)
+
 class AccountState(Base):
     __tablename__ = "account_state"
     id = Column(Integer, primary_key=True, index=True)
     current_capital = Column(Float, default=100000.0)
+    auto_deploy = Column(Boolean, default=False)
 
 # Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
@@ -403,6 +335,34 @@ def get_capital():
     capital = state.current_capital
     db.close()
     return {"current_capital": capital}
+
+class AutoDeployToggle(BaseModel):
+    auto_deploy: bool
+
+@app.get("/api/account/auto_deploy")
+def get_auto_deploy():
+    db = SessionLocal()
+    state = db.query(AccountState).first()
+    if not state:
+        state = AccountState()
+        db.add(state)
+        db.commit()
+        db.refresh(state)
+    status = state.auto_deploy
+    db.close()
+    return {"auto_deploy": status}
+
+@app.post("/api/account/auto_deploy")
+def toggle_auto_deploy(data: AutoDeployToggle):
+    db = SessionLocal()
+    state = db.query(AccountState).first()
+    if not state:
+        state = AccountState()
+        db.add(state)
+    state.auto_deploy = data.auto_deploy
+    db.commit()
+    db.close()
+    return {"message": "Auto-deploy updated", "auto_deploy": state.auto_deploy}
 
 @app.post("/api/account/capital")
 def update_capital(data: dict):
