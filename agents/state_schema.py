@@ -4,20 +4,34 @@ from pydantic import BaseModel, Field
 # ==========================================
 # 1. PRE-MARKET CIO STATE
 # ==========================================
-class StockChoice(BaseModel):
-    ticker: str
-    directive: str = Field(description="'LONG' or 'SHORT'")
-    confidence_tier: str = Field(description="'HIGH', 'MEDIUM', or 'LOW'")
-    reasoning: str
+# class StockChoice(BaseModel):
+#     ticker: str
+#     directive: str = Field(description="'LONG' or 'SHORT'")
+#     confidence_tier: str = Field(description="'HIGH', 'MEDIUM', or 'LOW'")
+#     reasoning: str
 
-class WatchlistSelection(BaseModel):
-    selections: List[StockChoice]
+# class WatchlistSelection(BaseModel):
+#     selections: List[StockChoice]
+
+# class CIOState(BaseModel):
+#     """The state whiteboard for the 08:45 AM Pre-Market Graph"""
+#     target_tickers: List[str] = []                # List of Nifty 50 stocks to scan
+#     swing_predictions: Dict[str, dict] = {}       # The raw output from the Swing AI Tool
+#     structured_decision: WatchlistSelection = None # The final JSON from Gemini
+#     error_logs: List[str] = []
+
+class DailyPlaybookSchema(BaseModel):
+    market_regime: str = Field(description="'BULLISH', 'BEARISH', or 'CHOPPY'")
+    risk_level: str = Field(description="'AGGRESSIVE', 'MODERATE', or 'DEFENSIVE'")
+    approved_sectors: List[str] = Field(description="e.g., ['IT', 'Banking', 'Pharma']")
+    banned_sectors: List[str] = Field(description="e.g., ['Energy', 'Metals']")
+    reasoning: str = Field(description="1-2 sentences explaining why, citing the math and news.")
 
 class CIOState(BaseModel):
     """The state whiteboard for the 08:45 AM Pre-Market Graph"""
     target_tickers: List[str] = []                # List of Nifty 50 stocks to scan
     swing_predictions: Dict[str, dict] = {}       # The raw output from the Swing AI Tool
-    structured_decision: WatchlistSelection = None # The final JSON from Gemini
+    structured_decision: DailyPlaybookSchema = None # The final Macro Playbook from Llama
     error_logs: List[str] = []
 
 # ==========================================
