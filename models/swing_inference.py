@@ -260,6 +260,445 @@
 #     print(result)
 
 
+# import os
+# import torch
+# import torch.nn as nn
+# import joblib
+# import numpy as np
+# import pandas as pd
+# import ta
+# import warnings
+# import random
+# import time
+# from tvDatafeed import TvDatafeed, Interval
+
+# # Suppress underlying layout warnings
+# warnings.filterwarnings('ignore', category=FutureWarning)
+# warnings.filterwarnings('ignore', category=UserWarning)
+
+# # --- Device Configuration ---
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+# # --- Dynamic Pathing ---
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# WEIGHTS_DIR = os.path.join(BASE_DIR, 'weights')
+
+# SCALER_PATH = os.path.join(WEIGHTS_DIR, 'swing_feature_scaler.pkl') 
+# WEIGHTS_PATH = os.path.join(WEIGHTS_DIR, 'best_swing_attention_V4.pth')
+
+# # TradingView Exchange & Symbol Structure Map
+# MACRO_TICKERS = {
+#     'NIFTY50': {'symbol': 'NIFTY', 'exchange': 'NSE'},
+#     'BANKNIFTY': {'symbol': 'BANKNIFTY', 'exchange': 'NSE'},
+#     'INDIAVIX': {'symbol': 'INDIAVIX', 'exchange': 'NSE'},
+#     'USDINR': {'symbol': 'USDINR', 'exchange': 'FX_IDC'},
+#     'CRUDEOIL': {'symbol': 'USOIL', 'exchange': 'TVC'},
+#     'GOLD': {'symbol': 'GOLD', 'exchange': 'TVC'}
+# }
+
+# # ==========================================
+# # 0. GLOBAL CACHE SETUP
+# # ==========================================
+# # Initialize TradingView ONCE for the entire script run
+# # print("Initializing Global TradingView Session...")
+# # global_tv = TvDatafeed()
+
+# # # Store the macro data in RAM so we don't re-download it 50 times
+# # cached_macro_df = None 
+
+# print("Initializing Global TradingView Session...")
+# global_tv = TvDatafeed()
+
+# # High-stability wrapper to download the macro context once
+# def initialize_macro_cache(lookback_days=320):
+#     print("   🌐 [Macro Engine] Pre-loading Global Grid (Nifty, VIX, Oil, Gold)...")
+#     macro_data = {}
+    
+#     # Pre-populate index timestamps from a guaranteed asset (NIFTY)
+#     try:
+#         base_df = global_tv.get_hist(symbol='NIFTY', exchange='NSE', interval=Interval.in_daily, n_bars=lookback_days)
+#         if base_df is not None and not base_df.empty:
+#             base_df.reset_index(inplace=True)
+#             base_df.rename(columns={'datetime': 'date'}, inplace=True)
+#             base_df['date'] = pd.to_datetime(base_df['date']).dt.tz_localize(None).dt.normalize()
+#             macro_data['date'] = base_df['date']
+#     except Exception:
+#         print("   ⚠️ Critical: Failed to establish baseline macro calendar timeline.")
+#         return pd.DataFrame(columns=['date'])
+
+#     macro_df = pd.DataFrame(macro_data)
+
+#     for name, config in MACRO_TICKERS.items():
+#         try:
+#             time.sleep(1.0) # Defensive delay to respect API limits
+#             m_df = global_tv.get_hist(symbol=config['symbol'], exchange=config['exchange'], interval=Interval.in_daily, n_bars=lookback_days)
+            
+#             if m_df is not None and not m_df.empty:
+#                 m_df.reset_index(inplace=True)
+#                 m_df.rename(columns={'datetime': 'date'}, inplace=True)
+#                 m_df['date'] = pd.to_datetime(m_df['date']).dt.tz_localize(None).dt.normalize()
+                
+#                 # Isolate target metrics cleanly
+#                 if name == 'INDIAVIX':
+#                     temp_df = m_df[['date', 'close']].rename(columns={'close': f'{name}_close'})
+#                 else:
+#                     m_df[f'{name}_return'] = m_df['close'].pct_change()
+#                     temp_df = m_df[['date', f'{name}_return']]
+                    
+#                 macro_df = pd.merge(macro_df, temp_df, on='date', how='left')
+#                 print(f"      🔹 Matrix integrated: {name}")
+#             else:
+#                 raise ValueError("Empty frame returned.")
+#         except Exception:
+#             print(f"   ⚠️ Connection dropped for {name}. Injecting synthetic flat baseline context.")
+#             # Fallback alignment matrix to keep feature shapes at 52
+#             if name == 'INDIAVIX':
+#                 macro_df[f'{name}_close'] = 15.0  # Normalized baseline VIX
+#             else:
+#                 macro_df[f'{name}_return'] = 0.0  # Neutral framework response
+
+#     # Final data polishing pass
+#     macro_df.ffill(inplace=True)
+#     macro_df.bfill(inplace=True)
+#     return macro_df
+
+# # Bootstrap the cache ON MODULE IMPORT (Runs exactly once when cio_graph loads)
+# cached_macro_df = initialize_macro_cache()
+
+# # ==========================================
+# # 1. PYTORCH MODEL ARCHITECTURE
+# # ==========================================
+# # class Attention(nn.Module):
+# #     def __init__(self, hidden_dim):
+# #         super(Attention, self).__init__()
+# #         self.attention = nn.Linear(hidden_dim, 1, bias=False)
+
+# #     def forward(self, lstm_outputs):
+# #         attn_weights = torch.softmax(self.attention(lstm_outputs), dim=1) 
+# #         context_vector = torch.sum(attn_weights * lstm_outputs, dim=1) 
+# #         return context_vector, attn_weights
+
+# # class StockCNNLSTMAttention(nn.Module):
+# #     def __init__(self, input_dim, cnn_out_channels, kernel_size, hidden_dim, num_layers, dropout_rate):
+# #         super(StockCNNLSTMAttention, self).__init__()
+# #         pad = kernel_size // 2 
+        
+# #         self.conv1 = nn.Conv1d(in_channels=input_dim, out_channels=cnn_out_channels, kernel_size=kernel_size, padding=pad)
+# #         self.relu = nn.ReLU()
+        
+# #         self.lstm = nn.LSTM(cnn_out_channels, hidden_dim, num_layers, batch_first=True, dropout=dropout_rate)
+        
+# #         self.attention = Attention(hidden_dim)
+# #         self.fc = nn.Linear(hidden_dim, 1)
+        
+# #     def forward(self, x):
+# #         x = x.permute(0, 2, 1) 
+# #         x = self.conv1(x)
+# #         x = self.relu(x)
+# #         x = x.permute(0, 2, 1) 
+        
+# #         h0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(x.device)
+# #         c0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(x.device)
+        
+# #         lstm_out, _ = self.lstm(x, (h0, c0))
+# #         context_vector, _ = self.attention(lstm_out)
+        
+# #         out = self.fc(context_vector)
+# #         return out.squeeze(-1)
+
+# class Attention(nn.Module):
+#     def __init__(self, hidden_dim):
+#         super(Attention, self).__init__()
+#         self.attention = nn.Linear(hidden_dim, 1, bias=False)
+
+#     def forward(self, lstm_outputs):
+#         attn_weights = torch.softmax(self.attention(lstm_outputs), dim=1) 
+#         context_vector = torch.sum(attn_weights * lstm_outputs, dim=1) 
+#         return context_vector, attn_weights
+
+# class StockCNNLSTMAttention(nn.Module):
+#     def __init__(self, input_dim, cnn_out_channels, kernel_size, hidden_dim, num_layers, dropout_rate):
+#         super(StockCNNLSTMAttention, self).__init__()
+#         pad = kernel_size // 2 
+        
+#         self.conv1 = nn.Conv1d(in_channels=input_dim, out_channels=cnn_out_channels, kernel_size=kernel_size, padding=pad)
+#         self.relu = nn.ReLU()
+        
+#         self.lstm = nn.LSTM(cnn_out_channels, hidden_dim, num_layers, batch_first=True, dropout=dropout_rate)
+        
+#         self.attention = Attention(hidden_dim)
+#         self.fc = nn.Linear(hidden_dim, 1)
+        
+#     def forward(self, x):
+#         x = x.permute(0, 2, 1) 
+#         x = self.conv1(x)
+#         x = self.relu(x)
+#         x = x.permute(0, 2, 1) 
+        
+#         h0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(x.device)
+#         c0 = torch.zeros(self.lstm.num_layers, x.size(0), self.lstm.hidden_size).to(x.device)
+        
+#         lstm_out, _ = self.lstm(x, (h0, c0))
+#         context_vector, _ = self.attention(lstm_out)
+        
+#         out = self.fc(context_vector)
+#         return out.squeeze(-1)
+
+# # ==========================================
+# # 2. DATA INGESTION & PREPROCESSING
+# # ==========================================
+# # def fetch_live_tensor_data(ticker: str, lookback_days=320):
+# #     """
+# #     Downloads raw daily data via TradingView, applies macro frameworks, 
+# #     and packages calculations into a 52-feature inference matrix.
+# #     """
+# #     global global_tv, cached_macro_df # Access the global cache
+    
+# #     clean_ticker = ticker.replace('.NS', '')
+    
+# #     # Slight pacing for the individual stock download
+# #     time.sleep(random.uniform(0.5, 1.5))
+    
+# #     # 1. Fetch Base Historical Series from NSE
+# #     df = global_tv.get_hist(symbol=clean_ticker, exchange='NSE', interval=Interval.in_daily, n_bars=lookback_days)
+    
+# #     if df is None or df.empty or len(df) < 230:
+# #         raise ValueError(f"Not enough live daily data for {ticker}. Need at least 230 rows.")
+        
+# #     df.reset_index(inplace=True)
+# #     df.rename(columns={'datetime': 'date'}, inplace=True)
+# #     df['date'] = pd.to_datetime(df['date']).dt.tz_localize(None).dt.normalize()
+    
+# #     # Core technical calculations
+# #     df['daily_return'] = df['close'].pct_change()
+# #     df['open_gap'] = (df['open'] - df['close'].shift(1)) / df['close'].shift(1)
+# #     df['intraday_return'] = (df['close'] - df['open']) / df['open']
+# #     df['high_low_range'] = (df['high'] - df['low']) / df['close']
+# #     df['body_size'] = np.abs(df['close'] - df['open']) / df['open']
+    
+# #     df['sma_5'] = ta.trend.sma_indicator(df['close'], window=5)
+# #     df['sma_10'] = ta.trend.sma_indicator(df['close'], window=10)
+# #     df['sma_20'] = ta.trend.sma_indicator(df['close'], window=20)
+# #     df['sma_50'] = ta.trend.sma_indicator(df['close'], window=50)
+# #     df['ema_10'] = ta.trend.ema_indicator(df['close'], window=10)
+# #     df['ema_20'] = ta.trend.ema_indicator(df['close'], window=20)
+# #     df['ema_50'] = ta.trend.ema_indicator(df['close'], window=50)
+    
+# #     df['rsi_14'] = ta.momentum.rsi(df['close'], window=14)
+# #     macd = ta.trend.MACD(df['close'])
+# #     df['macd'] = macd.macd()
+# #     df['macd_signal'] = macd.macd_signal()
+# #     df['macd_hist'] = macd.macd_diff()
+# #     df['roc_5'] = ta.momentum.roc(df['close'], window=5)
+# #     df['roc_10'] = ta.momentum.roc(df['close'], window=10)
+    
+# #     df['stoch_rsi'] = ta.momentum.stochrsi(df['close'])
+# #     df['atr_14'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=14)
+# #     df['atr_20'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=20)
+# #     df['rolling_std_5'] = df['close'].rolling(window=5).std()
+# #     df['rolling_std_10'] = df['close'].rolling(window=10).std()
+# #     df['rolling_std_20'] = df['close'].rolling(window=20).std()
+# #     bollinger = ta.volatility.BollingerBands(df['close'])
+# #     df['bollinger_width'] = bollinger.bollinger_wband()
+    
+# #     df['volume_ratio'] = df['volume'] / df['volume'].rolling(window=20).mean()
+# #     df['volume_change'] = df['volume'].pct_change()
+# #     df['obv'] = ta.volume.on_balance_volume(df['close'], df['volume'])
+# #     df['vwap_distance'] = (df['close'] - ta.volume.volume_weighted_average_price(df['high'], df['low'], df['close'], df['volume'])) / ta.volume.volume_weighted_average_price(df['high'], df['low'], df['close'], df['volume'])
+# #     df.replace([np.inf, -np.inf], 0, inplace=True)
+
+# #     # ==========================================
+# #     # 2. FETCH MACRO GRID (WITH CACHING!)
+# #     # ==========================================
+# #     if cached_macro_df is None:
+# #         print("   🌐 Downloading Global Macro Data (Once per day)...")
+# #         macro_data = {}
+# #         for name, config in MACRO_TICKERS.items():
+# #             time.sleep(random.uniform(0.5, 1.0)) # Pace the initial download
+# #             m_df = global_tv.get_hist(symbol=config['symbol'], exchange=config['exchange'], interval=Interval.in_daily, n_bars=lookback_days)
+            
+# #             if m_df is not None and not m_df.empty:
+# #                 m_df.reset_index(inplace=True)
+# #                 m_df.rename(columns={'datetime': 'date'}, inplace=True)
+# #                 m_df['date'] = pd.to_datetime(m_df['date']).dt.tz_localize(None).dt.normalize()
+# #                 m_df.set_index('date', inplace=True)
+                
+# #                 if name == 'INDIAVIX':
+# #                     macro_data[f'{name}_close'] = m_df['close']
+# #                 else:
+# #                     macro_data[f'{name}_return'] = m_df['close'].pct_change()
+                    
+# #         # Save to global cache
+# #         cached_macro_df = pd.DataFrame(macro_data)
+# #         cached_macro_df.reset_index(inplace=True)
+    
+# #     # Use a copy of the cached data to prevent accidental overrides
+# #     macro_df = cached_macro_df.copy()
+    
+# #     # Merge and forward fill gaps
+# #     df = pd.merge(df, macro_df, on='date', how='left')
+# #     df.ffill(inplace=True)
+# #     df.bfill(inplace=True)
+
+# #     # Contextual Calendar Metrics
+# #     df['day_of_week'] = df['date'].dt.dayofweek
+# #     df['month'] = df['date'].dt.month
+# #     df['quarter'] = df['date'].dt.quarter
+# #     df['expiry_week'] = ((df['date'].dt.day >= 22) & (df['date'].dt.day <= 28)).astype(int)
+# #     df['month_end'] = (df['date'].dt.day >= (df['date'].dt.days_in_month - 5)).astype(int)
+    
+# #     df['trend_strength'] = ta.trend.adx(df['high'], df['low'], df['close'], window=14, fillna=True)
+# #     atr_50_avg = df['atr_14'].rolling(window=50).mean()
+# #     df['volatility_regime'] = (df['atr_14'] > atr_50_avg).astype(int)
+    
+# #     sma_200 = ta.trend.sma_indicator(df['close'], window=200)
+# #     df['above_200dma'] = (df['close'] > sma_200).astype(int)
+    
+# #     df['open_equals_low'] = (df['open'] == df['low']).astype(int)
+# #     df['open_equals_high'] = (df['open'] == df['high']).astype(int)
+    
+# #     pivot_point = (df['high'] + df['low'] + df['close']) / 3
+# #     support_1 = (2 * pivot_point) - df['high']
+# #     resistance_1 = (2 * pivot_point) - df['low']
+# #     df['dist_to_pivot'] = (df['close'] - pivot_point) / df['close']
+# #     df['dist_to_s1'] = (df['close'] - support_1) / df['close']
+# #     df['dist_to_r1'] = (df['close'] - resistance_1) / df['close']
+    
+# #     df.dropna(inplace=True)
+    
+# #     # Filter feature space to match exact shapes
+# #     exclude_cols = ['date', 'symbol', 'Symbol', 'Ticker', 'target_return', 'target_low_return', 'intraday_return']
+# #     feature_cols = [col for col in df.columns if col not in exclude_cols]
+    
+# #     if len(feature_cols) != 52:
+# #         raise ValueError(f"Feature mismatch! Model expects 52, got {len(feature_cols)}: {feature_cols}")
+        
+# #     if not os.path.exists(SCALER_PATH):
+# #         raise FileNotFoundError(f"Missing Scaler! Cannot predict without {SCALER_PATH}")
+        
+# #     scaler = joblib.load(SCALER_PATH)
+# #     scaled_features = scaler.transform(df[feature_cols])
+    
+# #     if len(scaled_features) < 30:
+# #         raise ValueError(f"Not enough clean sequence points left after dropping NaNs.")
+        
+# #     final_sequence = scaled_features[-30:]
+# #     tensor_input = torch.tensor(final_sequence, dtype=torch.float32).unsqueeze(0).to(device)
+    
+# #     return tensor_input
+
+# def fetch_live_tensor_data(ticker: str, lookback_days=320):
+#     """Downloads individual stock vectors and maps them against the static pre-allocated global macro grid."""
+#     global global_tv, cached_macro_df
+    
+#     clean_ticker = ticker.replace('.NS', '')
+    
+#     # Pacing to protect individual ticker extraction
+#     time.sleep(random.uniform(0.5, 1.2))
+    
+#     df = global_tv.get_hist(symbol=clean_ticker, exchange='NSE', interval=Interval.in_daily, n_bars=lookback_days)
+    
+#     if df is None or df.empty or len(df) < 230:
+#         raise ValueError(f"Not enough live daily data for {ticker}. Need at least 230 rows.")
+        
+#     df.reset_index(inplace=True)
+#     df.rename(columns={'datetime': 'date'}, inplace=True)
+#     df['date'] = pd.to_datetime(df['date']).dt.tz_localize(None).dt.normalize()
+    
+#     # Core technical calculations
+#     df['daily_return'] = df['close'].pct_change()
+#     df['open_gap'] = (df['open'] - df['close'].shift(1)) / df['close'].shift(1)
+#     df['intraday_return'] = (df['close'] - df['open']) / df['open']
+#     df['high_low_range'] = (df['high'] - df['low']) / df['close']
+#     df['body_size'] = np.abs(df['close'] - df['open']) / df['open']
+    
+#     df['sma_5'] = ta.trend.sma_indicator(df['close'], window=5)
+#     df['sma_10'] = ta.trend.sma_indicator(df['close'], window=10)
+#     df['sma_20'] = ta.trend.sma_indicator(df['close'], window=20)
+#     df['sma_50'] = ta.trend.sma_indicator(df['close'], window=50)
+#     df['ema_10'] = ta.trend.ema_indicator(df['close'], window=10)
+#     df['ema_20'] = ta.trend.ema_indicator(df['close'], window=20)
+#     df['ema_50'] = ta.trend.ema_indicator(df['close'], window=50)
+    
+#     df['rsi_14'] = ta.momentum.rsi(df['close'], window=14)
+#     macd = ta.trend.MACD(df['close'])
+#     df['macd'] = macd.macd()
+#     df['macd_signal'] = macd.macd_signal()
+#     df['macd_hist'] = macd.macd_diff()
+#     df['roc_5'] = ta.momentum.roc(df['close'], window=5)
+#     df['roc_10'] = ta.momentum.roc(df['close'], window=10)
+    
+#     df['stoch_rsi'] = ta.momentum.stochrsi(df['close'])
+#     df['atr_14'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=14)
+#     df['atr_20'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=20)
+#     df['rolling_std_5'] = df['close'].rolling(window=5).std()
+#     df['rolling_std_10'] = df['close'].rolling(window=10).std()
+#     df['rolling_std_20'] = df['close'].rolling(window=20).std()
+#     bollinger = ta.volatility.BollingerBands(df['close'])
+#     df['bollinger_width'] = bollinger.bollinger_wband()
+    
+#     df['volume_ratio'] = df['volume'] / df['volume'].rolling(window=20).mean()
+#     df['volume_change'] = df['volume'].pct_change()
+#     df['obv'] = ta.volume.on_balance_volume(df['close'], df['volume'])
+#     df['vwap_distance'] = (df['close'] - ta.volume.volume_weighted_average_price(df['high'], df['low'], df['close'], df['volume'])) / ta.volume.volume_weighted_average_price(df['high'], df['low'], df['close'], df['volume'])
+#     df.replace([np.inf, -np.inf], 0, inplace=True)
+
+#     # Clean merge with the copying protection layer
+#     macro_df = cached_macro_df.copy()
+#     df = pd.merge(df, macro_df, on='date', how='left')
+#     df.ffill(inplace=True)
+#     df.bfill(inplace=True)
+
+# # ==========================================
+# # 3. LIVE INFERENCE ENGINE (MC DROPOUT)
+# # ==========================================
+# def get_live_swing_prediction(ticker: str) -> dict:
+#     print(f"   [Neural Net] Running live macro-inference for {ticker}...")
+    
+#     try:
+#         tensor_input = fetch_live_tensor_data(ticker)
+        
+#         if not os.path.exists(WEIGHTS_PATH):
+#             raise FileNotFoundError(f"Weights not found at {WEIGHTS_PATH}")
+            
+#         model = StockCNNLSTMAttention(
+#             input_dim=52, 
+#             cnn_out_channels=128, 
+#             kernel_size=5,
+#             hidden_dim=64, 
+#             num_layers=2, 
+#             dropout_rate=0.32768562460671624
+#         ).to(device)
+        
+#         model.load_state_dict(torch.load(WEIGHTS_PATH, map_location=device, weights_only=True))
+#         model.train()
+        
+#         passes = 50
+#         predictions = []
+        
+#         with torch.no_grad():
+#             for _ in range(passes):
+#                 out = model(tensor_input)
+#                 predictions.append(out.item())
+                
+#         expected_return = np.mean(predictions)
+#         uncertainty = np.std(predictions)
+        
+#         return {
+#             "ticker": ticker,
+#             "expected_return": round(float(expected_return), 6),
+#             "uncertainty": round(float(uncertainty), 6),
+#             "status": "success"
+#         }
+        
+#     except Exception as e:
+#         return {"ticker": ticker, "status": "error", "message": str(e)}
+
+# if __name__ == "__main__":
+#     result = get_live_swing_prediction("INFY")
+#     print(result)
+
+
 import os
 import torch
 import torch.nn as nn
@@ -268,9 +707,8 @@ import numpy as np
 import pandas as pd
 import ta
 import warnings
-import random
 import time
-from tvDatafeed import TvDatafeed, Interval
+import yfinance as yf
 
 # Suppress underlying layout warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
@@ -286,25 +724,77 @@ WEIGHTS_DIR = os.path.join(BASE_DIR, 'weights')
 SCALER_PATH = os.path.join(WEIGHTS_DIR, 'swing_feature_scaler.pkl') 
 WEIGHTS_PATH = os.path.join(WEIGHTS_DIR, 'best_swing_attention_V4.pth')
 
-# TradingView Exchange & Symbol Structure Map
+# --- THE FIX: Yahoo Finance Macro Mapping ---
 MACRO_TICKERS = {
-    'NIFTY50': {'symbol': 'NIFTY', 'exchange': 'NSE'},
-    'BANKNIFTY': {'symbol': 'BANKNIFTY', 'exchange': 'NSE'},
-    'INDIAVIX': {'symbol': 'INDIAVIX', 'exchange': 'NSE'},
-    'USDINR': {'symbol': 'USDINR', 'exchange': 'FX_IDC'},
-    'CRUDEOIL': {'symbol': 'USOIL', 'exchange': 'TVC'},
-    'GOLD': {'symbol': 'GOLD', 'exchange': 'TVC'}
+    'NIFTY50': '^NSEI',
+    'BANKNIFTY': '^NSEBANK',
+    'INDIAVIX': '^INDIAVIX',
+    'USDINR': 'INR=X',
+    'CRUDEOIL': 'CL=F',
+    'GOLD': 'GC=F'
 }
 
 # ==========================================
-# 0. GLOBAL CACHE SETUP
+# 0. GLOBAL CACHE ENGINE (YFinance HTTP)
 # ==========================================
-# Initialize TradingView ONCE for the entire script run
-print("Initializing Global TradingView Session...")
-global_tv = TvDatafeed()
+def initialize_macro_cache(lookback_days=320):
+    print("   🌐 [Macro Engine] Pre-loading Global Grid via yfinance...")
+    macro_data = {}
+    
+    # Pre-populate index timestamps from a guaranteed asset (NIFTY)
+    try:
+        nifty = yf.Ticker(MACRO_TICKERS['NIFTY50'])
+        base_df = nifty.history(period=f"{lookback_days}d", interval="1d")
+        if not base_df.empty:
+            base_df.reset_index(inplace=True)
+            # YFinance sometimes returns 'Date' or 'Datetime' depending on the asset
+            date_col = 'Datetime' if 'Datetime' in base_df.columns else 'Date'
+            base_df['date'] = pd.to_datetime(base_df[date_col]).dt.tz_localize(None).dt.normalize()
+            macro_data['date'] = base_df['date']
+        else:
+            raise ValueError("Empty frame.")
+    except Exception as e:
+        print(f"   ⚠️ Critical: Failed to establish baseline timeline. {e}")
+        return pd.DataFrame(columns=['date'])
 
-# Store the macro data in RAM so we don't re-download it 50 times
-cached_macro_df = None 
+    macro_df = pd.DataFrame(macro_data)
+
+    for name, yf_symbol in MACRO_TICKERS.items():
+        try:
+            asset = yf.Ticker(yf_symbol)
+            m_df = asset.history(period=f"{lookback_days}d", interval="1d")
+            
+            if not m_df.empty:
+                m_df.reset_index(inplace=True)
+                date_col = 'Datetime' if 'Datetime' in m_df.columns else 'Date'
+                m_df['date'] = pd.to_datetime(m_df[date_col]).dt.tz_localize(None).dt.normalize()
+                
+                # Standardize columns
+                m_df.rename(columns={'Close': 'close'}, inplace=True)
+                
+                if name == 'INDIAVIX':
+                    temp_df = m_df[['date', 'close']].rename(columns={'close': f'{name}_close'})
+                else:
+                    m_df[f'{name}_return'] = m_df['close'].pct_change()
+                    temp_df = m_df[['date', f'{name}_return']]
+                    
+                macro_df = pd.merge(macro_df, temp_df, on='date', how='left')
+                print(f"      🔹 Matrix integrated: {name}")
+            else:
+                raise ValueError("Empty frame.")
+        except Exception:
+            print(f"   ⚠️ Could not fetch {name}. Injecting synthetic flat baseline.")
+            if name == 'INDIAVIX':
+                macro_df[f'{name}_close'] = 15.0  
+            else:
+                macro_df[f'{name}_return'] = 0.0  
+
+    macro_df.ffill(inplace=True)
+    macro_df.bfill(inplace=True)
+    return macro_df
+
+# Bootstrap the cache ON MODULE IMPORT
+cached_macro_df = initialize_macro_cache()
 
 # ==========================================
 # 1. PYTORCH MODEL ARCHITECTURE
@@ -326,9 +816,7 @@ class StockCNNLSTMAttention(nn.Module):
         
         self.conv1 = nn.Conv1d(in_channels=input_dim, out_channels=cnn_out_channels, kernel_size=kernel_size, padding=pad)
         self.relu = nn.ReLU()
-        
         self.lstm = nn.LSTM(cnn_out_channels, hidden_dim, num_layers, batch_first=True, dropout=dropout_rate)
-        
         self.attention = Attention(hidden_dim)
         self.fc = nn.Linear(hidden_dim, 1)
         
@@ -351,26 +839,23 @@ class StockCNNLSTMAttention(nn.Module):
 # 2. DATA INGESTION & PREPROCESSING
 # ==========================================
 def fetch_live_tensor_data(ticker: str, lookback_days=320):
-    """
-    Downloads raw daily data via TradingView, applies macro frameworks, 
-    and packages calculations into a 52-feature inference matrix.
-    """
-    global global_tv, cached_macro_df # Access the global cache
+    global cached_macro_df
     
-    clean_ticker = ticker.replace('.NS', '')
+    # Ensure correct Yahoo Finance suffix
+    clean_ticker = ticker if ticker.endswith('.NS') else f"{ticker}.NS"
     
-    # Slight pacing for the individual stock download
-    time.sleep(random.uniform(0.5, 1.5))
+    stock = yf.Ticker(clean_ticker)
+    df = stock.history(period=f"{lookback_days}d", interval="1d")
     
-    # 1. Fetch Base Historical Series from NSE
-    df = global_tv.get_hist(symbol=clean_ticker, exchange='NSE', interval=Interval.in_daily, n_bars=lookback_days)
-    
-    if df is None or df.empty or len(df) < 230:
+    if df.empty or len(df) < 230:
         raise ValueError(f"Not enough live daily data for {ticker}. Need at least 230 rows.")
         
     df.reset_index(inplace=True)
-    df.rename(columns={'datetime': 'date'}, inplace=True)
+    date_col = 'Datetime' if 'Datetime' in df.columns else 'Date'
+    df.rename(columns={date_col: 'date'}, inplace=True)
     df['date'] = pd.to_datetime(df['date']).dt.tz_localize(None).dt.normalize()
+    
+    df.rename(columns={'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Volume': 'volume'}, inplace=True)
     
     # Core technical calculations
     df['daily_return'] = df['close'].pct_change()
@@ -410,35 +895,8 @@ def fetch_live_tensor_data(ticker: str, lookback_days=320):
     df['vwap_distance'] = (df['close'] - ta.volume.volume_weighted_average_price(df['high'], df['low'], df['close'], df['volume'])) / ta.volume.volume_weighted_average_price(df['high'], df['low'], df['close'], df['volume'])
     df.replace([np.inf, -np.inf], 0, inplace=True)
 
-    # ==========================================
-    # 2. FETCH MACRO GRID (WITH CACHING!)
-    # ==========================================
-    if cached_macro_df is None:
-        print("   🌐 Downloading Global Macro Data (Once per day)...")
-        macro_data = {}
-        for name, config in MACRO_TICKERS.items():
-            time.sleep(random.uniform(0.5, 1.0)) # Pace the initial download
-            m_df = global_tv.get_hist(symbol=config['symbol'], exchange=config['exchange'], interval=Interval.in_daily, n_bars=lookback_days)
-            
-            if m_df is not None and not m_df.empty:
-                m_df.reset_index(inplace=True)
-                m_df.rename(columns={'datetime': 'date'}, inplace=True)
-                m_df['date'] = pd.to_datetime(m_df['date']).dt.tz_localize(None).dt.normalize()
-                m_df.set_index('date', inplace=True)
-                
-                if name == 'INDIAVIX':
-                    macro_data[f'{name}_close'] = m_df['close']
-                else:
-                    macro_data[f'{name}_return'] = m_df['close'].pct_change()
-                    
-        # Save to global cache
-        cached_macro_df = pd.DataFrame(macro_data)
-        cached_macro_df.reset_index(inplace=True)
-    
-    # Use a copy of the cached data to prevent accidental overrides
+    # Clean merge with the macro cache
     macro_df = cached_macro_df.copy()
-    
-    # Merge and forward fill gaps
     df = pd.merge(df, macro_df, on='date', how='left')
     df.ffill(inplace=True)
     df.bfill(inplace=True)
@@ -469,8 +927,8 @@ def fetch_live_tensor_data(ticker: str, lookback_days=320):
     
     df.dropna(inplace=True)
     
-    # Filter feature space to match exact shapes
-    exclude_cols = ['date', 'symbol', 'Symbol', 'Ticker', 'target_return', 'target_low_return', 'intraday_return']
+    # Filter feature space
+    exclude_cols = ['date', 'symbol', 'Symbol', 'Ticker', 'target_return', 'target_low_return', 'intraday_return', 'Stock Splits', 'Dividends']
     feature_cols = [col for col in df.columns if col not in exclude_cols]
     
     if len(feature_cols) != 52:
@@ -491,11 +949,10 @@ def fetch_live_tensor_data(ticker: str, lookback_days=320):
     return tensor_input
 
 # ==========================================
-# 3. LIVE INFERENCE ENGINE (MC DROPOUT)
+# 3. LIVE INFERENCE ENGINE
 # ==========================================
 def get_live_swing_prediction(ticker: str) -> dict:
     print(f"   [Neural Net] Running live macro-inference for {ticker}...")
-    
     try:
         tensor_input = fetch_live_tensor_data(ticker)
         
@@ -531,7 +988,6 @@ def get_live_swing_prediction(ticker: str) -> dict:
             "uncertainty": round(float(uncertainty), 6),
             "status": "success"
         }
-        
     except Exception as e:
         return {"ticker": ticker, "status": "error", "message": str(e)}
 

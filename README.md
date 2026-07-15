@@ -1,627 +1,84 @@
-# AI Stock Prediction System (Version 1)
+## 🔄 Data Flow & Lifecycle
 
-## Project Vision
+### 1. The Macro Strategist (Pre-Market)
 
-The goal of this project is to build a quantitative AI-powered stock selection system for the Indian stock market.
+* **Trigger:** `market_daemon.py` at 08:45 AM IST.
 
-This is NOT a stock price prediction project.
+* **Process:** The **CIO Agent** sweeps the market, analyzes global news sentiment, and calculates broad sector risks.
 
-This is NOT a chart pattern recognition project.
+* **Output:** Saves a structured **Daily Playbook** to the `daily_playbook` database table.
 
-The objective is:
+* **Significance:** This provides the strategic "guardrails" for all other agents.
 
-> Every evening after market close, predict which NIFTY50 stocks are most likely to generate positive intraday returns on the next trading day.
+### 2. The Alpha Engine (The Hunter)
 
-The system will then rank all stocks and identify the highest-probability trading opportunities.
+* **Trigger:** Every 15 minutes by `market_daemon.py`.
 
-Long-term objective:
+* **Process:** Pure Python script runs PyTorch `StockCNNLSTMAttention` models across the Nifty 50.
 
-- Generate profitable trading signals
-- Estimate uncertainty and confidence
-- Rank opportunities automatically
-- Build a portfolio selection engine
-- Eventually evolve into a complete AI trading assistant
+* **Output:** Overwrites the `live_opportunities` table with the top setups based on absolute return magnitude.
 
----
+* **Significance:** Decoupled from LLMs for speed and zero cost.
 
-# Current Status
+### 3. The Tactical Copilot (The Sniper)
 
-## Phase 1 — Data Ingestion & Feature Engineering ✅ COMPLETED
+* **Trigger:** Every 15 minutes (30 seconds after Alpha Engine).
 
-Historical data has been collected for all NIFTY50 stocks.
+* **Process:**
 
-Period:
+  1. Reads the `Daily Playbook` (CIO instructions).
+  2. Reads `live_opportunities` (Alpha signals).
+  3. Checks the `cooldown_ledger` (Penalty Box).
+  4. Evaluates against the current Nifty Trend.
 
-2015 → Present
+* **Output:** Routes trade proposals to the `FastAPI` endpoint.
 
-Each stock-day contains engineered features from multiple feature layers.
+### 4. The Guardian (Risk Manager)
 
----
+* **Trigger:** Every 5 minutes.
 
-# Dataset Structure
+* **Process:** Scans the `trade_ledger` for `ACTIVE` trades. Evaluates live price action vs. RSI/MACD indicators.
 
-Each row represents:
+* **Output:** Updates P&L in real-time. If a trade is stopped out, it automatically updates the `cooldown_ledger` to prevent revenge trading.
 
-```text
-One Stock
-+
-One Trading Day
-```
+## 🧩 Agent Roles
 
----
+<br />
 
-## Layer 1 — OHLCV Features
+**Agent**
 
-Raw market data.
+**Technology**
 
-Features:
+**Responsibility**
 
-- open
-- high
-- low
-- close
-- volume
+**CIO**
 
----
+Llama 3 + News API
 
-## Layer 2 — Price Derived Features
+Macro-regime, sector bias, risk appetite.
 
-Features:
+**Alpha**
 
-- daily_return
-- open_gap
-- intraday_return
-- high_low_range
-- body_size
+PyTorch + TradingView
 
----
+Quantitive setup discovery (Math only).
 
-## Layer 3 — Trend Features
+**Copilot**
 
-Features:
+Llama 3 + LangGraph
 
-- close_ema20_ratio
-- close_ema50_ratio
-- ema20_ema50_ratio
-- SMA ratios
-- EMA ratios
+Sizing, execution logic, and alignment checks.
 
----
+**Risk Manager**
 
-## Layer 4 — Momentum Features
+Llama 3 + TA Lib
 
-Features:
+Trailing stops, profit-taking, and circuit breaking.
 
-- RSI14
-- MACD
-- MACD Signal
-- MACD Histogram
-- ROC5
-- ROC10
-- Stochastic RSI
+## 🛠️ Key Technical Differentiators
 
----
+* **Zero-Cost Alpha Discovery:** By using a pure Python script for the Alpha Engine, the system scans the entire Nifty 50 universe at \$0 cost, leaving your LLM budget for high-level tactical decision-making.
 
-## Layer 5 — Volatility Features
+* **The Penalty Box (Circuit Breaker):** If the Risk Manager cuts a loss, the stock is automatically blacklisted in the `cooldown_ledger` for 60 minutes, physically preventing the Copilot from re-entering the trade until the market settles.
 
-Features:
-
-- ATR14
-- ATR20
-- Rolling Std 5
-- Rolling Std 10
-- Rolling Std 20
-- Bollinger Width
-
----
-
-## Layer 6 — Volume Features
-
-Features:
-
-- volume_ratio
-- volume_change
-- OBV
-- VWAP_distance
-
----
-
-## Layer 7 — Market Context Features
-
-Features:
-
-- BANKNIFTY return
-- FINNIFTY return
-- India VIX
-- USDINR return
-- Crude Oil return
-- Gold return
-
----
-
-## Layer 8 — Time Features
-
-Features:
-
-- day_of_week
-- month
-- quarter
-- expiry_week
-- month_end
-
----
-
-## Layer 9 — Market Regime Features
-
-Features:
-
-- trend_strength
-- volatility_regime
-- above_200dma
-
----
-
-# Trading Strategy
-
-## Prediction Timing
-
-Predictions are generated:
-
-```text
-After market close
-(~4 PM)
-```
-
-using only information available up to that moment.
-
-The model predicts:
-
-```text
-Tomorrow's trading session
-```
-
----
-
-## Trade Execution
-
-The intended Version 1 strategy:
-
-```text
-Buy at next day's market open
-↓
-Hold throughout the day
-↓
-Sell at next day's market close
-```
-
-No overnight holding.
-
-No multi-day positions.
-
-No options trading.
-
-No leverage.
-
-Version 1 is strictly:
-
-```text
-Open → Close Intraday Trading
-```
-
----
-
-# Prediction Target
-
-The primary target is:
-
-```python
-target_return = (
-    next_day_close - next_day_open
-) / next_day_open
-```
-
-Example:
-
-Today:
-
-```text
-Prediction generated after market close
-```
-
-Tomorrow:
-
-```text
-Open = 1000
-Close = 1030
-```
-
-Target:
-
-```text
-(1030 - 1000) / 1000
-
-= 0.03
-
-= +3%
-```
-
-The model learns to predict this value.
-
----
-
-# Why This Target?
-
-The project's objective is not:
-
-```text
-Will the stock go up tomorrow?
-```
-
-The objective is:
-
-```text
-Can we make money
-buying at open
-and selling at close?
-```
-
-The target directly measures the profitability of that strategy.
-
----
-
-# Model Outputs
-
-Version 1 should produce four outputs for every stock.
-
----
-
-## Output 1 — Expected Intraday Return
-
-Example:
-
-```text
-Reliance
-
-Expected Return = +2.4%
-```
-
----
-
-## Output 2 — Direction Probability
-
-Example:
-
-```text
-Probability(Return > 0)
-
-= 81%
-```
-
-Meaning:
-
-```text
-81% chance
-that the stock closes above its opening price.
-```
-
----
-
-## Output 3 — Confidence / Uncertainty
-
-Example:
-
-```text
-Predicted Return = 2.4%
-
-Uncertainty = ±0.5%
-```
-
-Meaning:
-
-```text
-Prediction is relatively reliable.
-```
-
----
-
-## Output 4 — Trade Score
-
-A ranking score used to compare opportunities.
-
-Example:
-
-```text
-Trade Score
-
-=
-Expected Return
-/
-Uncertainty
-```
-
-Higher score:
-
-- Higher expected reward
-- Lower uncertainty
-
-Better trade candidate.
-
----
-
-# Daily Workflow
-
-Every trading day:
-
-## Step 1
-
-After market close:
-
-Generate predictions for all NIFTY50 stocks.
-
----
-
-## Step 2
-
-For each stock predict:
-
-- Expected Return
-- Direction Probability
-- Uncertainty
-- Trade Score
-
----
-
-## Step 3
-
-Rank all stocks.
-
-Example:
-
-```text
-1. Reliance
-2. SBI
-3. ICICI Bank
-4. HDFC Bank
-5. Infosys
-```
-
----
-
-## Step 4
-
-Select top N opportunities.
-
-Example:
-
-```text
-Top 5 stocks
-```
-
----
-
-## Step 5
-
-Execute strategy:
-
-```text
-Buy at open
-Sell at close
-```
-
----
-
-# Phase 2 — CURRENT PHASE
-
-The objective of Phase 2 is:
-
-```text
-Convert raw feature dataset
-into a supervised learning dataset.
-```
-
----
-
-## Task 1 — Create Target Variable
-
-For every stock-day:
-
-```python
-target_return = (
-    next_day_close - next_day_open
-) / next_day_open
-```
-
-Store as:
-
-```text
-target_return
-```
-
----
-
-## Task 2 — Generate Training Sequences
-
-Create rolling windows.
-
-Example:
-
-```text
-Days 1–30
-→ Predict Day 31 target_return
-
-Days 2–31
-→ Predict Day 32 target_return
-
-Days 3–32
-→ Predict Day 33 target_return
-```
-
-Recommended:
-
-```text
-Window Size = 30 Days
-```
-
----
-
-## Task 3 — Chronological Dataset Split
-
-Use time-based splitting only.
-
-Example:
-
-Train:
-
-```text
-2015–2022
-```
-
-Validation:
-
-```text
-2023
-```
-
-Test:
-
-```text
-2024–Present
-```
-
-No random shuffling.
-
----
-
-## Task 4 — Train Baseline Models
-
-Before deep learning:
-
-Train:
-
-- Linear Regression
-- Random Forest Regressor
-- XGBoost Regressor
-
-Purpose:
-
-Determine whether the engineered features contain predictive signal.
-
----
-
-## Task 5 — Evaluate Predictions
-
-Metrics:
-
-Regression:
-
-- MAE
-- RMSE
-- R²
-
-Direction:
-
-- Accuracy
-- Precision
-- Recall
-
-Financial:
-
-- Average Return
-- Sharpe Ratio
-- Win Rate
-- Maximum Drawdown
-
----
-
-## Task 6 — Build Backtesting Engine
-
-Simulate real trading.
-
-Daily process:
-
-```text
-Predict
-↓
-Rank
-↓
-Select Top N
-↓
-Buy Open
-↓
-Sell Close
-↓
-Record Return
-```
-
-Backtesting must be performed on unseen data only.
-
----
-
-# Phase 3
-
-Only after baseline models are validated:
-
-Train deep learning models.
-
-Candidate architectures:
-
-- LSTM
-- GRU
-- CNN + LSTM
-
-Initial recommendation:
-
-```text
-CNN
-↓
-LSTM
-↓
-Dense Layers
-↓
-Return Prediction
-```
-
----
-
-# Future Versions
-
-Planned additions:
-
-- Monte Carlo Dropout
-- Bayesian Neural Networks
-- Model Ensembles
-- News Sentiment
-- Earnings Analysis
-- GenAI Explanations
-- Portfolio Optimization
-- Position Sizing Engine
-
----
-
-# Success Criteria
-
-Version 1 is successful if:
-
-1. The system predicts next-day intraday returns.
-2. Stocks can be ranked effectively.
-3. High-confidence opportunities are identified.
-4. Backtesting outperforms naive selection methods.
-5. Risk-adjusted returns are positive.
-
----
-
-# Core Principle
-
-The project goal is NOT:
-
-```text
-Predict stock prices.
-```
-
-The project goal is:
-
-```text
-Every evening,
-identify tomorrow's highest-probability
-intraday trading opportunities.
-```
+* **Shared Memory Architecture:** Using PostgreSQL as the "truth" allows you to plug in a React frontend, a mobile app, or a Telegram bot without changing any of the backend agent logic.

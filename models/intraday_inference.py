@@ -4,12 +4,14 @@
 # import joblib
 # import numpy as np
 # import pandas as pd
-# import yfinance as yf
 # import ta
 # import warnings
-# import requests
+# from datetime import datetime, timedelta
+# from tvDatafeed import TvDatafeed, Interval
 
+# # Suppress warnings for cleaner console output
 # warnings.filterwarnings('ignore', category=FutureWarning)
+# warnings.filterwarnings('ignore', category=UserWarning)
 
 # # --- Device Configuration ---
 # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -66,29 +68,20 @@
 # # 2. DATA INGESTION & PREPROCESSING
 # # ==========================================
 # def fetch_live_intraday_tensor(ticker: str, window_size=60):
-#     # --- STEALTH MODE ---
-#     session = requests.Session()
-#     session.headers.update({
-#         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-#     })
+#     # Initialize TradingView Datafeed (Guest Mode)
+#     tv = TvDatafeed()
+#     clean_ticker = ticker.replace('.NS', '')
     
-#     stock = yf.Ticker(f"{ticker}.NS", session=session)
-#     df = stock.history(period="10d", interval="15m")
+#     # Fetch directly from TradingView's NSE exchange data stream
+#     df = tv.get_hist(symbol=clean_ticker, exchange='NSE', interval=Interval.in_15_minute, n_bars=250)
     
-#     if df.empty or len(df) < (window_size + 25):
-#         raise ValueError(f"Not enough live intraday data for {ticker}. Need at least 85 periods.")
+#     if df is None or df.empty or len(df) < (window_size + 25):
+#         raise ValueError(f"Not enough live intraday data for {ticker} from TradingView.")
         
 #     df.reset_index(inplace=True)
     
-#     # Normalize datetime column
-#     if 'Datetime' in df.columns:
-#         df['Datetime'] = pd.to_datetime(df['Datetime']).dt.tz_localize(None)
-#         df.rename(columns={'Datetime': 'date_time'}, inplace=True)
-#     elif 'Date' in df.columns:
-#         df['Date'] = pd.to_datetime(df['Date']).dt.tz_localize(None)
-#         df.rename(columns={'Date': 'date_time'}, inplace=True)
-        
-#     df.rename(columns={'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Volume': 'volume'}, inplace=True)
+#     # Normalize datetime column name
+#     df.rename(columns={'datetime': 'date_time'}, inplace=True)
 #     df['ticker'] = ticker
     
 #     # Layer 2: Micro-Structure
@@ -139,10 +132,10 @@
     
 #     # Clean up
 #     df.replace([np.inf, -np.inf], 0, inplace=True)
-#     df.dropna(inplace=True) # Drops the warmup periods
+#     df.dropna(inplace=True) 
     
 #     # Define exact features
-#     exclude_cols = ['date_time', 'ticker', 'Dividends', 'Stock Splits']
+#     exclude_cols = ['date_time', 'ticker', 'symbol']
 #     feature_cols = [col for col in df.columns if col not in exclude_cols]
     
 #     if len(feature_cols) != 26:
@@ -157,15 +150,12 @@
 #     if len(scaled_features) < window_size:
 #         raise ValueError(f"Not enough 15m periods left after dropping NaNs. Have {len(scaled_features)}, need {window_size}.")
         
-#     # --- EXTRACT THE SCALAR VALUES HERE ---
 #     current_price = df['close'].iloc[-1]
 #     current_atr = df['atr_14'].iloc[-1]
 
-#     # Grab the final sequence block
 #     final_sequence = scaled_features[-window_size:]
 #     tensor_input = torch.tensor(final_sequence, dtype=torch.float32).unsqueeze(0).to(device)
     
-#     # Return all three variables
 #     return tensor_input, current_price, current_atr
 
 # # ==========================================
@@ -175,7 +165,6 @@
 #     print(f"   [Intraday Engine] Scanning live 15m order flow for {ticker}...")
     
 #     try:
-#         # Unpack the tuple here
 #         tensor_input, current_price, current_atr = fetch_live_intraday_tensor(ticker, window_size=60)
         
 #         if not os.path.exists(WEIGHTS_PATH):
@@ -191,7 +180,6 @@
 #         ).to(device)
         
 #         model.load_state_dict(torch.load(WEIGHTS_PATH, map_location=device, weights_only=True))
-        
 #         model.train() 
         
 #         passes = 50
@@ -221,19 +209,17 @@
 #     result = get_live_intraday_prediction("RELIANCE")
 #     print(result)
 
-
 import os
 import torch
 import torch.nn as nn
 import joblib
 import numpy as np
 import pandas as pd
+import yfinance as yf
 import ta
 import warnings
-from datetime import datetime, timedelta
-from tvDatafeed import TvDatafeed, Interval
+import requests
 
-# Suppress warnings for cleaner console output
 warnings.filterwarnings('ignore', category=FutureWarning)
 warnings.filterwarnings('ignore', category=UserWarning)
 
@@ -244,11 +230,12 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 WEIGHTS_DIR = os.path.join(BASE_DIR, 'weights')
 
-SCALER_PATH = os.path.join(WEIGHTS_DIR, 'intraday_feature_scaler.pkl') 
-WEIGHTS_PATH = os.path.join(WEIGHTS_DIR, 'best_intraday_attention.pth')
+# Pointing to your newly pasted files!
+SCALER_PATH = os.path.join(WEIGHTS_DIR, 'dual_intraday_attention_v3.pkl') 
+WEIGHTS_PATH = os.path.join(WEIGHTS_DIR, 'dual_intraday_attention_v3.pth')
 
 # ==========================================
-# 1. PYTORCH MODEL ARCHITECTURE
+# 1. V3 DUAL-BOUNDARY ARCHITECTURE
 # ==========================================
 class Attention(nn.Module):
     def __init__(self, hidden_dim):
@@ -269,9 +256,10 @@ class StockCNNLSTMAttention(nn.Module):
         self.relu = nn.ReLU()
         
         self.lstm = nn.LSTM(cnn_out_channels, hidden_dim, num_layers, batch_first=True, dropout=dropout_rate)
-        
         self.attention = Attention(hidden_dim)
-        self.fc = nn.Linear(hidden_dim, 1)
+        
+        # Dual outputs for High and Low boundaries
+        self.fc = nn.Linear(hidden_dim, 2)
         
     def forward(self, x):
         x = x.permute(0, 2, 1) 
@@ -285,150 +273,137 @@ class StockCNNLSTMAttention(nn.Module):
         lstm_out, _ = self.lstm(x, (h0, c0))
         context_vector, _ = self.attention(lstm_out)
         
-        out = self.fc(context_vector)
-        return out.squeeze(-1)
+        return self.fc(context_vector)
 
 # ==========================================
-# 2. DATA INGESTION & PREPROCESSING
+# 2. DATA INGESTION & 28-FEATURE ENGINEERING
 # ==========================================
 def fetch_live_intraday_tensor(ticker: str, window_size=60):
-    # Initialize TradingView Datafeed (Guest Mode)
-    tv = TvDatafeed()
-    clean_ticker = ticker.replace('.NS', '')
+    session = requests.Session()
+    session.headers.update({
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120.0.0.0 Safari/537.36'
+    })
     
-    # Fetch directly from TradingView's NSE exchange data stream
-    df = tv.get_hist(symbol=clean_ticker, exchange='NSE', interval=Interval.in_15_minute, n_bars=250)
+    stock = yf.Ticker(f"{ticker}.NS" if not ticker.endswith(".NS") else ticker, session=session)
+    df = stock.history(period="10d", interval="15m")
     
-    if df is None or df.empty or len(df) < (window_size + 25):
-        raise ValueError(f"Not enough live intraday data for {ticker} from TradingView.")
+    if df.empty or len(df) < (window_size + 25):
+        raise ValueError(f"Not enough live intraday data for {ticker}.")
         
     df.reset_index(inplace=True)
+    date_col = 'Datetime' if 'Datetime' in df.columns else 'Date'
+    df.rename(columns={date_col: 'date_time', 'Open': 'open', 'High': 'high', 'Low': 'low', 'Close': 'close', 'Volume': 'volume'}, inplace=True)
+    df['date_time'] = pd.to_datetime(df['date_time']).dt.tz_localize(None)
     
-    # Normalize datetime column name
-    df.rename(columns={'datetime': 'date_time'}, inplace=True)
-    df['ticker'] = ticker
-    
-    # Layer 2: Micro-Structure
+    # 1. Physics & Trend
     df['return_15m'] = df['close'].pct_change()
     df['candle_body'] = np.abs(df['close'] - df['open']) / df['open']
     df['upper_wick'] = (df['high'] - df[['open', 'close']].max(axis=1)) / df['open']
     df['lower_wick'] = (df[['open', 'close']].min(axis=1) - df['low']) / df['open']
-    
-    # Layer 3: Rapid Intraday Trend
     df['ema_9'] = ta.trend.ema_indicator(df['close'], window=9)
     df['ema_21'] = ta.trend.ema_indicator(df['close'], window=21)
     
-    # Layer 4: Momentum & Order Flow
+    # 2. Macro Anchors
+    df['ema_9_21_ratio'] = df['ema_9'] / df['ema_21']
+    df['date_only'] = df['date_time'].dt.date
+    df['daily_open'] = df.groupby('date_only')['open'].transform('first')
+    df['dist_from_daily_open'] = (df['close'] - df['daily_open']) / df['daily_open']
+    df.drop(columns=['date_only', 'daily_open'], inplace=True)
+    
+    # 3. Momentum & Volatility
     df['rsi_14'] = ta.momentum.rsi(df['close'], window=14)
     df['roc_4'] = ta.momentum.roc(df['close'], window=4) 
     macd = ta.trend.MACD(df['close'], window_fast=12, window_slow=26, window_sign=9)
     df['macd_hist'] = macd.macd_diff()
-    
-    # Layer 5: Intraday Volatility
     df['atr_14'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=14)
     bollinger = ta.volatility.BollingerBands(df['close'], window=20, window_dev=2)
     df['bollinger_width'] = bollinger.bollinger_wband()
     df['bollinger_position'] = bollinger.bollinger_pband()
     
-    # Layer 6: Volume Anomalies & VWAP
+    # 4. Volume & Time
     df['volume_spike'] = df['volume'] / df['volume'].rolling(window=10).mean()
     df['vwap'] = ta.volume.volume_weighted_average_price(df['high'], df['low'], df['close'], df['volume'])
     df['vwap_distance'] = (df['close'] - df['vwap']) / df['vwap']
     df.drop(columns=['vwap'], inplace=True) 
-
-    # Layer 7: Time Context 
     df['hour'] = df['date_time'].dt.hour
     df['minute'] = df['date_time'].dt.minute
-
-    # Layer 8: Intraday Extremes & Micro-Pivots
+    
+    # 5. Micro Pivots
     df['open_equals_low'] = (df['open'] == df['low']).astype(int)
     df['open_equals_high'] = (df['open'] == df['high']).astype(int)
-    
     df['pivot_point'] = (df['high'].shift(1) + df['low'].shift(1) + df['close'].shift(1)) / 3
     df['support_1'] = (2 * df['pivot_point']) - df['high'].shift(1)
     df['resistance_1'] = (2 * df['pivot_point']) - df['low'].shift(1)
-    
     df['dist_to_pivot'] = (df['close'] - df['pivot_point']) / df['close']
     df['dist_to_s1'] = (df['close'] - df['support_1']) / df['close']
     df['dist_to_r1'] = (df['close'] - df['resistance_1']) / df['close']
-    
     df.drop(columns=['pivot_point', 'support_1', 'resistance_1'], inplace=True)
-    
-    # Clean up
+
     df.replace([np.inf, -np.inf], 0, inplace=True)
-    df.dropna(inplace=True) 
+    df.fillna(0, inplace=True)
     
-    # Define exact features
-    exclude_cols = ['date_time', 'ticker', 'symbol']
+    # Extract features
+    exclude_cols = ['date_time', 'ticker', 'Stock Splits', 'Dividends']
     feature_cols = [col for col in df.columns if col not in exclude_cols]
     
-    if len(feature_cols) != 26:
-        raise ValueError(f"Feature mismatch! Intraday Model expects 26, got {len(feature_cols)}: {feature_cols}")
-        
-    if not os.path.exists(SCALER_PATH):
-        raise FileNotFoundError(f"Missing Scaler! Cannot predict without {SCALER_PATH}")
+    if len(feature_cols) != 28:
+        raise ValueError(f"Feature mismatch! V3 Model expects 28, got {len(feature_cols)}.")
         
     scaler = joblib.load(SCALER_PATH)
     scaled_features = scaler.transform(df[feature_cols])
     
-    if len(scaled_features) < window_size:
-        raise ValueError(f"Not enough 15m periods left after dropping NaNs. Have {len(scaled_features)}, need {window_size}.")
-        
     current_price = df['close'].iloc[-1]
-    current_atr = df['atr_14'].iloc[-1]
-
+    
     final_sequence = scaled_features[-window_size:]
     tensor_input = torch.tensor(final_sequence, dtype=torch.float32).unsqueeze(0).to(device)
     
-    return tensor_input, current_price, current_atr
+    return tensor_input, current_price
 
 # ==========================================
-# 3. LIVE INFERENCE ENGINE
+# 3. LIVE MC DROPOUT INFERENCE ENGINE
 # ==========================================
 def get_live_intraday_prediction(ticker: str) -> dict:
-    print(f"   [Intraday Engine] Scanning live 15m order flow for {ticker}...")
-    
     try:
-        tensor_input, current_price, current_atr = fetch_live_intraday_tensor(ticker, window_size=60)
+        tensor_input, current_price = fetch_live_intraday_tensor(ticker, window_size=60)
         
         if not os.path.exists(WEIGHTS_PATH):
             raise FileNotFoundError(f"Weights not found at {WEIGHTS_PATH}")
             
         model = StockCNNLSTMAttention(
-            input_dim=26, 
+            input_dim=28, 
             cnn_out_channels=128, 
             kernel_size=5,
             hidden_dim=128, 
-            num_layers=1, 
-            dropout_rate=0.0
+            num_layers=2, 
+            dropout_rate=0.3881
         ).to(device)
         
         model.load_state_dict(torch.load(WEIGHTS_PATH, map_location=device, weights_only=True))
+        
+        # MC Dropout enabled
         model.train() 
         
         passes = 50
-        predictions = []
+        high_preds, low_preds = [], []
         
         with torch.no_grad():
             for _ in range(passes):
                 out = model(tensor_input)
-                predictions.append(out.item())
+                high_preds.append(out[0][0].item())
+                low_preds.append(out[0][1].item())
                 
-        expected_return = np.mean(predictions)
-        uncertainty = np.std(predictions)
+        expected_high = np.mean(high_preds)
+        expected_low = np.mean(low_preds)
+        uncertainty = np.std(high_preds) + np.std(low_preds)
         
         return {
             "ticker": ticker,
-            "expected_return": round(float(expected_return), 6),
-            "uncertainty": round(float(uncertainty), 6),
-            "current_price": round(float(current_price), 2),
-            "current_atr": round(float(current_atr), 2),
+            "expected_high": float(expected_high),
+            "expected_low": float(expected_low),
+            "uncertainty": float(uncertainty),
+            "current_price": float(current_price),
             "status": "success"
         }
         
     except Exception as e:
         return {"ticker": ticker, "status": "error", "message": str(e)}
-
-if __name__ == "__main__":
-    result = get_live_intraday_prediction("RELIANCE")
-    print(result)
