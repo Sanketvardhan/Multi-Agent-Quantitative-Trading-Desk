@@ -528,17 +528,17 @@ def run_market_daemon():
         
         if is_market_open:
             # --- STEP A: 5-MINUTE RISK MANAGER MONITOR ---
-            if now.minute in risk_minutes and now.minute != last_run_minute_risk:
-                last_run_minute_risk = now.minute
+            # if now.minute in risk_minutes and now.minute != last_run_minute_risk:
+            #     last_run_minute_risk = now.minute
                 
-                print(f"\n--- 🛡️ 5M RISK PROFILE EVALUATION: {now.strftime('%I:%M %p')} IST ---")
-                rm = RiskManagerAgent()
-                try:
-                    rm.manage_active_positions()
-                except Exception as e:
-                    print(f"❌ Risk Manager Execution Block Error: {e}")
-                finally:
-                    rm.close()
+            #     print(f"\n--- 🛡️ 5M RISK PROFILE EVALUATION: {now.strftime('%I:%M %p')} IST ---")
+            #     rm = RiskManagerAgent()
+            #     try:
+            #         rm.manage_active_positions()
+            #     except Exception as e:
+            #         print(f"❌ Risk Manager Execution Block Error: {e}")
+            #     finally:
+            #         rm.close()
 
             # --- STEP B: 15-MINUTE DECOUPLED ALPHA & COPILOT MONITOR ---
             if now.minute in copilot_minutes and now.minute != last_run_minute_copilot:
