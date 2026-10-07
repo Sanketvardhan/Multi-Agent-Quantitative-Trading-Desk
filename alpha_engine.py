@@ -81,18 +81,27 @@ def scan_market(basket: List[str] = None) -> List[Dict[str, Any]]:
             if price <= 0 or atr <= 0:
                 continue
                 
-            # Directional Determination based on asymmetric reward/risk
+            # Extract trend indicators added to the inference response
+            ema_21 = pred.get("ema_21", price)
+            rsi_14 = pred.get("rsi_14", 50.0)
+            
+            # Directional Determination based on asymmetric reward/risk + Trend Alignment
             direction = None
-            if exp_high >= 0.0020 and exp_high > (abs(exp_low) * 1.3):
+            
+            # LONG setup: Needs minimum 0.35% expected move, 1.5x reward/risk, price above 21 EMA, and RSI not overbought
+            if exp_high >= 0.0035 and exp_high > (abs(exp_low) * 1.5) and price > ema_21 and rsi_14 < 70:
                 direction = "LONG"
                 sl_price = round(price - (atr * ATR_SL_MULTIPLIER), 2)
                 tp_price = round(price + (atr * ATR_TP_MULTIPLIER), 2)
                 expected_gain_per_share = tp_price - price
-            elif abs(exp_low) >= 0.0020 and abs(exp_low) > (exp_high * 1.3):
+                
+            # SHORT setup: Needs minimum 0.35% expected drop, 1.5x reward/risk, price below 21 EMA, and RSI not oversold
+            elif abs(exp_low) >= 0.0035 and abs(exp_low) > (exp_high * 1.5) and price < ema_21 and rsi_14 > 30:
                 direction = "SHORT"
                 sl_price = round(price + (atr * ATR_SL_MULTIPLIER), 2)
                 tp_price = round(price - (atr * ATR_TP_MULTIPLIER), 2)
                 expected_gain_per_share = price - tp_price
+                
             else:
                 continue
                 

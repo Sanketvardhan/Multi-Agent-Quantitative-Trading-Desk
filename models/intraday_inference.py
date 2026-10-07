@@ -131,18 +131,20 @@ def fetch_live_intraday_tensor(ticker: str, window_size=60):
     
     latest_atr = float(df['atr_14'].iloc[-1])
     live_price = data_engine.get_realtime_price(ticker) or float(df['close'].iloc[-1])
+    latest_ema_21 = float(df['ema_21'].iloc[-1])
+    latest_rsi_14 = float(df['rsi_14'].iloc[-1])
     
     final_sequence = scaled_features[-window_size:]
     tensor_input = torch.tensor(final_sequence, dtype=torch.float32).unsqueeze(0).to(device)
     
-    return tensor_input, live_price, latest_atr
+    return tensor_input, live_price, latest_atr, latest_ema_21, latest_rsi_14
 
 # ==========================================
 # 3. LIVE INFERENCE ENGINE
 # ==========================================
 def get_live_intraday_prediction(ticker: str) -> dict:
     try:
-        tensor_input, current_price, current_atr = fetch_live_intraday_tensor(ticker, window_size=60)
+        tensor_input, current_price, current_atr, ema_21, rsi_14 = fetch_live_intraday_tensor(ticker, window_size=60)
         
         if not os.path.exists(WEIGHTS_PATH):
             raise FileNotFoundError(f"Weights not found at {WEIGHTS_PATH}")
@@ -174,6 +176,8 @@ def get_live_intraday_prediction(ticker: str) -> dict:
             "uncertainty": round(uncertainty, 5),
             "current_price": round(float(current_price), 2),
             "current_atr": round(float(current_atr), 2),
+            "ema_21": round(float(ema_21), 2),
+            "rsi_14": round(float(rsi_14), 2),
             "status": "success"
         }
         
