@@ -1,407 +1,28 @@
-# import os
-
-# from fastapi import FastAPI, HTTPException
-# from pydantic import BaseModel
-
-# from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, cast, Date, Boolean
-# from sqlalchemy.orm import declarative_base, sessionmaker
-# from dotenv import load_dotenv
-# from datetime import datetime, time as datetime_time
-# from typing import Optional
-
-# # --- Load Environment & Database ---
-# load_dotenv()
-# DB_PASSWORD = os.getenv('DB_PASSWORD', 'root')
-# DATABASE_URL = f"postgresql://postgres:{DB_PASSWORD}@localhost:5432/nifty_intraday_db"
-
-# engine = create_engine(DATABASE_URL)
-# SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-# Base = declarative_base()
-
-# # # --- Database Schema (The Ledger) ---
-# # class Trade(Base):
-# #     __tablename__ = "trade_ledger"
-    
-# #     id = Column(Integer, primary_key=True, index=True)
-# #     ticker = Column(String, index=True)
-# #     action = Column(String) # 'EXECUTE LONG' or 'EXECUTE SHORT'
-# #     entry_price = Column(Float)
-# #     take_profit = Column(Float)
-# #     stop_loss = Column(Float)
-# #     sizing = Column(Integer)
-# #     status = Column(String, default="PENDING") # PENDING, ACTIVE, REJECTED, CLOSED
-# #     created_at = Column(DateTime, default=datetime.utcnow)
-
-# class Trade(Base):
-#     __tablename__ = "trade_ledger"
-#     id = Column(Integer, primary_key=True, index=True)
-#     ticker = Column(String, index=True)
-#     action = Column(String) 
-#     entry_price = Column(Float)
-#     take_profit = Column(Float)
-#     stop_loss = Column(Float)
-#     sizing = Column(Integer)
-#     status = Column(String, default="PENDING") 
-#     created_at = Column(DateTime, default=datetime.utcnow)
-    
-#     # --- NEW LIVE METRICS ---
-#     live_price = Column(Float, nullable=True)
-#     live_rsi = Column(Float, nullable=True)
-#     live_macd = Column(Float, nullable=True)
-#     current_pnl = Column(Float, nullable=True)
-#     risk_reasoning = Column(String, nullable=True)
-#     activated_at = Column(DateTime, nullable=True)
-
-#     closed_at = Column(DateTime, nullable=True)
-
-# # Create the table in Postgres if it doesn't exist
-# Base.metadata.create_all(bind=engine)
-
-# # --- FastAPI App Setup ---
-# app = FastAPI(title="Vibe Trading Engine API")
-
-# # --- Pydantic Models for API Requests ---
-# class TradeCreate(BaseModel):
-#     ticker: str
-#     action: str
-#     entry_price: float
-#     take_profit: float
-#     stop_loss: float
-#     sizing: int
-
-# # ==========================================
-# # API ENDPOINTS
-# # ==========================================
-
-# # @app.post("/api/trades/propose")
-# # def propose_trade(trade: TradeCreate):
-# #     """Copilot uses this to submit a new trade proposal."""
-# #     db = SessionLocal()
-    
-# #     existing_trade = db.query(Trade).filter(
-# #         Trade.ticker == trade.ticker, 
-# #         Trade.status.in_(["PENDING", "ACTIVE"])
-# #     ).first()
-    
-# #     if existing_trade:
-# #         db.close()
-# #         return {"message": f"Trade for {trade.ticker} already exists. Ignored."}
-    
-# #     db_trade = Trade(**trade.dict())
-# #     db.add(db_trade)
-# #     db.commit()
-# #     db.refresh(db_trade)
-# #     db.close()
-    
-# #     return {"message": "Trade proposed successfully", "trade_id": db_trade.id}
-
-# @app.post("/api/trades/propose")
-# def propose_trade(trade: TradeCreate):
-#     """Copilot uses this to submit a new trade proposal."""
-#     db = SessionLocal()
-    
-#     existing_trade = db.query(Trade).filter(
-#         Trade.ticker == trade.ticker, 
-#         Trade.status.in_(["PENDING", "ACTIVE"])
-#     ).first()
-    
-#     if existing_trade:
-#         db.close()
-#         return {"message": f"Trade for {trade.ticker} already exists. Ignored."}
-    
-#     # --- AUTO DEPLOY CHECK ---
-#     account_state = db.query(AccountState).first()
-#     is_auto = account_state.auto_deploy if account_state else False
-
-#     db_trade = Trade(**trade.dict())
-    
-#     # If auto-deploy is on, instantly activate it and start the clock
-#     if is_auto:
-#         db_trade.status = "ACTIVE"
-#         db_trade.activated_at = datetime.utcnow()
-
-#     db.add(db_trade)
-#     db.commit()
-#     db.refresh(db_trade)
-#     db.close()
-    
-#     return {"message": "Trade proposed successfully", "trade_id": db_trade.id}
-
-# # @app.get("/api/trades/pending")
-# # def get_pending_trades():
-# #     """React UI uses this to fetch trades waiting for human approval."""
-# #     db = SessionLocal()
-# #     trades = db.query(Trade).filter(Trade.status == "PENDING").all()
-# #     db.close()
-# #     return trades
-
-# @app.get("/api/trades/pending")
-# def get_pending_trades():
-#     """React UI uses this to fetch ONLY TODAY'S trades waiting for human approval."""
-#     db = SessionLocal()
-    
-#     # Calculate the exact start of today in UTC (matching your Column's default)
-#     today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
-    
-#     # Filter for PENDING status AND created today
-#     trades = db.query(Trade).filter(
-#         Trade.status == "PENDING",
-#         Trade.created_at >= today_start
-#     ).all()
-    
-#     db.close()
-#     return trades
-
-# # @app.get("/api/trades/active")
-# # def get_active_trades():
-# #     """React UI uses this to display live positions monitored by Risk Manager."""
-# #     db = SessionLocal()
-# #     trades = db.query(Trade).filter(Trade.status == "ACTIVE").all()
-# #     db.close()
-    
-# #     # We enrich the DB fields to populate the advanced frontend UI details
-# #     enriched_trades = []
-# #     for t in trades:
-# #         enriched_trades.append({
-# #             "id": t.id,
-# #             "ticker": t.ticker,
-# #             "action": t.action,
-# #             "entry_price": t.entry_price,
-# #             "take_profit": t.take_profit,
-# #             "stop_loss": t.stop_loss,
-# #             "sizing": t.sizing,
-# #             "live_price": t.entry_price, # Handled natively inside risk_manager log cycles
-# #             "current_pnl": 0.0,          
-# #             "live_rsi": "Calculated",
-# #             "live_macd": "Active Scan",
-# #             "risk_reasoning": "Vibe Risk Engine actively tracking current structural market boundaries."
-# #         })
-# #     return enriched_trades
-
-# @app.get("/api/trades/active")
-# def get_active_trades():
-#     db = SessionLocal()
-#     trades = db.query(Trade).filter(Trade.status == "ACTIVE").all()
-#     db.close()
-    
-#     enriched_trades = []
-#     for t in trades:
-#         enriched_trades.append({
-#             "id": t.id,
-#             "ticker": t.ticker,
-#             "action": t.action,
-#             "entry_price": t.entry_price,
-#             "take_profit": t.take_profit,
-#             "stop_loss": t.stop_loss,
-#             "sizing": t.sizing,
-#             # Pass the real data to React (fallback to entry price/defaults if Risk Manager hasn't scanned it yet)
-#             "live_price": t.live_price or t.entry_price, 
-#             "current_pnl": t.current_pnl or 0.0,          
-#             "live_rsi": t.live_rsi or "Scanning...",
-#             "live_macd": t.live_macd or "Scanning...",
-#             "risk_reasoning": t.risk_reasoning or "Awaiting first Risk Engine scan cycle...",
-#             "created_at": t.created_at,
-#             "activated_at": t.activated_at
-#         })
-#     return enriched_trades
-
-# # @app.post("/api/trades/{trade_id}/approve")
-# # def approve_trade(trade_id: int):
-# #     """React UI uses this when the human clicks 'YES'."""
-# #     db = SessionLocal()
-# #     trade = db.query(Trade).filter(Trade.id == trade_id).first()
-# #     if not trade:
-# #         raise HTTPException(status_code=404, detail="Trade not found")
-        
-# #     trade.status = "ACTIVE"
-# #     db.commit()
-# #     db.close()
-# #     return {"message": f"Trade {trade_id} ACTIVE."}
-
-# @app.post("/api/trades/{trade_id}/approve")
-# def approve_trade(trade_id: int):
-#     """React UI uses this when the human clicks 'YES'."""
-#     db = SessionLocal()
-#     trade = db.query(Trade).filter(Trade.id == trade_id).first()
-#     if not trade:
-#         raise HTTPException(status_code=404, detail="Trade not found")
-        
-#     trade.status = "ACTIVE"
-#     trade.activated_at = datetime.utcnow() # <-- START THE CLOCK HERE
-#     db.commit()
-#     db.close()
-#     return {"message": f"Trade {trade_id} ACTIVE."}
-
-# # @app.post("/api/trades/{trade_id}/reject")
-# # def reject_trade(trade_id: int):
-# #     """React UI uses this when the human clicks 'NO'."""
-# #     db = SessionLocal()
-# #     trade = db.query(Trade).filter(Trade.id == trade_id).first()
-# #     if not trade:
-# #         raise HTTPException(status_code=404, detail="Trade not found")
-        
-# #     trade.status = "REJECTED"
-# #     db.commit()
-# #     db.close()
-# #     return {"message": f"Trade {trade_id} REJECTED."}
-
-# @app.post("/api/trades/{trade_id}/reject")
-# def reject_trade(trade_id: int):
-#     """React UI uses this when the human clicks 'NO'. Marks as REJECTED (Not Executed) for historical logs."""
-#     db = SessionLocal()
-#     trade = db.query(Trade).filter(Trade.id == trade_id).first()
-#     if not trade:
-#         raise HTTPException(status_code=404, detail="Trade not found")
-        
-#     # Instead of deleting, we change state so it disappears from 'Pending' but stays in your database for future analytics
-#     trade.status = "REJECTED"
-#     db.commit()
-#     db.close()
-#     return {"message": f"Trade {trade_id} marked as REJECTED (Not Executed)."}
-
-# @app.get("/api/trades/closed")
-# def get_closed_trades():
-#     """React UI uses this to display trades finalized today."""
-#     db = SessionLocal()
-    
-#     # Calculate the exact start of today in UTC to match your created_at columns
-#     today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
-    
-#     # Find any trade that starts with "CLOSED_" and was created today
-#     closed_trades = db.query(Trade).filter(
-#         Trade.status.like("CLOSED_%"),
-#         Trade.created_at >= today_start
-#     ).all()
-    
-#     db.close()
-#     return closed_trades
-
-# @app.post("/api/trades/{trade_id}/emergency_stop")
-# def emergency_stop_trade(trade_id: int):
-#     """React UI uses this to manually kill an active trade."""
-#     db = SessionLocal()
-#     trade = db.query(Trade).filter(Trade.id == trade_id, Trade.status == "ACTIVE").first()
-    
-#     if not trade:
-#         db.close()
-#         raise HTTPException(status_code=404, detail="Trade not found or already closed")
-        
-#     # We use the last known live_price from the risk manager. If it hasn't been scanned yet, we fallback to entry.
-#     exit_price = trade.live_price or trade.entry_price
-    
-#     # Calculate final locked P&L
-#     if "SHORT" in trade.action:
-#         pnl_per_share = trade.entry_price - exit_price
-#     else:
-#         pnl_per_share = exit_price - trade.entry_price
-        
-#     final_pnl = round(pnl_per_share * trade.sizing, 2)
-    
-#     trade.status = "CLOSED_MANUAL"
-#     trade.current_pnl = final_pnl
-#     trade.risk_reasoning = "MANUAL OVERRIDE: Position killed via dashboard."
-#     trade.closed_at = datetime.utcnow()
-    
-#     db.commit()
-#     db.close()
-#     return {"message": f"Trade {trade_id} stopped manually."}
-
-# # 1. Add this new table schema below your Trade class
-# # class AccountState(Base):
-# #     __tablename__ = "account_state"
-# #     id = Column(Integer, primary_key=True, index=True)
-# #     current_capital = Column(Float, default=100000.0)
-
-# class AccountState(Base):
-#     __tablename__ = "account_state"
-#     id = Column(Integer, primary_key=True, index=True)
-#     current_capital = Column(Float, default=100000.0)
-#     auto_deploy = Column(Boolean, default=False)
-
-# # Create tables if they don't exist
-# Base.metadata.create_all(bind=engine)
-
-# # 2. Add these two endpoints to handle capital sync
-# @app.get("/api/account/capital")
-# def get_capital():
-#     db = SessionLocal()
-#     state = db.query(AccountState).first()
-#     if not state:
-#         # Initialize default if empty
-#         state = AccountState(current_capital=100000.0)
-#         db.add(state)
-#         db.commit()
-#         db.refresh(state)
-#     capital = state.current_capital
-#     db.close()
-#     return {"current_capital": capital}
-
-# class AutoDeployToggle(BaseModel):
-#     auto_deploy: bool
-
-# @app.get("/api/account/auto_deploy")
-# def get_auto_deploy():
-#     db = SessionLocal()
-#     state = db.query(AccountState).first()
-#     if not state:
-#         state = AccountState()
-#         db.add(state)
-#         db.commit()
-#         db.refresh(state)
-#     status = state.auto_deploy
-#     db.close()
-#     return {"auto_deploy": status}
-
-# @app.post("/api/account/auto_deploy")
-# def toggle_auto_deploy(data: AutoDeployToggle):
-#     db = SessionLocal()
-#     state = db.query(AccountState).first()
-#     if not state:
-#         state = AccountState()
-#         db.add(state)
-#     state.auto_deploy = data.auto_deploy
-#     db.commit()
-#     db.close()
-#     return {"message": "Auto-deploy updated", "auto_deploy": state.auto_deploy}
-
-# @app.post("/api/account/capital")
-# def update_capital(data: dict):
-#     db = SessionLocal()
-#     state = db.query(AccountState).first()
-#     if not state:
-#         state = AccountState()
-#         db.add(state)
-#     state.current_capital = float(data.get("current_capital", 100000.0))
-#     db.commit()
-#     db.close()
-#     return {"message": "Capital updated successfully", "current_capital": state.current_capital}
-
-
 import os
+import logging
+from datetime import datetime, timedelta
+from typing import Optional, List
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
-from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, cast, Date, Boolean
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, Boolean, JSON
 from sqlalchemy.orm import declarative_base, sessionmaker
-from dotenv import load_dotenv
-from datetime import datetime, timedelta, time as datetime_time
-from typing import Optional
 
-# --- Load Environment & Database ---
-load_dotenv()
-DB_PASSWORD = os.getenv('DB_PASSWORD', 'root')
+from core.config import DATABASE_URL, INITIAL_CAPITAL
 
-# --- THE FIX: Pointed to the NEW Multi-Agent Database ---
-DATABASE_URL = f"postgresql://postgres:{DB_PASSWORD}@localhost:5432/converse_db"
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logger = logging.getLogger("API")
 
+# --- UNIFIED DATABASE SETUP ---
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# --- Database Schemas ---
 class Trade(Base):
     __tablename__ = "trade_ledger"
+    __table_args__ = {'extend_existing': True}
+    
     id = Column(Integer, primary_key=True, index=True)
     ticker = Column(String, index=True)
     action = Column(String) 
@@ -410,37 +31,63 @@ class Trade(Base):
     stop_loss = Column(Float)
     sizing = Column(Integer)
     status = Column(String, default="PENDING") 
-    created_at = Column(DateTime, default=datetime.utcnow)
     
     live_price = Column(Float, nullable=True)
+    peak_price = Column(Float, nullable=True)
     live_rsi = Column(Float, nullable=True)
     live_macd = Column(Float, nullable=True)
     current_pnl = Column(Float, nullable=True)
     risk_reasoning = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
     activated_at = Column(DateTime, nullable=True)
     closed_at = Column(DateTime, nullable=True)
 
 class AccountState(Base):
     __tablename__ = "account_state"
+    __table_args__ = {'extend_existing': True}
+    
     id = Column(Integer, primary_key=True, index=True)
-    current_capital = Column(Float, default=100000.0)
+    current_capital = Column(Float, default=INITIAL_CAPITAL)
     auto_deploy = Column(Boolean, default=False)
 
-# --- THE FIX: Added the Cooldown Ledger for the Penalty Box ---
 class Cooldown(Base):
     __tablename__ = "cooldown_ledger"
+    __table_args__ = {'extend_existing': True}
+    
     id = Column(Integer, primary_key=True, index=True)
     ticker = Column(String, unique=True, index=True)
     cooldown_until = Column(DateTime)
-    reason = Column(String)
+    reason = Column(String, nullable=True)
 
-# Create the tables in Postgres if they don't exist
+class DailyPlaybookDB(Base):
+    __tablename__ = "daily_playbook"
+    __table_args__ = {'extend_existing': True}
+    
+    id = Column(Integer, primary_key=True, index=True)
+    date = Column(DateTime, default=datetime.utcnow)
+    market_regime = Column(String) 
+    risk_level = Column(String)    
+    approved_sectors = Column(JSON) 
+    banned_sectors = Column(JSON)   
+    reasoning = Column(String)
+    top_headlines = Column(JSON, nullable=True)
+    sector_sentiments = Column(JSON, nullable=True)
+
 Base.metadata.create_all(bind=engine)
 
-# --- FastAPI App Setup ---
-app = FastAPI(title="Vibe Trading Engine API")
+# --- FASTAPI APP INITIALIZATION ---
+app = FastAPI(title="Autonomous Quantitative Trading Engine API")
 
-# --- Pydantic Models for API Requests ---
+# Enable CORS for React Frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# --- PYDANTIC SCHEMAS ---
 class TradeCreate(BaseModel):
     ticker: str
     action: str
@@ -448,262 +95,304 @@ class TradeCreate(BaseModel):
     take_profit: float
     stop_loss: float
     sizing: int
+    reasoning: Optional[str] = None
 
 class AutoDeployToggle(BaseModel):
     auto_deploy: bool
-    
+
+class CapitalUpdate(BaseModel):
+    current_capital: float
+
 class CooldownRequest(BaseModel):
     ticker: str
-    minutes: int = 60
+    minutes: int = 45
 
 # ==========================================
-# API ENDPOINTS
+# 1. TRADE PROPOSALS & LEDGER ENDPOINTS
 # ==========================================
-
-# @app.post("/api/trades/propose")
-# def propose_trade(trade: TradeCreate):
-#     """Copilot uses this to submit a new trade proposal."""
-#     db = SessionLocal()
-    
-#     existing_trade = db.query(Trade).filter(
-#         Trade.ticker == trade.ticker, 
-#         Trade.status.in_(["PENDING", "ACTIVE"])
-#     ).first()
-    
-#     if existing_trade:
-#         db.close()
-#         return {"message": f"Trade for {trade.ticker} already exists. Ignored."}
-    
-#     account_state = db.query(AccountState).first()
-#     is_auto = account_state.auto_deploy if account_state else False
-
-#     db_trade = Trade(**trade.dict())
-    
-#     if is_auto:
-#         db_trade.status = "ACTIVE"
-#         db_trade.activated_at = datetime.utcnow()
-
-#     db.add(db_trade)
-#     db.commit()
-#     db.refresh(db_trade)
-#     db.close()
-    
-#     return {"message": "Trade proposed successfully", "trade_id": db_trade.id}
-
 @app.post("/api/trades/propose")
 def propose_trade(trade: TradeCreate):
-    """Copilot uses this to submit a new trade proposal."""
     db = SessionLocal()
-    
-    existing_trade = db.query(Trade).filter(
-        Trade.ticker == trade.ticker, 
-        Trade.status.in_(["PENDING", "ACTIVE"])
-    ).first()
-    
-    if existing_trade:
+    try:
+        # Prevent duplicates for currently active or pending tickers
+        existing = db.query(Trade).filter(
+            Trade.ticker == trade.ticker,
+            Trade.status.in_(["PENDING", "ACTIVE"])
+        ).first()
+        
+        if existing:
+            return {"message": f"Trade for {trade.ticker} already exists in status {existing.status}."}
+
+        account = db.query(AccountState).first()
+        is_auto = account.auto_deploy if account else False
+
+        db_trade = Trade(
+            ticker=trade.ticker,
+            action=trade.action,
+            entry_price=trade.entry_price,
+            take_profit=trade.take_profit,
+            stop_loss=trade.stop_loss,
+            sizing=trade.sizing,
+            peak_price=trade.entry_price,
+            risk_reasoning=trade.reasoning
+        )
+
+        if db_trade.sizing <= 0:
+            db_trade.status = "IGNORED_LOW_FUNDS"
+        elif is_auto:
+            db_trade.status = "ACTIVE"
+            db_trade.activated_at = datetime.utcnow()
+        else:
+            db_trade.status = "PENDING"
+
+        db.add(db_trade)
+        db.commit()
+        db.refresh(db_trade)
+        return {"message": "Trade processed", "trade_id": db_trade.id, "status": db_trade.status}
+    finally:
         db.close()
-        return {"message": f"Trade for {trade.ticker} already exists. Ignored."}
-    
-    account_state = db.query(AccountState).first()
-    is_auto = account_state.auto_deploy if account_state else False
-
-    db_trade = Trade(**trade.dict())
-    
-    # --- THE NEW LOGIC: Intercept 0-Unit Trades ---
-    if db_trade.sizing <= 0:
-        db_trade.status = "IGNORED_LOW_FUNDS"
-    elif is_auto:
-        db_trade.status = "ACTIVE"
-        db_trade.activated_at = datetime.utcnow()
-    # (If sizing > 0 and auto_deploy is False, it defaults to "PENDING" per your schema)
-
-    db.add(db_trade)
-    db.commit()
-    db.refresh(db_trade)
-    db.close()
-    
-    return {"message": "Trade proposed successfully", "trade_id": db_trade.id}
 
 @app.get("/api/trades/pending")
 def get_pending_trades():
     db = SessionLocal()
-    today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
-    trades = db.query(Trade).filter(
-        Trade.status == "PENDING",
-        Trade.created_at >= today_start
-    ).all()
-    db.close()
-    return trades
-
-@app.get("/api/trades/active")
-def get_active_trades():
-    db = SessionLocal()
-    trades = db.query(Trade).filter(Trade.status == "ACTIVE").all()
-    db.close()
-    
-    enriched_trades = []
-    for t in trades:
-        enriched_trades.append({
-            "id": t.id,
-            "ticker": t.ticker,
-            "action": t.action,
-            "entry_price": t.entry_price,
-            "take_profit": t.take_profit,
-            "stop_loss": t.stop_loss,
-            "sizing": t.sizing,
-            "live_price": t.live_price or t.entry_price, 
-            "current_pnl": t.current_pnl or 0.0,          
-            "live_rsi": t.live_rsi or "Scanning...",
-            "live_macd": t.live_macd or "Scanning...",
-            "risk_reasoning": t.risk_reasoning or "Awaiting first Risk Engine scan cycle...",
-            "created_at": t.created_at,
-            "activated_at": t.activated_at
-        })
-    return enriched_trades
+    try:
+        today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        return db.query(Trade).filter(
+            Trade.status == "PENDING",
+            Trade.created_at >= today_start
+        ).all()
+    finally:
+        db.close()
 
 @app.post("/api/trades/{trade_id}/approve")
 def approve_trade(trade_id: int):
     db = SessionLocal()
-    trade = db.query(Trade).filter(Trade.id == trade_id).first()
-    if not trade:
-        raise HTTPException(status_code=404, detail="Trade not found")
-        
-    trade.status = "ACTIVE"
-    trade.activated_at = datetime.utcnow() 
-    db.commit()
-    db.close()
-    return {"message": f"Trade {trade_id} ACTIVE."}
+    try:
+        trade = db.query(Trade).filter(Trade.id == trade_id).first()
+        if not trade:
+            raise HTTPException(status_code=404, detail="Trade not found")
+        trade.status = "ACTIVE"
+        trade.activated_at = datetime.utcnow()
+        trade.peak_price = trade.entry_price
+        db.commit()
+        return {"message": f"Trade {trade_id} activated successfully."}
+    finally:
+        db.close()
 
 @app.post("/api/trades/{trade_id}/reject")
 def reject_trade(trade_id: int):
     db = SessionLocal()
-    trade = db.query(Trade).filter(Trade.id == trade_id).first()
-    if not trade:
-        raise HTTPException(status_code=404, detail="Trade not found")
-        
-    trade.status = "REJECTED"
-    db.commit()
-    db.close()
-    return {"message": f"Trade {trade_id} marked as REJECTED."}
+    try:
+        trade = db.query(Trade).filter(Trade.id == trade_id).first()
+        if not trade:
+            raise HTTPException(status_code=404, detail="Trade not found")
+        trade.status = "REJECTED"
+        db.commit()
+        return {"message": f"Trade {trade_id} rejected."}
+    finally:
+        db.close()
+
+@app.get("/api/trades/active")
+def get_active_trades():
+    db = SessionLocal()
+    try:
+        trades = db.query(Trade).filter(Trade.status == "ACTIVE").all()
+        enriched = []
+        for t in trades:
+            enriched.append({
+                "id": t.id,
+                "ticker": t.ticker,
+                "action": t.action,
+                "entry_price": t.entry_price,
+                "take_profit": t.take_profit,
+                "stop_loss": t.stop_loss,
+                "sizing": t.sizing,
+                "live_price": t.live_price or t.entry_price,
+                "current_pnl": t.current_pnl or 0.0,
+                "live_rsi": t.live_rsi or 50.0,
+                "live_macd": t.live_macd or 0.0,
+                "risk_reasoning": t.risk_reasoning or "Monitoring position...",
+                "created_at": t.created_at,
+                "activated_at": t.activated_at
+            })
+        return enriched
+    finally:
+        db.close()
 
 @app.get("/api/trades/closed")
 def get_closed_trades():
     db = SessionLocal()
-    today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
-    closed_trades = db.query(Trade).filter(
-        Trade.status.like("CLOSED_%"),
-        Trade.created_at >= today_start
-    ).all()
-    db.close()
-    return closed_trades
+    try:
+        today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        return db.query(Trade).filter(
+            Trade.status.like("CLOSED_%"),
+            Trade.created_at >= today_start
+        ).all()
+    finally:
+        db.close()
 
 @app.post("/api/trades/{trade_id}/emergency_stop")
 def emergency_stop_trade(trade_id: int):
     db = SessionLocal()
-    trade = db.query(Trade).filter(Trade.id == trade_id, Trade.status == "ACTIVE").first()
-    
-    if not trade:
+    try:
+        trade = db.query(Trade).filter(Trade.id == trade_id, Trade.status == "ACTIVE").first()
+        if not trade:
+            raise HTTPException(status_code=404, detail="Trade not found or already closed")
+            
+        exit_price = trade.live_price or trade.entry_price
+        if "SHORT" in trade.action:
+            pnl_per_share = trade.entry_price - exit_price
+        else:
+            pnl_per_share = exit_price - trade.entry_price
+            
+        trade.status = "CLOSED_MANUAL"
+        trade.current_pnl = round(pnl_per_share * trade.sizing, 2)
+        trade.risk_reasoning = "MANUAL OVERRIDE: Position killed via dashboard."
+        trade.closed_at = datetime.utcnow()
+        db.commit()
+        return {"message": f"Trade {trade_id} stopped manually."}
+    finally:
         db.close()
-        raise HTTPException(status_code=404, detail="Trade not found or already closed")
-        
-    exit_price = trade.live_price or trade.entry_price
-    
-    if "SHORT" in trade.action:
-        pnl_per_share = trade.entry_price - exit_price
-    else:
-        pnl_per_share = exit_price - trade.entry_price
-        
-    final_pnl = round(pnl_per_share * trade.sizing, 2)
-    
-    trade.status = "CLOSED_MANUAL"
-    trade.current_pnl = final_pnl
-    trade.risk_reasoning = "MANUAL OVERRIDE: Position killed via dashboard."
-    trade.closed_at = datetime.utcnow()
-    
-    db.commit()
-    db.close()
-    return {"message": f"Trade {trade_id} stopped manually."}
 
 # ==========================================
-# ACCOUNT & CAPITAL ENDPOINTS
+# 2. ACCOUNT & CAPITAL MANAGEMENT
 # ==========================================
 @app.get("/api/account/capital")
 def get_capital():
     db = SessionLocal()
-    state = db.query(AccountState).first()
-    if not state:
-        state = AccountState(current_capital=100000.0)
-        db.add(state)
+    try:
+        state = db.query(AccountState).first()
+        if not state:
+            state = AccountState(current_capital=INITIAL_CAPITAL)
+            db.add(state)
+            db.commit()
+            db.refresh(state)
+        return {"current_capital": state.current_capital}
+    finally:
+        db.close()
+
+@app.post("/api/account/capital")
+def update_capital(data: CapitalUpdate):
+    db = SessionLocal()
+    try:
+        state = db.query(AccountState).first()
+        if not state:
+            state = AccountState()
+            db.add(state)
+        state.current_capital = data.current_capital
         db.commit()
-        db.refresh(state)
-    capital = state.current_capital
-    db.close()
-    return {"current_capital": capital}
+        return {"message": "Capital updated", "current_capital": state.current_capital}
+    finally:
+        db.close()
 
 @app.get("/api/account/auto_deploy")
 def get_auto_deploy():
     db = SessionLocal()
-    state = db.query(AccountState).first()
-    if not state:
-        state = AccountState()
-        db.add(state)
-        db.commit()
-        db.refresh(state)
-    status = state.auto_deploy
-    db.close()
-    return {"auto_deploy": status}
+    try:
+        state = db.query(AccountState).first()
+        if not state:
+            state = AccountState()
+            db.add(state)
+            db.commit()
+            db.refresh(state)
+        return {"auto_deploy": state.auto_deploy}
+    finally:
+        db.close()
 
 @app.post("/api/account/auto_deploy")
 def toggle_auto_deploy(data: AutoDeployToggle):
     db = SessionLocal()
-    state = db.query(AccountState).first()
-    if not state:
-        state = AccountState()
-        db.add(state)
-    state.auto_deploy = data.auto_deploy
-    db.commit()
-    db.close()
-    return {"message": "Auto-deploy updated", "auto_deploy": state.auto_deploy}
-
-@app.post("/api/account/capital")
-def update_capital(data: dict):
-    db = SessionLocal()
-    state = db.query(AccountState).first()
-    if not state:
-        state = AccountState()
-        db.add(state)
-    state.current_capital = float(data.get("current_capital", 100000.0))
-    db.commit()
-    db.close()
-    return {"message": "Capital updated successfully", "current_capital": state.current_capital}
+    try:
+        state = db.query(AccountState).first()
+        if not state:
+            state = AccountState()
+            db.add(state)
+        state.auto_deploy = data.auto_deploy
+        db.commit()
+        return {"message": "Auto-deploy updated", "auto_deploy": state.auto_deploy}
+    finally:
+        db.close()
 
 # ==========================================
-# NEW: COOLDOWN (PENALTY BOX) ENDPOINTS
+# 3. PENALTY BOX (COOLDOWN LEDGER)
 # ==========================================
 @app.post("/api/cooldown/add")
 def add_cooldown(req: CooldownRequest):
-    """Risk Manager uses this to put a stopped-out stock in timeout."""
     db = SessionLocal()
-    cd = db.query(Cooldown).filter(Cooldown.ticker == req.ticker).first()
-    
-    release_time = datetime.utcnow() + timedelta(minutes=req.minutes)
-    if cd:
-        cd.cooldown_until = release_time
-    else:
-        cd = Cooldown(ticker=req.ticker, cooldown_until=release_time)
-        db.add(cd)
-    
-    db.commit()
-    db.close()
-    return {"message": f"{req.ticker} in cooldown until {release_time}"}
+    try:
+        release_time = datetime.utcnow() + timedelta(minutes=req.minutes)
+        cd = db.query(Cooldown).filter(Cooldown.ticker == req.ticker).first()
+        if cd:
+            cd.cooldown_until = release_time
+        else:
+            cd = Cooldown(ticker=req.ticker, cooldown_until=release_time)
+            db.add(cd)
+        db.commit()
+        return {"message": f"{req.ticker} in cooldown until {release_time}"}
+    finally:
+        db.close()
 
 @app.get("/api/cooldown/check/{ticker}")
 def check_cooldown(ticker: str):
-    """Copilot uses this to see if it's allowed to trade the stock."""
     db = SessionLocal()
-    cd = db.query(Cooldown).filter(Cooldown.ticker == ticker).first()
-    db.close()
-    
-    if cd and cd.cooldown_until > datetime.utcnow():
-        return {"in_cooldown": True, "release_time": cd.cooldown_until}
-    return {"in_cooldown": False}
+    try:
+        cd = db.query(Cooldown).filter(Cooldown.ticker == ticker).first()
+        if cd and cd.cooldown_until > datetime.utcnow():
+            return {"in_cooldown": True, "release_time": cd.cooldown_until}
+        return {"in_cooldown": False}
+    finally:
+        db.close()
+
+@app.get("/api/cooldown/all")
+def get_all_cooldowns():
+    db = SessionLocal()
+    try:
+        now = datetime.utcnow()
+        cds = db.query(Cooldown).filter(Cooldown.cooldown_until > now).all()
+        return [{"ticker": c.ticker, "release_time": c.cooldown_until, "reason": c.reason} for c in cds]
+    finally:
+        db.close()
+
+# ==========================================
+# 4. MACRO CIO INTELLIGENCE & NEWS ENDPOINTS
+# ==========================================
+@app.get("/api/macro/playbook")
+def get_macro_playbook():
+    db = SessionLocal()
+    try:
+        playbook = db.query(DailyPlaybookDB).order_by(DailyPlaybookDB.id.desc()).first()
+        if not playbook:
+            return {
+                "market_regime": "NEUTRAL",
+                "risk_level": "MODERATE",
+                "approved_sectors": ["IT", "Banking", "Auto"],
+                "banned_sectors": [],
+                "reasoning": "Pre-market sweep pending initialization.",
+                "top_headlines": [],
+                "sector_sentiments": {}
+            }
+        return {
+            "id": playbook.id,
+            "date": playbook.date,
+            "market_regime": playbook.market_regime,
+            "risk_level": playbook.risk_level,
+            "approved_sectors": playbook.approved_sectors or [],
+            "banned_sectors": playbook.banned_sectors or [],
+            "reasoning": playbook.reasoning,
+            "top_headlines": playbook.top_headlines or [],
+            "sector_sentiments": playbook.sector_sentiments or {}
+        }
+    finally:
+        db.close()
+
+@app.get("/api/macro/news")
+def get_live_news():
+    try:
+        from core.news_engine import news_engine
+        return news_engine.fetch_market_news()
+    except Exception as e:
+        return {"headlines": [], "sentiment": {"score": 0.0, "label": "NEUTRAL"}, "error": str(e)}
+
+@app.get("/api/health")
+def health_check():
+    return {"status": "online", "timestamp": datetime.utcnow()}

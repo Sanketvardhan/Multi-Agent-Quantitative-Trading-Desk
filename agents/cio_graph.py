@@ -1,37 +1,36 @@
 import os
+import sys
 import json
-import time
-from typing import Dict, Any
+import logging
+from datetime import datetime
+from typing import Dict, Any, List
 from dotenv import load_dotenv
 
-# Database Imports for Shared Memory
-from sqlalchemy import create_engine, Column, Integer, String, JSON, DateTime
-from sqlalchemy.orm import sessionmaker, declarative_base
-from datetime import datetime
-
-# LangChain & LangGraph Imports
-from langgraph.graph import StateGraph, END
-from langchain_aws import ChatBedrock
-from langchain_core.output_parsers import PydanticOutputParser
-
-# Import our custom schemas and tools
-from state_schema import CIOState, DailyPlaybookSchema
-from tools.model_tools import tool_get_swing_prediction, tool_get_stock_news
-
-# --- Configuration ---
+# Ensure root directory is in sys.path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(BASE_DIR, '.env'))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
-# --- SHARED MEMORY DATABASE SETUP ---
-DB_PASSWORD = os.getenv('DB_PASSWORD', 'root')
-DATABASE_URL = f"postgresql://postgres:{DB_PASSWORD}@localhost:5432/converse_db"
+from sqlalchemy import create_engine, Column, Integer, String, JSON, DateTime, text
+from sqlalchemy.orm import sessionmaker, declarative_base
+from pydantic import BaseModel, Field
 
+from core.config import DATABASE_URL
+from core.data_engine import data_engine
+from core.news_engine import news_engine
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logger = logging.getLogger("MacroCIO")
+
+# --- DATABASE SETUP ---
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 class DailyPlaybookDB(Base):
     __tablename__ = "daily_playbook"
+    __table_args__ = {'extend_existing': True}
+    
     id = Column(Integer, primary_key=True, index=True)
     date = Column(DateTime, default=datetime.utcnow)
     market_regime = Column(String) 
@@ -39,275 +38,142 @@ class DailyPlaybookDB(Base):
     approved_sectors = Column(JSON) 
     banned_sectors = Column(JSON)   
     reasoning = Column(String)
+    top_headlines = Column(JSON, nullable=True)
+    sector_sentiments = Column(JSON, nullable=True)
 
-# ==========================================
-# 1. LANGGRAPH NODES
-# ==========================================
-# def run_full_market_sweep_node(state: CIOState):
-#     """Node 1: Sweeps the market, fetching BOTH Deep Learning Math and Sentiment News."""
-#     print("\n[CIO Agent] 🌍 Initiating Macro Market Sweep (Math + Sentiment)...")
-    
-#     market_data = {}
-#     for ticker in state.target_tickers:
-#         print(f" -> Analyzing {ticker}...")
-#         try:
-#             quant_result = tool_get_swing_prediction.invoke({"ticker": ticker})
-#         except Exception as e:
-#             quant_result = {"status": "error", "message": str(e)}
-            
-#         try:
-#             news_result = tool_get_stock_news.invoke({"ticker": ticker})
-#         except Exception as e:
-#             news_result = {"status": "error", "message": str(e)}
-            
-#         if quant_result.get("status") == "success":
-#             market_data[ticker] = {
-#                 "expected_return": quant_result.get("expected_return"),
-#                 "uncertainty": quant_result.get("uncertainty"),
-#                 "headlines": news_result.get("headlines", [])
-#             }
-#         else:
-#             print(f"    ❌ Skipping {ticker} - Quant Engine Failed.")
-            
-#         time.sleep(2) # Pacing
-            
-#     return {"swing_predictions": market_data}
+Base.metadata.create_all(bind=engine)
 
-def run_full_market_sweep_node(state: CIOState):
-    """Node 1: Sweeps the market, fetching BOTH Deep Learning Math and Sentiment News with connection retry guards."""
-    print("\n[CIO Agent] 🌍 Initiating Macro Market Sweep (Math + Sentiment)...")
+# Auto-migrate new columns if missing
+try:
+    with engine.connect() as conn:
+        conn.execute(text("ALTER TABLE daily_playbook ADD COLUMN IF NOT EXISTS top_headlines JSON;"))
+        conn.execute(text("ALTER TABLE daily_playbook ADD COLUMN IF NOT EXISTS sector_sentiments JSON;"))
+        conn.commit()
+except Exception as e:
+    logger.debug(f"DB column auto-migration note: {e}")
+
+class DailyPlaybookSchema(BaseModel):
+    market_regime: str = Field(description="'BULLISH', 'BEARISH', or 'CHOPPY'")
+    risk_level: str = Field(description="'AGGRESSIVE', 'MODERATE', or 'DEFENSIVE'")
+    approved_sectors: List[str] = Field(description="e.g., ['IT', 'Banking', 'Pharma']")
+    banned_sectors: List[str] = Field(description="e.g., ['Energy', 'Metals']")
+    reasoning: str = Field(description="Summary of macro regime, news drivers, and sector bias.")
+    top_headlines: List[Dict[str, str]] = Field(default_factory=list)
+    sector_sentiments: Dict[str, Any] = Field(default_factory=dict)
+
+ALL_MONITORED_SECTORS = ["IT", "Banking", "Auto", "Metals", "Pharma", "Energy", "FMCG"]
+
+def run_macro_cio_sweep(target_tickers: List[str] = None) -> DailyPlaybookSchema:
+    """
+    Executes Pre-Market Macro Analysis using:
+    1. Quantitative Benchmarks (Nifty 50, India VIX)
+    2. Real-Time Indian Market News Headlines
+    3. Multi-Sector Sentiment Breadth (IT, Banking, Metals, Auto, Pharma, Energy, FMCG)
+    """
+    logger.info("🌅 [CIO Agent] Initiating Pre-Market Macro Strategy & News Sweep...")
     
-    market_data = {}
-    for ticker in state.target_tickers:
-        print(f" -> Analyzing {ticker}...")
+    # 1. Fetch Macro Benchmarks
+    vix_context = data_engine.calculate_technical_context("^INDIAVIX")
+    vix_price = vix_context.get("current_price", 14.0)
+    
+    nifty_context = data_engine.calculate_technical_context("^NSEI")
+    nifty_price = nifty_context.get("current_price", 24000.0)
+    nifty_rsi = nifty_context.get("rsi_14", 50.0)
+    
+    # 2. Fetch Live Market News
+    market_news = news_engine.fetch_market_news()
+    market_headlines = market_news.get("headlines", [])
+    market_sentiment = market_news.get("sentiment", {})
+    
+    # 3. Fetch Sector Sentiment Breadth
+    sector_sentiments = {}
+    approved_sectors = []
+    banned_sectors = []
+    
+    for sector in ALL_MONITORED_SECTORS:
+        sec_data = news_engine.fetch_sector_news(sector)
+        sec_sentiment = sec_data.get("sentiment", {})
+        sector_sentiments[sector] = {
+            "score": sec_sentiment.get("score", 0.0),
+            "label": sec_sentiment.get("label", "NEUTRAL"),
+            "has_red_flag": sec_sentiment.get("has_red_flag", False),
+            "top_headline": sec_data.get("headlines", [{}])[0].get("title", "") if sec_data.get("headlines") else ""
+        }
         
-        # --- THE RESILIENCE FIX: Retry loop for stable quant data collection ---
-        quant_result = {"status": "error"}
-        max_retries = 3
-        
-        for attempt in range(max_retries):
-            try:
-                # Direct invocation of the macro predictive tool
-                quant_result = tool_get_swing_prediction.invoke({"ticker": ticker})
-                
-                # If we get a clean result, break out of retry loop immediately
-                if quant_result.get("status") == "success":
-                    break
-                    
-                # If tvDatafeed returned no data internally, trigger a soft failure to retry
-                if "no data" in str(quant_result.get("message", "")).lower():
-                    raise ConnectionError("TradingView dropped data buffer.")
-                    
-            except Exception as e:
-                print(f"    ⚠️ Quant attempt {attempt + 1}/{max_retries} failed for {ticker}. Re-aligning network socket...")
-                # Sleep progressively longer each time (3s, 6s, 9s) to let the connection drop cool down
-                time.sleep(3 * (attempt + 1)) 
-        
-        # 2. Fetch Sentiment News
-        try:
-            news_result = tool_get_stock_news.invoke({"ticker": ticker})
-        except Exception as e:
-            news_result = {"status": "error", "message": str(e)}
-            
-        # 3. Aggregate Data to State Matrix
-        if quant_result.get("status") == "success":
-            market_data[ticker] = {
-                "expected_return": quant_result.get("expected_return"),
-                "uncertainty": quant_result.get("uncertainty"),
-                "headlines": news_result.get("headlines", [])
-            }
-            print(f"    ✅ Aggregated data successfully.")
+        # Sector Classification Rules:
+        if sec_sentiment.get("has_red_flag") or sec_sentiment.get("label") == "BEARISH":
+            banned_sectors.append(sector)
+        elif sec_sentiment.get("label") == "BULLISH":
+            approved_sectors.append(sector)
         else:
-            print(f"    ❌ Skipping {ticker} - Quant Engine permanently timed out or failed after {max_retries} retries.")
-            
-        # Pacing: Keep a steady 2.5-second sleep to avoid triggering automated protection systems
-        time.sleep(2.5) 
-            
-    return {"swing_predictions": market_data}
-
-# def generate_decisions_node(state: CIOState):
-#     """Node 2: Llama 3 acts as the Macro Strategist to set the Daily Playbook."""
-#     print("\n[CIO Agent] 🤖 Waking up CIO to generate Macro Playbook...")
-    
-#     if not state.swing_predictions:
-#         return {"error_logs": ["No valid market data generated."]}
-
-#     # Sort stocks by the absolute magnitude of Expected Return
-#     sorted_predictions = dict(sorted(
-#         state.swing_predictions.items(),
-#         key=lambda item: abs(item[1].get("expected_return", 0)),
-#         reverse=True
-#     ))
-
-#     llm = ChatBedrock(
-#         model_id="meta.llama3-8b-instruct-v1:0", # Or 70b if you have it
-#         model_kwargs={"temperature": 0.2},
-#         region_name="us-east-1" 
-#     )
-    
-#     parser = PydanticOutputParser(pydantic_object=DailyPlaybookSchema)
-    
-#     system_instruction = (
-#         "You are the Chief Investment Officer of a quantitative hedge fund.\n"
-#         "You are receiving a full market sweep containing deep-learning expected returns, MC Dropout uncertainty, and news headlines.\n\n"
-#         "YOUR JOB:\n"
-#         "Do NOT pick specific stocks. Your job is to analyze the data and generate a 'Daily Playbook' for the execution bots.\n\n"
-#         "SELECTION RULES:\n"
-#         "1. Identify the overarching trend based on the math. Are most high-magnitude expected returns negative? Then the regime is BEARISH.\n"
-#         "2. Identify which sectors the top movers belong to (e.g., IT, Banking, Energy). Put the sectors with high absolute returns and low uncertainty in 'approved_sectors'.\n"
-#         "3. Put sectors with catastrophic news or high uncertainty in 'banned_sectors'.\n"
-#         "4. Set Risk Level: 'AGGRESSIVE' if uncertainty is generally low, 'DEFENSIVE' if uncertainty is high.\n\n"
-#         f"FORMAT REQUIREMENTS:\n{parser.get_format_instructions()}\n"
-#         "OUTPUT STRICTLY VALID JSON ONLY."
-#     )
-    
-#     user_payload = f"Full Market Data Sweep:\n{json.dumps(sorted_predictions, indent=2)}"
-    
-#     response = llm.invoke([
-#         {"role": "system", "content": system_instruction},
-#         {"role": "user", "content": user_payload}
-#     ])
-    
-#     try:
-#         decision = parser.parse(response.content)
-#     except Exception as e:
-#         print(f" ❌ Failed to parse JSON: {e}")
-#         return {"error_logs": ["JSON Parse Error"]}
-    
-#     return {"structured_decision": decision}
-
-def generate_decisions_node(state: CIOState):
-    """Node 2: Llama 3 acts as the Macro Strategist to set the Daily Playbook."""
-    print("\n[CIO Agent] 🤖 Waking up CIO to generate Macro Playbook...")
-    
-    if not state.swing_predictions:
-        return {"error_logs": ["No valid market data generated."]}
-
-    # Sort stocks by the absolute magnitude of Expected Return
-    sorted_predictions = dict(sorted(
-        state.swing_predictions.items(),
-        key=lambda item: abs(item[1].get("expected_return", 0)),
-        reverse=True
-    ))
-
-    llm = ChatBedrock(
-        model_id="meta.llama3-8b-instruct-v1:0", 
-        model_kwargs={"temperature": 0.1}, # Lowered temp slightly for stricter formatting
-        region_name="us-east-1" 
-    )
-    
-    parser = PydanticOutputParser(pydantic_object=DailyPlaybookSchema)
-    
-    system_instruction = (
-        "You are the Chief Investment Officer of a quantitative hedge fund.\n"
-        "You are receiving a market sweep containing deep-learning expected returns, MC Dropout uncertainty, and news headlines.\n\n"
-        "YOUR JOB:\n"
-        "Analyze the data and generate a 'Daily Playbook' for the execution bots.\n\n"
-        "SELECTION RULES:\n"
-        "1. Identify the overarching trend. Are most high-magnitude expected returns negative? Then the regime is BEARISH.\n"
-        "2. Identify which sectors the top movers belong to. Put the sectors with high absolute returns and low uncertainty in 'approved_sectors'.\n"
-        "3. Put sectors with catastrophic news or high uncertainty in 'banned_sectors'.\n"
-        "4. Set Risk Level: 'AGGRESSIVE' if uncertainty is generally low, 'DEFENSIVE' if uncertainty is high.\n"
-        "5. If you do not have enough data to pick sectors, just leave the arrays empty: [].\n\n"
-        f"FORMAT REQUIREMENTS:\n{parser.get_format_instructions()}\n"
-        "CRITICAL: OUTPUT STRICTLY VALID JSON ONLY. DO NOT add any conversational text before or after the JSON. DO NOT use markdown formatting."
-    )
-    
-    user_payload = f"Market Data Sweep:\n{json.dumps(sorted_predictions, indent=2)}"
-    
-    response = llm.invoke([
-        {"role": "system", "content": system_instruction},
-        {"role": "user", "content": user_payload}
-    ])
-    
-    # --- THE FIX: BULLETPROOF JSON EXTRACTION ---
-    raw_text = response.content
-    try:
-        # Attempt 1: Try the strict LangChain parser first
-        decision = parser.parse(raw_text)
-    except Exception:
-        # Attempt 2: If the LLM was chatty, surgically extract the JSON block
-        print("   ⚠️ LLM added conversational text. Extracting JSON via Regex...")
-        try:
-            import re
-            # Find everything between the first { and the last }
-            json_match = re.search(r'\{.*\}', raw_text, re.DOTALL)
-            if json_match:
-                clean_json = json_match.group(0)
-                parsed_dict = json.loads(clean_json)
-                decision = DailyPlaybookSchema(**parsed_dict)
+            # Neutral sectors default to approved if market is not heavily bearish
+            if nifty_rsi >= 45:
+                approved_sectors.append(sector)
             else:
-                raise ValueError("No JSON block found in output.")
-        except Exception as e:
-            print(f" ❌ Failed to extract JSON: {e}")
-            print(f" Raw Output: {raw_text}")
-            return {"error_logs": ["JSON Parse Error"]}
-    
-    return {"structured_decision": decision}
+                banned_sectors.append(sector)
 
-def export_configuration_node(state: CIOState):
-    """Node 3: Saves the Playbook to PostgreSQL for the Copilot."""
-    if not state.structured_decision:
-        return {}
+    # 4. Determine Global Market Regime & Risk Level
+    if vix_price > 18.0 or market_sentiment.get("label") == "BEARISH":
+        risk_level = "DEFENSIVE"
+    elif vix_price < 13.0 and market_sentiment.get("label") == "BULLISH":
+        risk_level = "AGGRESSIVE"
+    else:
+        risk_level = "MODERATE"
         
-    print("\n[CIO Agent] 💾 Exporting Final Macro Playbook to Database...")
-    playbook = state.structured_decision
+    if nifty_rsi > 58:
+        market_regime = "BULLISH"
+    elif nifty_rsi < 42:
+        market_regime = "BEARISH"
+    else:
+        market_regime = "CHOPPY"
+        
+    # Safety fallback if empty
+    if not approved_sectors:
+        approved_sectors = ["IT", "Pharma", "FMCG"]
+        
+    headline_snippet = market_headlines[0]["title"] if market_headlines else "Market consolidating near key support levels."
+    reasoning = (
+        f"Nifty RSI @ {nifty_rsi:.1f} | India VIX @ {vix_price:.2f} ({risk_level} Risk). "
+        f"Regime: {market_regime}. Leading Catalyst: '{headline_snippet}'. "
+        f"Approved Sectors: {', '.join(approved_sectors)}. Banned Sectors: {', '.join(banned_sectors) if banned_sectors else 'None'}."
+    )
     
-    print(f"\n📊 REGIME: {playbook.market_regime} | 🛡️ RISK: {playbook.risk_level}")
-    print(f"✅ APPROVED SECTORS: {', '.join(playbook.approved_sectors)}")
-    print(f"🚫 BANNED SECTORS: {', '.join(playbook.banned_sectors)}")
-    print(f"💬 THESIS: {playbook.reasoning}\n")
+    playbook = DailyPlaybookSchema(
+        market_regime=market_regime,
+        risk_level=risk_level,
+        approved_sectors=approved_sectors,
+        banned_sectors=banned_sectors,
+        reasoning=reasoning,
+        top_headlines=market_headlines,
+        sector_sentiments=sector_sentiments
+    )
     
+    # 5. Persist to Unified Shared Database
     db = SessionLocal()
     try:
-        # We delete yesterday's playbook so the Copilot only reads today's
         db.query(DailyPlaybookDB).delete()
-        
-        new_pb = DailyPlaybookDB(
+        db.add(DailyPlaybookDB(
             market_regime=playbook.market_regime,
             risk_level=playbook.risk_level,
             approved_sectors=playbook.approved_sectors,
             banned_sectors=playbook.banned_sectors,
-            reasoning=playbook.reasoning
-        )
-        db.add(new_pb)
+            reasoning=playbook.reasoning,
+            top_headlines=playbook.top_headlines,
+            sector_sentiments=playbook.sector_sentiments
+        ))
         db.commit()
-        print("✅ Playbook successfully injected into Shared Memory.")
+        logger.info(f"✅ Macro Playbook persisted to Database. Regime: {market_regime} | Risk: {risk_level}")
+        logger.info(f"📰 Top Catalyst: {headline_snippet}")
+        logger.info(f"🟢 Approved Sectors: {', '.join(approved_sectors)}")
+        if banned_sectors:
+            logger.info(f"🔴 Banned Sectors: {', '.join(banned_sectors)}")
     except Exception as e:
         db.rollback()
-        print(f"❌ Database error: {e}")
+        logger.error(f"Failed to persist playbook: {e}")
     finally:
         db.close()
         
-    return {}
-
-# ==========================================
-# 2. COMPILE THE STATE GRAPH
-# ==========================================
-workflow = StateGraph(CIOState)
-
-workflow.add_node("scan_market", run_full_market_sweep_node)
-workflow.add_node("make_decisions", generate_decisions_node)
-workflow.add_node("export", export_configuration_node)
-
-workflow.set_entry_point("scan_market")
-workflow.add_edge("scan_market", "make_decisions")
-workflow.add_edge("make_decisions", "export")
-workflow.add_edge("export", END)
-
-cio_app = workflow.compile()
+    return playbook
 
 if __name__ == "__main__":
-    print("=========================================================")
-    print("🌅 STARTING PRE-MARKET CIO AGENT WORKFLOW")
-    print("=========================================================")
-    
-    # Passing a sample list to test. Expand to Nifty 50 later.
-    # initial_state = CIOState(target_tickers=['RELIANCE', 'TCS', 'HDFCBANK', 'INFY'])
-    initial_state = CIOState(target_tickers=["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BEL","BHARTIARTL","CIPLA","COALINDIA","DRREDDY","EICHERMOT","ETERNAL","GRASIM","HCLTECH","HDFCBANK","HDFCLIFE","HINDALCO","HINDUNILVR","ICICIBANK","INDIGO","INFY","ITC","JIOFIN","JSWSTEEL","KOTAKBANK","LT","M&M","MARUTI","MAXHEALTH","NESTLEIND","NTPC","ONGC","POWERGRID","RELIANCE","SBILIFE","SHRIRAMFIN","SBIN","SUNPHARMA","TCS","TATACONSUM","TMPV","TATASTEEL","TECHM","TITAN","TRENT","ULTRACEMCO","WIPRO"])
-    
-    
-    try:
-        cio_app.invoke(initial_state)
-    except Exception as e:
-        print(f"❌ LangGraph Execution Failed: {e}")
+    pb = run_macro_cio_sweep()

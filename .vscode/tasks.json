@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "API Server",
+      "type": "shell",
+      "command": "call stock_predictor_env\\Scripts\\activate.bat && uvicorn api:app --reload",
+      "options": {
+        "shell": { "executable": "cmd.exe", "args": ["/d", "/c"] }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend Dev",
+      "type": "shell",
+      "command": "cd frontend && npm run dev",
+      "options": {
+        "shell": { "executable": "cmd.exe", "args": ["/d", "/c"] }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Market Daemon",
+      "type": "shell",
+      "command": "call stock_predictor_env\\Scripts\\activate.bat && python market_daemon.py",
+      "options": {
+        "shell": { "executable": "cmd.exe", "args": ["/d", "/c"] }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Risk Daemon",
+      "type": "shell",
+      "command": "call stock_predictor_env\\Scripts\\activate.bat && python risk_daemon.py",
+      "options": {
+        "shell": { "executable": "cmd.exe", "args": ["/d", "/c"] }
+      },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Start All Services",
+      "dependsOn": [
+        "API Server",
+        "Frontend Dev",
+        "Market Daemon",
+        "Risk Daemon"
+      ],
+      "dependsOrder": "parallel",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

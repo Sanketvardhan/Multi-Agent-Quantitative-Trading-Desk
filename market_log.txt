@@ -1,0 +1,1717 @@
+Day 1
+
+(stock_predictor_env) C:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor>python -u "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py"
+2026-08-25 09:36:18,798 [INFO] 🤖 Quantitative Multi-Agent Market Daemon Initialized.
+2026-08-25 09:36:18,803 [INFO] 📊 Active Daily Playbook found for today (CHOPPY | Risk: AGGRESSIVE).
+2026-08-25 09:45:00,034 [INFO] 
+⚡ [09:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 09:45:00,034 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 09:45:00,034 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 09:45:04,335 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1125.2 | ATR: ₹3.62 | SL: ₹1119.77 | TP: ₹1134.25 | Est Gain: ₹18.1
+2026-08-25 09:45:08,245 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13502.0 | ATR: ₹35.68 | SL: ₹13448.48 | TP: ₹13591.2 | Est Gain: ₹89.2
+2026-08-25 09:45:10,196 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹180.39 | ATR: ₹0.55 | SL: ₹179.56 | TP: ₹181.76 | Est Gain: ₹17.81
+2026-08-25 09:45:11,690 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.75 | ATR: ₹0.86 | SL: ₹336.46 | TP: ₹339.9 | Est Gain: ₹15.05
+2026-08-25 09:45:12,136 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-08-25 09:45:12,136 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 09:45:12,136 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 09:45:12,506 [INFO] ⏸️ Skipping MARUTI [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 09:45:12,510 [INFO] ⏸️ Skipping INFY [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 09:45:12,541 [INFO] ⏸️ Skipping WIPRO [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 09:45:12,556 [INFO] ⏸️ Skipping NTPC [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:00:00,949 [INFO] 
+⚡ [10:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 10:00:00,949 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 10:00:00,949 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 10:00:02,886 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1125.4 | ATR: ₹3.81 | SL: ₹1119.69 | TP: ₹1134.93 | Est Gain: ₹19.06
+2026-08-25 10:00:04,776 [INFO] 🎯 Setup: ITC [LONG] Price: ₹268.0 | ATR: ₹0.75 | SL: ₹266.88 | TP: ₹269.88 | Est Gain: ₹16.92
+2026-08-25 10:00:06,522 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13490.0 | ATR: ₹32.29 | SL: ₹13441.57 | TP: ₹13570.73 | Est Gain: ₹80.73
+2026-08-25 10:00:08,058 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹2969.3 | ATR: ₹10.33 | SL: ₹2953.81 | TP: ₹2995.12 | Est Gain: ₹25.82
+2026-08-25 10:00:08,667 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.89 | ATR: ₹0.63 | SL: ₹178.94 | TP: ₹181.46 | Est Gain: ₹20.41
+2026-08-25 10:00:10,101 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.85 | ATR: ₹0.9 | SL: ₹336.5 | TP: ₹340.1 | Est Gain: ₹15.75
+2026-08-25 10:00:10,523 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 10:00:10,523 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 10:00:10,524 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 10:00:10,760 [INFO] ⏸️ Skipping MARUTI [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:00:10,782 [INFO] ⏸️ Skipping ADANIENT [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:00:10,786 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-25 10:00:10,812 [INFO] ⏸️ Skipping INFY [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:00:10,817 [INFO] ⏸️ Skipping ITC [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:15:00,224 [INFO] 
+⚡ [10:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 10:15:00,224 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 10:15:00,224 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 10:15:02,257 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1128.4 | ATR: ₹3.81 | SL: ₹1122.69 | TP: ₹1137.93 | Est Gain: ₹19.06
+2026-08-25 10:15:04,120 [INFO] 🎯 Setup: ITC [LONG] Price: ₹268.15 | ATR: ₹0.72 | SL: ₹267.07 | TP: ₹269.95 | Est Gain: ₹16.2
+2026-08-25 10:15:05,961 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13490.0 | ATR: ₹32.39 | SL: ₹13441.42 | TP: ₹13570.98 | Est Gain: ₹80.98
+2026-08-25 10:15:07,915 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹180.1 | ATR: ₹0.61 | SL: ₹179.19 | TP: ₹181.62 | Est Gain: ₹19.76
+2026-08-25 10:15:09,444 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.35 | ATR: ₹0.9 | SL: ₹336.0 | TP: ₹339.6 | Est Gain: ₹15.75
+2026-08-25 10:15:10,035 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 10:15:10,036 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 10:15:10,036 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 10:15:10,307 [INFO] ⏸️ Skipping MARUTI [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:15:10,322 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-25 10:15:10,337 [INFO] ⏸️ Skipping INFY [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:15:10,354 [INFO] ⏸️ Skipping ITC [LONG]: Conflicts with Bearish Nifty regime.
+2026-08-25 10:15:10,368 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+Traceback (most recent call last):
+  File "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py", line 129, in <module>
+    run_market_daemon()
+  File "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py", line 126, in run_market_daemon
+    time.sleep(1)
+KeyboardInterrupt
+^C
+(stock_predictor_env) C:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor>python -u "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py"
+2026-08-25 10:29:13,452 [INFO] 🤖 Quantitative Multi-Agent Market Daemon Initialized.
+2026-08-25 10:29:13,457 [INFO] 📊 Active Daily Playbook found for today (CHOPPY | Risk: AGGRESSIVE).
+2026-08-25 10:30:00,475 [INFO] 
+⚡ [10:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 10:30:00,475 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 10:30:00,476 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 10:30:05,268 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1126.6 | ATR: ₹3.48 | SL: ₹1121.38 | TP: ₹1135.3 | Est Gain: ₹17.4
+2026-08-25 10:30:07,291 [INFO] 🎯 Setup: ITC [LONG] Price: ₹268.85 | ATR: ₹0.73 | SL: ₹267.75 | TP: ₹270.68 | Est Gain: ₹16.47
+2026-08-25 10:30:09,281 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13488.0 | ATR: ₹33.32 | SL: ₹13438.02 | TP: ₹13571.3 | Est Gain: ₹83.3
+2026-08-25 10:30:11,371 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹2983.2 | ATR: ₹11.04 | SL: ₹2966.64 | TP: ₹3010.8 | Est Gain: ₹27.6
+2026-08-25 10:30:11,916 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.6 | ATR: ₹0.57 | SL: ₹178.75 | TP: ₹181.03 | Est Gain: ₹18.59
+2026-08-25 10:30:13,785 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 10:30:13,785 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 10:30:13,785 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 10:30:14,124 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 10:30:14,137 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 10:30:14,180 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 10:30:14,205 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-25 10:30:14,238 [INFO] 🚀 Dispatched INFY EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 10:30:14,273 [INFO] 🚀 Dispatched ITC EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 10:45:00,998 [INFO] 
+⚡ [10:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 10:45:00,998 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 10:45:00,998 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 10:45:04,591 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1128.0 | ATR: ₹3.35 | SL: ₹1122.97 | TP: ₹1136.38 | Est Gain: ₹16.76
+2026-08-25 10:45:09,165 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13509.0 | ATR: ₹32.73 | SL: ₹13459.91 | TP: ₹13590.83 | Est Gain: ₹81.83
+2026-08-25 10:45:11,030 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹2999.6 | ATR: ₹11.73 | SL: ₹2982.01 | TP: ₹3028.92 | Est Gain: ₹29.32
+2026-08-25 10:45:11,643 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.55 | ATR: ₹0.54 | SL: ₹178.74 | TP: ₹180.9 | Est Gain: ₹17.55
+2026-08-25 10:45:13,635 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹336.85 | ATR: ₹0.89 | SL: ₹335.52 | TP: ₹339.08 | Est Gain: ₹15.61
+2026-08-25 10:45:14,224 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 10:45:14,224 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 10:45:14,224 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 10:45:14,561 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 10:45:14,610 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 10:45:14,650 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 10:45:14,695 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 10:45:14,739 [INFO] 🚀 Dispatched INFY EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 10:45:14,763 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-25 11:00:00,252 [INFO] 
+⚡ [11:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 11:00:00,252 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 11:00:00,252 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 11:00:02,793 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1126.7 | ATR: ₹3.49 | SL: ₹1121.47 | TP: ₹1135.42 | Est Gain: ₹17.44
+2026-08-25 11:00:03,880 [INFO] 🎯 Setup: SBIN [LONG] Price: ₹1040.1 | ATR: ₹3.06 | SL: ₹1035.51 | TP: ₹1047.75 | Est Gain: ₹15.3
+2026-08-25 11:00:06,553 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13496.0 | ATR: ₹31.3 | SL: ₹13449.05 | TP: ₹13574.25 | Est Gain: ₹78.25
+2026-08-25 11:00:08,255 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3022.0 | ATR: ₹13.0 | SL: ₹3002.5 | TP: ₹3054.5 | Est Gain: ₹32.5
+2026-08-25 11:00:08,831 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.65 | ATR: ₹0.52 | SL: ₹178.87 | TP: ₹180.95 | Est Gain: ₹16.9
+2026-08-25 11:00:10,259 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.5 | ATR: ₹0.93 | SL: ₹336.11 | TP: ₹339.82 | Est Gain: ₹16.24
+2026-08-25 11:00:11,022 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 11:00:11,022 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 11:00:11,023 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 11:00:11,288 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 11:00:11,307 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 11:00:11,340 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 11:00:11,365 [INFO] 🚀 Dispatched INFY EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 11:00:11,395 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 11:00:11,409 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-25 11:15:00,900 [INFO] 
+⚡ [11:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 11:15:00,900 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 11:15:00,900 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 11:15:03,033 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1125.6 | ATR: ₹3.17 | SL: ₹1120.84 | TP: ₹1133.52 | Est Gain: ₹15.84
+2026-08-25 11:15:06,409 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13509.0 | ATR: ₹32.15 | SL: ₹13460.77 | TP: ₹13589.38 | Est Gain: ₹80.38
+2026-08-25 11:15:07,517 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1077.4 | ATR: ₹3.09 | SL: ₹1072.77 | TP: ₹1085.12 | Est Gain: ₹15.44
+2026-08-25 11:15:07,971 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3034.0 | ATR: ₹13.91 | SL: ₹3013.14 | TP: ₹3068.78 | Est Gain: ₹34.78
+2026-08-25 11:15:08,448 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.35 | ATR: ₹0.51 | SL: ₹178.59 | TP: ₹180.62 | Est Gain: ₹16.51
+2026-08-25 11:15:09,681 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹338.05 | ATR: ₹0.87 | SL: ₹336.75 | TP: ₹340.23 | Est Gain: ₹15.26
+2026-08-25 11:15:10,067 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 11:15:10,068 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 11:15:10,068 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 11:15:10,281 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 11:15:10,286 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-08-25 11:15:10,316 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 11:15:10,327 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 11:15:10,342 [INFO] 🛑 Skipping INFY: In active Cooldown penalty box.
+2026-08-25 11:15:10,379 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 11:30:00,815 [INFO] 
+⚡ [11:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 11:30:00,815 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 11:30:00,815 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 11:30:03,217 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1127.0 | ATR: ₹3.33 | SL: ₹1122.01 | TP: ₹1135.33 | Est Gain: ₹16.66
+2026-08-25 11:30:04,518 [INFO] 🎯 Setup: SBIN [LONG] Price: ₹1040.6 | ATR: ₹3.07 | SL: ₹1035.99 | TP: ₹1048.27 | Est Gain: ₹15.34
+2026-08-25 11:30:07,581 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13469.0 | ATR: ₹33.64 | SL: ₹13418.54 | TP: ₹13553.1 | Est Gain: ₹84.1
+2026-08-25 11:30:09,764 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3035.8 | ATR: ₹13.99 | SL: ₹3014.82 | TP: ₹3070.78 | Est Gain: ₹34.98
+2026-08-25 11:30:10,261 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.7 | ATR: ₹0.5 | SL: ₹178.95 | TP: ₹180.95 | Est Gain: ₹16.25
+2026-08-25 11:30:12,074 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.25 | ATR: ₹0.89 | SL: ₹335.92 | TP: ₹339.48 | Est Gain: ₹15.61
+2026-08-25 11:30:12,910 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 11:30:12,910 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 11:30:12,910 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 11:30:13,190 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 11:30:13,195 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-08-25 11:30:13,240 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 11:30:13,268 [INFO] 🛑 Skipping INFY: In active Cooldown penalty box.
+2026-08-25 11:30:13,299 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 11:30:13,315 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-25 11:45:00,078 [INFO] 
+⚡ [11:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 11:45:00,079 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 11:45:00,080 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 11:45:03,176 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1127.1 | ATR: ₹3.21 | SL: ₹1122.28 | TP: ₹1135.12 | Est Gain: ₹16.04
+2026-08-25 11:45:04,609 [INFO] 🎯 Setup: SBIN [LONG] Price: ₹1040.1 | ATR: ₹3.04 | SL: ₹1035.54 | TP: ₹1047.7 | Est Gain: ₹15.2
+2026-08-25 11:45:07,557 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13483.0 | ATR: ₹33.45 | SL: ₹13432.83 | TP: ₹13566.62 | Est Gain: ₹83.62
+2026-08-25 11:45:09,278 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3031.9 | ATR: ₹12.97 | SL: ₹3012.45 | TP: ₹3064.33 | Est Gain: ₹32.43
+2026-08-25 11:45:09,790 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.84 | ATR: ₹0.5 | SL: ₹179.09 | TP: ₹181.09 | Est Gain: ₹16.25
+2026-08-25 11:45:11,372 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.0 | ATR: ₹0.7 | SL: ₹267.95 | TP: ₹270.75 | Est Gain: ₹15.75
+2026-08-25 11:45:11,968 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹336.95 | ATR: ₹0.88 | SL: ₹335.63 | TP: ₹339.15 | Est Gain: ₹15.4
+2026-08-25 11:45:12,492 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 11:45:12,492 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 11:45:12,493 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 11:45:12,893 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 11:45:12,910 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-08-25 11:45:12,970 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 11:45:13,014 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 11:45:13,047 [INFO] 🛑 Skipping INFY: In active Cooldown penalty box.
+2026-08-25 11:45:13,086 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 12:00:01,001 [INFO] 
+⚡ [12:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 12:00:01,002 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 12:00:01,002 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 12:00:03,774 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1129.9 | ATR: ₹3.29 | SL: ₹1124.97 | TP: ₹1138.12 | Est Gain: ₹16.44
+2026-08-25 12:00:05,152 [INFO] 🎯 Setup: SBIN [LONG] Price: ₹1042.4 | ATR: ₹3.18 | SL: ₹1037.63 | TP: ₹1050.35 | Est Gain: ₹15.9
+2026-08-25 12:00:08,127 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13516.0 | ATR: ₹32.19 | SL: ₹13467.72 | TP: ₹13596.48 | Est Gain: ₹80.48
+2026-08-25 12:00:09,801 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3031.5 | ATR: ₹12.66 | SL: ₹3012.51 | TP: ₹3063.15 | Est Gain: ₹31.65
+2026-08-25 12:00:10,273 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.76 | ATR: ₹0.53 | SL: ₹178.97 | TP: ₹181.08 | Est Gain: ₹17.16
+2026-08-25 12:00:12,214 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.0 | ATR: ₹0.94 | SL: ₹335.59 | TP: ₹339.35 | Est Gain: ₹16.45
+2026-08-25 12:00:12,833 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 12:00:12,833 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 12:00:12,833 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 12:00:13,081 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 12:00:13,139 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:00:13,170 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:00:13,208 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 12:00:13,242 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-25 12:00:13,315 [INFO] 🚀 Dispatched INFY EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:15:00,166 [INFO] 
+⚡ [12:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 12:15:00,167 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 12:15:00,167 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 12:15:03,331 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1128.5 | ATR: ₹3.24 | SL: ₹1123.64 | TP: ₹1136.6 | Est Gain: ₹16.2
+2026-08-25 12:15:07,559 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13511.0 | ATR: ₹32.9 | SL: ₹13461.65 | TP: ₹13593.25 | Est Gain: ₹82.25
+2026-08-25 12:15:09,394 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3025.5 | ATR: ₹12.36 | SL: ₹3006.96 | TP: ₹3056.4 | Est Gain: ₹30.9
+2026-08-25 12:15:09,905 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.47 | ATR: ₹0.48 | SL: ₹178.75 | TP: ₹180.67 | Est Gain: ₹15.6
+2026-08-25 12:15:11,247 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.85 | ATR: ₹0.73 | SL: ₹268.75 | TP: ₹271.68 | Est Gain: ₹16.47
+2026-08-25 12:15:11,732 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹336.85 | ATR: ₹0.9 | SL: ₹335.5 | TP: ₹339.1 | Est Gain: ₹15.75
+2026-08-25 12:15:12,191 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 12:15:12,191 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 12:15:12,191 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 12:15:12,618 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 12:15:12,649 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:15:12,687 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:15:12,699 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 12:15:12,714 [INFO] 🚀 Dispatched INFY EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:15:12,756 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-25 12:30:00,572 [INFO] 
+⚡ [12:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 12:30:00,572 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 12:30:00,574 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 12:30:07,443 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13511.0 | ATR: ₹31.98 | SL: ₹13463.03 | TP: ₹13590.95 | Est Gain: ₹79.95
+2026-08-25 12:30:08,304 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5066.9 | ATR: ₹8.69 | SL: ₹5079.93 | TP: ₹5045.17 | Est Gain: ₹21.73
+2026-08-25 12:30:09,174 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3031.3 | ATR: ₹12.91 | SL: ₹3011.94 | TP: ₹3063.58 | Est Gain: ₹32.28
+2026-08-25 12:30:09,694 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.4 | ATR: ₹0.47 | SL: ₹178.69 | TP: ₹180.58 | Est Gain: ₹15.34
+2026-08-25 12:30:11,054 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.6 | ATR: ₹0.72 | SL: ₹268.52 | TP: ₹271.4 | Est Gain: ₹16.2
+2026-08-25 12:30:11,534 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹336.6 | ATR: ₹0.87 | SL: ₹335.3 | TP: ₹338.78 | Est Gain: ₹15.26
+2026-08-25 12:30:11,966 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 12:30:11,966 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 12:30:11,966 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 12:30:12,358 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 12:30:12,378 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:30:12,442 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:30:12,466 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-25 12:30:12,516 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 12:30:12,566 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 12:45:00,383 [INFO] 
+⚡ [12:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 12:45:00,384 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 12:45:00,384 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 12:45:04,618 [INFO] 🎯 Setup: SBIN [LONG] Price: ₹1041.8 | ATR: ₹3.03 | SL: ₹1037.25 | TP: ₹1049.38 | Est Gain: ₹15.16
+2026-08-25 12:45:07,313 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13511.0 | ATR: ₹31.41 | SL: ₹13463.89 | TP: ₹13589.52 | Est Gain: ₹78.52
+2026-08-25 12:45:08,342 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5065.2 | ATR: ₹8.59 | SL: ₹5078.09 | TP: ₹5043.72 | Est Gain: ₹21.48
+2026-08-25 12:45:09,270 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3031.4 | ATR: ₹12.39 | SL: ₹3012.82 | TP: ₹3062.38 | Est Gain: ₹30.98
+2026-08-25 12:45:09,742 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹178.94 | ATR: ₹0.47 | SL: ₹178.23 | TP: ₹180.12 | Est Gain: ₹15.34
+2026-08-25 12:45:11,161 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.6 | ATR: ₹0.7 | SL: ₹268.55 | TP: ₹271.35 | Est Gain: ₹15.75
+2026-08-25 12:45:11,655 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹335.95 | ATR: ₹0.88 | SL: ₹334.63 | TP: ₹338.15 | Est Gain: ₹15.4
+2026-08-25 12:45:12,151 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 12:45:12,151 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 12:45:12,152 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 12:45:12,406 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 12:45:12,469 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:45:12,543 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 12:45:12,567 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-25 12:45:12,591 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 12:45:12,610 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-25 13:00:00,152 [INFO] 
+⚡ [01:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 13:00:00,152 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 13:00:00,152 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 13:00:03,398 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1123.9 | ATR: ₹3.29 | SL: ₹1118.97 | TP: ₹1132.12 | Est Gain: ₹16.44
+2026-08-25 13:00:07,867 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13500.0 | ATR: ₹28.55 | SL: ₹13457.17 | TP: ₹13571.38 | Est Gain: ₹71.38
+2026-08-25 13:00:08,777 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5071.8 | ATR: ₹8.01 | SL: ₹5083.82 | TP: ₹5051.78 | Est Gain: ₹20.02
+2026-08-25 13:00:09,639 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3035.9 | ATR: ₹11.31 | SL: ₹3018.93 | TP: ₹3064.18 | Est Gain: ₹28.28
+2026-08-25 13:00:10,264 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.13 | ATR: ₹0.5 | SL: ₹178.38 | TP: ₹180.38 | Est Gain: ₹16.25
+2026-08-25 13:00:12,319 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 13:00:12,319 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 13:00:12,319 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 13:00:12,689 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 13:00:12,705 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 13:00:12,723 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 13:00:12,762 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-25 13:00:12,767 [INFO] 🛑 Skipping INFY: In active Cooldown penalty box.
+2026-08-25 13:00:12,792 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-25 13:15:00,325 [INFO] 
+⚡ [01:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 13:15:00,325 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 13:15:00,325 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 13:15:04,557 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1123.8 | ATR: ₹3.0 | SL: ₹1119.3 | TP: ₹1131.3 | Est Gain: ₹15.0
+2026-08-25 13:15:07,821 [INFO] 🎯 Setup: ITC [LONG] Price: ₹269.15 | ATR: ₹0.68 | SL: ₹268.13 | TP: ₹270.85 | Est Gain: ₹15.3
+2026-08-25 13:15:10,150 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13500.0 | ATR: ₹27.79 | SL: ₹13458.32 | TP: ₹13569.48 | Est Gain: ₹69.48
+2026-08-25 13:15:11,131 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5065.5 | ATR: ₹8.48 | SL: ₹5078.22 | TP: ₹5044.3 | Est Gain: ₹21.2
+2026-08-25 13:15:12,067 [INFO] 🎯 Setup: ADANIENT [LONG] Price: ₹3036.8 | ATR: ₹11.92 | SL: ₹3018.92 | TP: ₹3066.6 | Est Gain: ₹29.8
+2026-08-25 13:15:12,552 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹178.85 | ATR: ₹0.5 | SL: ₹178.1 | TP: ₹180.1 | Est Gain: ₹16.25
+2026-08-25 13:15:14,819 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-25 13:15:14,820 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 13:15:14,820 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 13:15:15,236 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 13:15:15,268 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 13:15:15,328 [INFO] 🚀 Dispatched ADANIENT EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 13:15:15,344 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-25 13:15:15,352 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-25 13:15:15,397 [INFO] 🚀 Dispatched ITC EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 13:30:00,857 [INFO] 
+⚡ [01:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 13:30:00,857 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 13:30:00,857 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 13:30:08,837 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13520.0 | ATR: ₹29.22 | SL: ₹13476.17 | TP: ₹13593.05 | Est Gain: ₹73.05
+2026-08-25 13:30:09,982 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5066.3 | ATR: ₹8.36 | SL: ₹5078.84 | TP: ₹5045.4 | Est Gain: ₹20.9
+2026-08-25 13:30:13,889 [INFO] ✅ Successfully persisted top 2 setups to database.
+2026-08-25 13:30:13,889 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 13:30:13,889 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 13:30:14,232 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 13:30:14,296 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 13:30:14,334 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-25 13:45:00,024 [INFO] 
+⚡ [01:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 13:45:00,024 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 13:45:00,024 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 13:45:06,854 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13544.0 | ATR: ₹29.49 | SL: ₹13499.76 | TP: ₹13617.73 | Est Gain: ₹73.73
+2026-08-25 13:45:07,902 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5071.9 | ATR: ₹8.23 | SL: ₹5084.24 | TP: ₹5051.32 | Est Gain: ₹20.58
+2026-08-25 13:45:10,786 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹268.75 | ATR: ₹0.67 | SL: ₹267.75 | TP: ₹270.43 | Est Gain: ₹15.12
+2026-08-25 13:45:11,770 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-25 13:45:11,771 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 13:45:11,773 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 13:45:12,153 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 13:45:12,221 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 13:45:12,237 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-25 13:45:12,290 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 14:00:00,762 [INFO] 
+⚡ [02:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 14:00:00,762 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 14:00:00,763 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 14:00:11,332 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13563.0 | ATR: ₹30.53 | SL: ₹13517.2 | TP: ₹13639.33 | Est Gain: ₹76.33
+2026-08-25 14:00:17,694 [INFO] ✅ Successfully persisted top 1 setups to database.
+2026-08-25 14:00:17,694 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 14:00:17,694 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 14:00:17,980 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 14:00:18,000 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 14:15:00,437 [INFO] 
+⚡ [02:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 14:15:00,437 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 14:15:00,437 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 14:15:07,732 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13563.0 | ATR: ₹29.7 | SL: ₹13518.45 | TP: ₹13637.25 | Est Gain: ₹74.25
+2026-08-25 14:15:10,848 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹268.7 | ATR: ₹0.72 | SL: ₹267.62 | TP: ₹270.5 | Est Gain: ₹16.2
+2026-08-25 14:15:11,747 [INFO] ✅ Successfully persisted top 2 setups to database.
+2026-08-25 14:15:11,747 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 14:15:11,747 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 14:15:12,003 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 14:15:12,034 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 14:15:12,048 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 14:30:00,454 [INFO] 
+⚡ [02:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 14:30:00,454 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 14:30:00,454 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 14:30:10,484 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13558.0 | ATR: ₹29.51 | SL: ₹13513.74 | TP: ₹13631.77 | Est Gain: ₹73.77
+2026-08-25 14:30:14,482 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹338.35 | ATR: ₹0.89 | SL: ₹337.02 | TP: ₹340.58 | Est Gain: ₹15.61
+2026-08-25 14:30:15,081 [INFO] ✅ Successfully persisted top 2 setups to database.
+2026-08-25 14:30:15,081 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 14:30:15,081 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 14:30:15,429 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 14:30:15,437 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 14:30:15,470 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-25 14:45:00,873 [INFO] 
+⚡ [02:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 14:45:00,873 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 14:45:00,873 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 14:45:07,770 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13606.0 | ATR: ₹30.11 | SL: ₹13560.83 | TP: ₹13681.27 | Est Gain: ₹75.27
+2026-08-25 14:45:11,623 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.95 | ATR: ₹0.73 | SL: ₹268.85 | TP: ₹271.77 | Est Gain: ₹16.38
+2026-08-25 14:45:12,069 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹338.7 | ATR: ₹0.88 | SL: ₹337.38 | TP: ₹340.9 | Est Gain: ₹15.4
+2026-08-25 14:45:12,652 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-25 14:45:12,652 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 14:45:12,652 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 14:45:12,949 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-25 14:45:12,975 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 14:45:13,012 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-25 14:45:13,033 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-25 15:00:00,460 [INFO] 
+⚡ [03:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 15:00:00,460 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 15:00:00,460 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 15:00:08,142 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13637.0 | ATR: ₹33.04 | SL: ₹13587.44 | TP: ₹13719.6 | Est Gain: ₹82.6
+2026-08-25 15:00:12,278 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹270.55 | ATR: ₹0.69 | SL: ₹269.51 | TP: ₹272.28 | Est Gain: ₹15.57
+2026-08-25 15:00:13,010 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹338.6 | ATR: ₹0.89 | SL: ₹337.27 | TP: ₹340.83 | Est Gain: ₹15.61
+2026-08-25 15:00:13,505 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-25 15:00:13,506 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 15:00:13,506 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 15:00:13,887 [INFO] 📊 Market Regime: BULLISH | Account Capital: ₹10000.0
+2026-08-25 15:00:13,933 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 15:00:13,965 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (7 shares) to Trade Ledger.
+2026-08-25 15:00:14,022 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 15:15:00,593 [INFO] 
+⚡ [03:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 15:15:00,594 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 15:15:00,594 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 15:15:08,718 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13621.0 | ATR: ₹31.43 | SL: ₹13573.85 | TP: ₹13699.58 | Est Gain: ₹78.58
+2026-08-25 15:15:12,676 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹270.75 | ATR: ₹0.76 | SL: ₹269.61 | TP: ₹272.65 | Est Gain: ₹17.1
+2026-08-25 15:15:13,212 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹338.15 | ATR: ₹0.95 | SL: ₹336.72 | TP: ₹340.52 | Est Gain: ₹16.59
+2026-08-25 15:15:13,793 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-25 15:15:13,793 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 15:15:13,794 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 15:15:14,201 [INFO] 📊 Market Regime: BULLISH | Account Capital: ₹10000.0
+2026-08-25 15:15:14,248 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 15:15:14,289 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 15:15:14,327 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (7 shares) to Trade Ledger.
+2026-08-25 15:30:00,022 [INFO] 
+⚡ [03:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-25 15:30:00,023 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-25 15:30:00,023 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-25 15:30:08,354 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13639.0 | ATR: ₹32.46 | SL: ₹13590.31 | TP: ₹13720.15 | Est Gain: ₹81.15
+2026-08-25 15:30:11,976 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹270.5 | ATR: ₹0.75 | SL: ₹269.38 | TP: ₹272.38 | Est Gain: ₹16.92
+2026-08-25 15:30:12,586 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.3 | ATR: ₹0.96 | SL: ₹335.86 | TP: ₹339.7 | Est Gain: ₹16.8
+2026-08-25 15:30:13,079 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-25 15:30:13,079 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-25 15:30:13,080 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-25 15:30:13,378 [INFO] 📊 Market Regime: BULLISH | Account Capital: ₹10000.0
+2026-08-25 15:30:13,423 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-25 15:30:13,492 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-25 15:30:13,554 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (7 shares) to Trade Ledger.
+2026-08-25 15:31:00,586 [INFO] 🛑 [03:31 PM] Market Closed. Resetting Daily State Flags.
+
+Day 2
+
+(stock_predictor_env) C:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor>python -u "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py"
+2026-08-26 09:45:56,727 [INFO] 🤖 Quantitative Multi-Agent Market Daemon Initialized.
+2026-08-26 09:45:56,746 [INFO] ⚠️ No Daily Playbook found for today. Triggering Macro CIO Sweep on startup...
+2026-08-26 09:45:56,746 [INFO] 🌅 [CIO Agent] Initiating Pre-Market Macro Strategy Sweep...
+2026-08-26 09:45:58,533 [INFO] ✅ Macro Playbook persisted to Database. Regime: BULLISH | Risk: AGGRESSIVE
+2026-08-26 09:45:58,533 [INFO] 
+⚡ [09:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 09:45:58,533 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 09:45:58,534 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 09:46:13,448 [INFO] 🎯 Setup: ITC [LONG] Price: ₹273.0 | ATR: ₹0.76 | SL: ₹271.86 | TP: ₹274.9 | Est Gain: ₹17.1
+2026-08-26 09:46:14,638 [INFO] 🎯 Setup: AXISBANK [LONG] Price: ₹1244.8 | ATR: ₹3.3 | SL: ₹1239.85 | TP: ₹1253.05 | Est Gain: ₹16.5
+2026-08-26 09:46:15,560 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13714.0 | ATR: ₹35.85 | SL: ₹13660.23 | TP: ₹13803.62 | Est Gain: ₹89.62
+2026-08-26 09:46:16,381 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5142.7 | ATR: ₹12.17 | SL: ₹5160.95 | TP: ₹5112.27 | Est Gain: ₹30.43
+2026-08-26 09:46:17,669 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹180.63 | ATR: ₹0.5 | SL: ₹179.88 | TP: ₹181.88 | Est Gain: ₹16.25
+2026-08-26 09:46:19,418 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹344.15 | ATR: ₹1.22 | SL: ₹342.32 | TP: ₹347.2 | Est Gain: ₹21.35
+2026-08-26 09:46:19,910 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-26 09:46:19,910 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 09:46:19,910 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 09:46:20,200 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 09:46:20,296 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 09:46:20,376 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-26 09:46:20,448 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-26 09:46:20,482 [INFO] 🚀 Dispatched ITC EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-26 09:46:20,519 [INFO] 🚀 Dispatched AXISBANK EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 10:00:00,073 [INFO] 
+⚡ [10:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 10:00:00,073 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 10:00:00,074 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 10:00:07,443 [INFO] 🎯 Setup: AXISBANK [LONG] Price: ₹1244.4 | ATR: ₹3.22 | SL: ₹1239.57 | TP: ₹1252.45 | Est Gain: ₹16.1
+2026-08-26 10:00:08,541 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13683.0 | ATR: ₹35.76 | SL: ₹13629.36 | TP: ₹13772.4 | Est Gain: ₹89.4
+2026-08-26 10:00:09,689 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5108.0 | ATR: ₹14.61 | SL: ₹5129.91 | TP: ₹5071.48 | Est Gain: ₹36.52
+2026-08-26 10:00:11,257 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹180.49 | ATR: ₹0.49 | SL: ₹179.75 | TP: ₹181.72 | Est Gain: ₹15.99
+2026-08-26 10:00:13,989 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹343.4 | ATR: ₹1.18 | SL: ₹341.63 | TP: ₹346.35 | Est Gain: ₹20.65
+2026-08-26 10:00:14,742 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹232.7 | ATR: ₹0.6 | SL: ₹231.8 | TP: ₹234.2 | Est Gain: ₹15.0
+2026-08-26 10:00:14,848 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-26 10:00:14,848 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 10:00:14,848 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 10:00:15,249 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 10:00:15,283 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 10:00:15,322 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-26 10:00:15,362 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-26 10:00:15,393 [INFO] 🚀 Dispatched AXISBANK EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 10:00:15,426 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (9 shares) to Trade Ledger.
+2026-08-26 10:15:00,244 [INFO] 
+⚡ [10:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 10:15:00,244 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 10:15:00,244 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 10:15:04,151 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1128.0 | ATR: ₹4.33 | SL: ₹1121.51 | TP: ₹1138.83 | Est Gain: ₹21.66
+2026-08-26 10:15:11,850 [INFO] 🎯 Setup: AXISBANK [LONG] Price: ₹1243.4 | ATR: ₹3.39 | SL: ₹1238.32 | TP: ₹1251.88 | Est Gain: ₹16.96
+2026-08-26 10:15:12,796 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13670.0 | ATR: ₹34.89 | SL: ₹13617.67 | TP: ₹13757.23 | Est Gain: ₹87.23
+2026-08-26 10:15:13,738 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5112.3 | ATR: ₹14.14 | SL: ₹5133.51 | TP: ₹5076.95 | Est Gain: ₹35.35
+2026-08-26 10:15:15,180 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹180.3 | ATR: ₹0.47 | SL: ₹179.59 | TP: ₹181.48 | Est Gain: ₹15.34
+2026-08-26 10:15:17,051 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.8 | ATR: ₹0.85 | SL: ₹268.53 | TP: ₹271.93 | Est Gain: ₹19.17
+2026-08-26 10:15:19,877 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹341.0 | ATR: ₹1.35 | SL: ₹338.98 | TP: ₹344.38 | Est Gain: ₹23.66
+2026-08-26 10:15:21,238 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-26 10:15:21,239 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 10:15:21,239 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 10:15:21,747 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 10:15:21,776 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-08-26 10:15:21,809 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-26 10:15:21,840 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-26 10:15:21,914 [INFO] 🚀 Dispatched INFY EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 10:15:21,971 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-26 10:30:00,800 [INFO] 
+⚡ [10:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 10:30:00,800 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 10:30:00,800 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 10:30:04,722 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1127.7 | ATR: ₹4.25 | SL: ₹1121.33 | TP: ₹1138.33 | Est Gain: ₹21.26
+2026-08-26 10:30:08,670 [INFO] 🎯 Setup: AXISBANK [LONG] Price: ₹1243.0 | ATR: ₹3.07 | SL: ₹1238.39 | TP: ₹1250.67 | Est Gain: ₹15.34
+2026-08-26 10:30:09,802 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13652.0 | ATR: ₹35.46 | SL: ₹13598.81 | TP: ₹13740.65 | Est Gain: ₹88.65
+2026-08-26 10:30:10,742 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5097.3 | ATR: ₹14.75 | SL: ₹5119.43 | TP: ₹5060.43 | Est Gain: ₹36.87
+2026-08-26 10:30:12,123 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹180.04 | ATR: ₹0.49 | SL: ₹179.3 | TP: ₹181.26 | Est Gain: ₹15.86
+2026-08-26 10:30:13,679 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.0 | ATR: ₹0.91 | SL: ₹267.63 | TP: ₹271.27 | Est Gain: ₹20.43
+2026-08-26 10:30:14,185 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹339.75 | ATR: ₹1.36 | SL: ₹337.71 | TP: ₹343.15 | Est Gain: ₹23.8
+2026-08-26 10:30:14,776 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-26 10:30:14,776 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 10:30:14,777 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 10:30:15,061 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 10:30:15,089 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-08-26 10:30:15,120 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-26 10:30:15,152 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-26 10:30:15,214 [INFO] 🚀 Dispatched INFY EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 10:30:15,232 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-26 10:45:00,037 [INFO] 
+⚡ [10:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 10:45:00,037 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 10:45:00,037 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 10:45:02,023 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2285.1 | ATR: ₹6.33 | SL: ₹2275.61 | TP: ₹2300.92 | Est Gain: ₹15.82
+2026-08-26 10:45:07,998 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13671.0 | ATR: ₹35.25 | SL: ₹13618.12 | TP: ₹13759.12 | Est Gain: ₹88.12
+2026-08-26 10:45:08,992 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5096.0 | ATR: ₹14.38 | SL: ₹5117.57 | TP: ₹5060.05 | Est Gain: ₹35.95
+2026-08-26 10:45:10,583 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.62 | ATR: ₹0.47 | SL: ₹178.91 | TP: ₹180.8 | Est Gain: ₹15.34
+2026-08-26 10:45:12,085 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹269.45 | ATR: ₹0.97 | SL: ₹268.0 | TP: ₹271.88 | Est Gain: ₹21.87
+2026-08-26 10:45:12,551 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹339.75 | ATR: ₹1.3 | SL: ₹337.8 | TP: ₹343.0 | Est Gain: ₹22.75
+2026-08-26 10:45:13,071 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-26 10:45:13,072 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 10:45:13,072 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 10:45:13,338 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 10:45:13,368 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-08-26 10:45:13,415 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-26 10:45:13,423 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-26 10:45:13,438 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-26 10:45:13,455 [INFO] 🚀 Dispatched TCS EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 11:00:00,289 [INFO] 
+⚡ [11:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 11:00:00,290 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 11:00:00,290 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 11:00:08,186 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13657.0 | ATR: ₹38.18 | SL: ₹13599.73 | TP: ₹13752.45 | Est Gain: ₹95.45
+2026-08-26 11:00:10,768 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹179.28 | ATR: ₹0.5 | SL: ₹178.53 | TP: ₹180.53 | Est Gain: ₹16.25
+2026-08-26 11:00:13,644 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹339.85 | ATR: ₹1.25 | SL: ₹337.98 | TP: ₹342.98 | Est Gain: ₹21.91
+2026-08-26 11:00:14,289 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-26 11:00:14,290 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 11:00:14,290 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 11:00:14,706 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 11:00:14,760 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 11:00:14,823 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-26 11:00:14,831 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-26 11:15:00,661 [INFO] 
+⚡ [11:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 11:15:00,661 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 11:15:00,662 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 11:15:09,587 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13665.0 | ATR: ₹37.17 | SL: ₹13609.25 | TP: ₹13757.92 | Est Gain: ₹92.92
+2026-08-26 11:15:12,603 [INFO] 🎯 Setup: TATASTEEL [SHORT] Price: ₹185.8 | ATR: ₹0.72 | SL: ₹186.88 | TP: ₹184.0 | Est Gain: ₹23.4
+2026-08-26 11:15:13,626 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹339.35 | ATR: ₹1.13 | SL: ₹337.66 | TP: ₹342.18 | Est Gain: ₹19.81
+2026-08-26 11:15:14,220 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-26 11:15:14,220 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 11:15:14,221 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 11:15:14,652 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 11:15:14,684 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 11:15:14,725 [INFO] 🚀 Dispatched TATASTEEL EXECUTE SHORT (9 shares) to Trade Ledger.
+2026-08-26 11:15:14,753 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-26 11:30:00,604 [INFO] 
+⚡ [11:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 11:30:00,604 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 11:30:00,605 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 11:30:02,684 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2275.3 | ATR: ₹6.18 | SL: ₹2266.03 | TP: ₹2290.75 | Est Gain: ₹15.45
+2026-08-26 11:30:03,831 [INFO] 🎯 Setup: INFY [LONG] Price: ₹1123.9 | ATR: ₹3.37 | SL: ₹1118.85 | TP: ₹1132.33 | Est Gain: ₹16.86
+2026-08-26 11:30:09,251 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13648.0 | ATR: ₹36.65 | SL: ₹13593.02 | TP: ₹13739.62 | Est Gain: ₹91.62
+2026-08-26 11:30:10,736 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1085.7 | ATR: ₹3.31 | SL: ₹1080.74 | TP: ₹1093.98 | Est Gain: ₹16.56
+2026-08-26 11:30:11,730 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹178.41 | ATR: ₹0.47 | SL: ₹177.7 | TP: ₹179.59 | Est Gain: ₹16.52
+2026-08-26 11:30:12,896 [INFO] 🎯 Setup: TATASTEEL [SHORT] Price: ₹185.0 | ATR: ₹0.79 | SL: ₹186.19 | TP: ₹183.03 | Est Gain: ₹25.61
+2026-08-26 11:30:13,989 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹338.7 | ATR: ₹1.12 | SL: ₹337.02 | TP: ₹341.5 | Est Gain: ₹19.6
+2026-08-26 11:30:14,724 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-08-26 11:30:14,724 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 11:30:14,725 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 11:30:15,045 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 11:30:15,079 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 11:30:15,140 [INFO] 🚀 Dispatched TATASTEEL EXECUTE SHORT (9 shares) to Trade Ledger.
+2026-08-26 11:30:15,169 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-26 11:30:15,200 [INFO] 🛑 Skipping INFY: In active Cooldown penalty box.
+2026-08-26 11:30:15,228 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 11:45:00,036 [INFO] 
+⚡ [11:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 11:45:00,036 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 11:45:00,036 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 11:45:02,832 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2277.0 | ATR: ₹6.07 | SL: ₹2267.89 | TP: ₹2292.18 | Est Gain: ₹15.18
+2026-08-26 11:45:09,850 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1088.7 | ATR: ₹3.35 | SL: ₹1083.67 | TP: ₹1097.08 | Est Gain: ₹16.76
+2026-08-26 11:45:12,274 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹268.15 | ATR: ₹0.84 | SL: ₹266.89 | TP: ₹270.25 | Est Gain: ₹18.9
+2026-08-26 11:45:12,831 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹338.15 | ATR: ₹1.08 | SL: ₹336.53 | TP: ₹340.85 | Est Gain: ₹18.9
+2026-08-26 11:45:13,472 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-08-26 11:45:13,472 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 11:45:13,472 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 11:45:13,779 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 11:45:13,817 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-26 11:45:13,842 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-26 11:45:13,907 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 11:45:13,916 [INFO] 🛑 Skipping TCS: In active Cooldown penalty box.
+2026-08-26 12:00:00,796 [INFO] 
+⚡ [12:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 12:00:00,796 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 12:00:00,797 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 12:00:09,866 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1087.9 | ATR: ₹3.49 | SL: ₹1082.67 | TP: ₹1096.62 | Est Gain: ₹17.44
+2026-08-26 12:00:10,939 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹178.37 | ATR: ₹0.45 | SL: ₹177.69 | TP: ₹179.5 | Est Gain: ₹15.82
+2026-08-26 12:00:12,393 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹267.9 | ATR: ₹0.86 | SL: ₹266.61 | TP: ₹270.05 | Est Gain: ₹19.35
+2026-08-26 12:00:12,862 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.95 | ATR: ₹1.04 | SL: ₹336.39 | TP: ₹340.55 | Est Gain: ₹18.2
+2026-08-26 12:00:13,345 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-08-26 12:00:13,346 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 12:00:13,346 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 12:00:13,641 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 12:00:13,688 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (6 shares) to Trade Ledger.
+2026-08-26 12:00:13,722 [INFO] 🛑 Skipping NTPC: In active Cooldown penalty box.
+2026-08-26 12:00:13,782 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 12:00:13,848 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (10 shares) to Trade Ledger.
+2026-08-26 12:15:00,774 [INFO] 
+⚡ [12:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 12:15:00,774 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 12:15:00,774 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 12:15:10,542 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1088.9 | ATR: ₹3.17 | SL: ₹1084.14 | TP: ₹1096.83 | Est Gain: ₹15.86
+2026-08-26 12:15:11,821 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹178.23 | ATR: ₹0.46 | SL: ₹177.54 | TP: ₹179.38 | Est Gain: ₹16.1
+2026-08-26 12:15:13,451 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹267.5 | ATR: ₹0.84 | SL: ₹266.24 | TP: ₹269.6 | Est Gain: ₹18.9
+2026-08-26 12:15:14,110 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.75 | ATR: ₹1.07 | SL: ₹336.14 | TP: ₹340.43 | Est Gain: ₹18.76
+2026-08-26 12:15:14,623 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-08-26 12:15:14,624 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 12:15:14,624 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 12:15:14,904 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 12:15:14,915 [INFO] ⏸️ Skipping POWERGRID [LONG]: Weak counter-trend setup in BEARISH Nifty regime.
+2026-08-26 12:15:14,923 [INFO] ⚡ NTPC [LONG]: Counter-trend but high alpha (0.32%). Allocating 50% defensive size.
+2026-08-26 12:15:14,940 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (3 shares) to Trade Ledger.
+2026-08-26 12:15:14,969 [INFO] ⏸️ Skipping WIPRO [LONG]: Weak counter-trend setup in BEARISH Nifty regime.
+2026-08-26 12:15:15,000 [INFO] ⏸️ Skipping BAJFINANCE [LONG]: Weak counter-trend setup in BEARISH Nifty regime.
+2026-08-26 12:30:00,002 [INFO] 
+⚡ [12:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 12:30:00,003 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 12:30:00,003 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 12:30:10,192 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1087.9 | ATR: ₹3.34 | SL: ₹1082.89 | TP: ₹1096.25 | Est Gain: ₹16.7
+2026-08-26 12:30:11,382 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹178.21 | ATR: ₹0.45 | SL: ₹177.53 | TP: ₹179.34 | Est Gain: ₹15.82
+2026-08-26 12:30:13,004 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹267.55 | ATR: ₹0.81 | SL: ₹266.34 | TP: ₹269.57 | Est Gain: ₹18.18
+2026-08-26 12:30:13,508 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.75 | ATR: ₹1.02 | SL: ₹336.22 | TP: ₹340.3 | Est Gain: ₹17.85
+2026-08-26 12:30:14,032 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-08-26 12:30:14,033 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 12:30:14,033 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 12:30:14,425 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 12:30:14,444 [INFO] ⏸️ Skipping POWERGRID [LONG]: Weak counter-trend setup in BEARISH Nifty regime.
+2026-08-26 12:30:14,452 [INFO] ⚡ NTPC [LONG]: Counter-trend but high alpha (0.35%). Allocating 50% defensive size.
+2026-08-26 12:30:14,476 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (3 shares) to Trade Ledger.
+2026-08-26 12:30:14,510 [INFO] ⏸️ Skipping BAJFINANCE [LONG]: Weak counter-trend setup in BEARISH Nifty regime.
+2026-08-26 12:30:14,523 [INFO] ⏸️ Skipping WIPRO [LONG]: Weak counter-trend setup in BEARISH Nifty regime.
+2026-08-26 12:45:00,590 [INFO] 
+⚡ [12:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 12:45:00,591 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 12:45:00,592 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 12:45:08,974 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹5098.2 | ATR: ₹12.73 | SL: ₹5117.3 | TP: ₹5066.38 | Est Gain: ₹31.82
+2026-08-26 12:45:09,424 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1087.0 | ATR: ₹3.25 | SL: ₹1082.12 | TP: ₹1095.12 | Est Gain: ₹16.24
+2026-08-26 12:45:11,561 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹267.3 | ATR: ₹0.8 | SL: ₹266.1 | TP: ₹269.3 | Est Gain: ₹18.0
+2026-08-26 12:45:12,384 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.4 | ATR: ₹0.98 | SL: ₹335.93 | TP: ₹339.85 | Est Gain: ₹17.15
+2026-08-26 12:45:13,100 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-08-26 12:45:13,100 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 12:45:13,100 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 12:45:13,549 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 12:45:13,596 [INFO] 🚀 Dispatched TITAN EXECUTE SHORT (1 shares) to Trade Ledger.
+2026-08-26 12:45:13,631 [INFO] 🛑 Skipping POWERGRID: In active Cooldown penalty box.
+2026-08-26 12:45:13,680 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (5 shares) to Trade Ledger.
+2026-08-26 12:45:13,727 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (1 shares) to Trade Ledger.
+2026-08-26 13:00:00,745 [INFO] 
+⚡ [01:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 13:00:00,745 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 13:00:00,745 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 13:00:10,878 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹177.71 | ATR: ₹0.45 | SL: ₹177.03 | TP: ₹178.84 | Est Gain: ₹15.82
+2026-08-26 13:00:12,301 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹267.2 | ATR: ₹0.76 | SL: ₹266.06 | TP: ₹269.1 | Est Gain: ₹17.1
+2026-08-26 13:00:12,756 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.4 | ATR: ₹0.92 | SL: ₹336.02 | TP: ₹339.7 | Est Gain: ₹16.1
+2026-08-26 13:00:13,258 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-26 13:00:13,258 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 13:00:13,259 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 13:00:13,531 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 13:00:13,545 [INFO] 🛑 Skipping POWERGRID: In active Cooldown penalty box.
+2026-08-26 13:00:13,566 [INFO] ⚡ NTPC [LONG]: Counter-trend but high alpha (0.40%). Allocating 50% defensive size.
+2026-08-26 13:00:13,579 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (3 shares) to Trade Ledger.
+2026-08-26 13:00:13,590 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-26 13:15:00,535 [INFO] 
+⚡ [01:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 13:15:00,536 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 13:15:00,536 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 13:15:12,908 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹177.32 | ATR: ₹0.44 | SL: ₹176.66 | TP: ₹178.42 | Est Gain: ₹15.4
+2026-08-26 13:15:14,486 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹267.05 | ATR: ₹0.73 | SL: ₹265.95 | TP: ₹268.88 | Est Gain: ₹16.47
+2026-08-26 13:15:15,220 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹337.15 | ATR: ₹0.88 | SL: ₹335.83 | TP: ₹339.35 | Est Gain: ₹15.4
+2026-08-26 13:15:16,148 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-08-26 13:15:16,148 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 13:15:16,150 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 13:15:16,487 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 13:15:16,496 [INFO] 🛑 Skipping POWERGRID: In active Cooldown penalty box.
+2026-08-26 13:15:16,504 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-26 13:15:16,532 [INFO] ⚡ NTPC [LONG]: Counter-trend but high alpha (0.45%). Allocating 50% defensive size.
+2026-08-26 13:15:16,565 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (3 shares) to Trade Ledger.
+Traceback (most recent call last):
+  File "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py", line 129, in <module>
+    run_market_daemon()
+  File "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py", line 126, in run_market_daemon
+    time.sleep(1)
+KeyboardInterrupt
+^C
+(stock_predictor_env) C:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor>python -u "c:\Users\Tuf_F15\Desktop\codes\Python\Project\stock_predictor\market_daemon.py"
+2026-08-26 13:30:19,611 [INFO] 🤖 Quantitative Multi-Agent Market Daemon Initialized.
+2026-08-26 13:30:19,621 [INFO] 📊 Active Daily Playbook found for today (BULLISH | Risk: AGGRESSIVE).
+2026-08-26 13:30:19,622 [INFO] 
+⚡ [01:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 13:30:19,622 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 13:30:19,622 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 13:30:35,329 [WARNING] No valid asymmetric setups found in this cycle.
+2026-08-26 13:30:35,329 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 13:30:35,330 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 13:30:35,677 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 13:30:35,710 [INFO] ⚡ POWERGRID [LONG]: Counter-trend but high alpha (0.39%). Allocating 50% defensive size.
+2026-08-26 13:30:35,737 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (4 shares) to Trade Ledger.
+2026-08-26 13:30:35,744 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-26 13:30:35,773 [INFO] ⚡ NTPC [LONG]: Counter-trend but high alpha (0.45%). Allocating 50% defensive size.
+2026-08-26 13:30:35,805 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (3 shares) to Trade Ledger.
+2026-08-26 13:45:00,068 [INFO] 
+⚡ [01:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 13:45:00,069 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 13:45:00,070 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 13:45:10,418 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹266.8 | ATR: ₹0.69 | SL: ₹265.76 | TP: ₹268.53 | Est Gain: ₹15.57
+2026-08-26 13:45:11,312 [INFO] ✅ Successfully persisted top 1 setups to database.
+2026-08-26 13:45:11,313 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 13:45:11,313 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 13:45:11,575 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 13:45:11,607 [INFO] ⚡ POWERGRID [LONG]: Counter-trend but high alpha (0.41%). Allocating 50% defensive size.
+2026-08-26 13:45:11,641 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (4 shares) to Trade Ledger.
+2026-08-26 14:00:00,091 [INFO] 
+⚡ [02:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 14:00:00,092 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 14:00:00,092 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 14:00:11,617 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹266.85 | ATR: ₹0.67 | SL: ₹265.85 | TP: ₹268.53 | Est Gain: ₹15.12
+2026-08-26 14:00:12,604 [INFO] ✅ Successfully persisted top 1 setups to database.
+2026-08-26 14:00:12,605 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 14:00:12,605 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 14:00:12,879 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 14:00:12,910 [INFO] ⚡ POWERGRID [LONG]: Counter-trend but high alpha (0.43%). Allocating 50% defensive size.
+2026-08-26 14:00:12,945 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (4 shares) to Trade Ledger.
+2026-08-26 14:15:00,207 [INFO] 
+⚡ [02:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 14:15:00,207 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 14:15:00,207 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 14:15:11,360 [WARNING] No valid asymmetric setups found in this cycle.
+2026-08-26 14:15:11,360 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 14:15:11,361 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 14:15:11,610 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 14:15:11,638 [INFO] ⚡ POWERGRID [LONG]: Counter-trend but high alpha (0.43%). Allocating 50% defensive size.
+2026-08-26 14:15:11,672 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (4 shares) to Trade Ledger.
+2026-08-26 14:30:00,417 [INFO] 
+⚡ [02:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 14:30:00,417 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 14:30:00,417 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 14:30:12,317 [WARNING] No valid asymmetric setups found in this cycle.
+2026-08-26 14:30:12,317 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 14:30:12,317 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 14:30:12,651 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 14:30:12,662 [INFO] ⚡ POWERGRID [LONG]: Counter-trend but high alpha (0.43%). Allocating 50% defensive size.
+2026-08-26 14:30:12,673 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (4 shares) to Trade Ledger.
+2026-08-26 14:45:00,590 [INFO] 
+⚡ [02:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 14:45:00,590 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 14:45:00,590 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 14:45:09,706 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹177.88 | ATR: ₹0.44 | SL: ₹177.22 | TP: ₹178.98 | Est Gain: ₹15.4
+2026-08-26 14:45:12,208 [INFO] ✅ Successfully persisted top 1 setups to database.
+2026-08-26 14:45:12,209 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 14:45:12,209 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 14:45:12,702 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 14:45:12,710 [INFO] ⚡ WIPRO [LONG]: Counter-trend but high alpha (0.55%). Allocating 50% defensive size.
+2026-08-26 14:45:12,732 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (7 shares) to Trade Ledger.
+2026-08-26 15:00:00,152 [INFO] 
+⚡ [03:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 15:00:00,152 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 15:00:00,152 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 15:00:12,443 [WARNING] No valid asymmetric setups found in this cycle.
+2026-08-26 15:00:12,444 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 15:00:12,444 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 15:00:12,806 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹10000.0
+2026-08-26 15:00:12,849 [INFO] 🚀 Dispatched WIPRO EXECUTE LONG (10 shares) to Trade Ledger.
+2026-08-26 15:15:00,277 [INFO] 
+⚡ [03:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 15:15:00,279 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 15:15:00,280 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 15:15:12,923 [WARNING] No valid asymmetric setups found in this cycle.
+2026-08-26 15:15:12,924 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 15:15:12,925 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 15:15:13,362 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 15:15:13,395 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-26 15:30:00,041 [INFO] 
+⚡ [03:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-08-26 15:30:00,041 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-08-26 15:30:00,042 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-08-26 15:30:09,111 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹177.55 | ATR: ₹0.44 | SL: ₹176.89 | TP: ₹178.65 | Est Gain: ₹15.4
+2026-08-26 15:30:11,316 [INFO] ✅ Successfully persisted top 1 setups to database.
+2026-08-26 15:30:11,317 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-08-26 15:30:11,317 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-08-26 15:30:11,611 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹10000.0
+2026-08-26 15:30:11,645 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-08-26 15:31:00,742 [INFO] 🛑 [03:31 PM] Market Closed. Resetting Daily State Flags.
+
+Day 3
+
+026-09-01 09:28:54,908 [INFO] 🤖 Quantitative Multi-Agent Market Daemon Initialized.
+2026-09-01 09:28:54,925 [INFO] ⚠️ No Daily Playbook found for today. Triggering Macro CIO Sweep on startup...
+2026-09-01 09:28:54,925 [INFO] 🌅 [CIO Agent] Initiating Pre-Market Macro Strategy Sweep...
+2026-09-01 09:28:56,769 [INFO] ✅ Macro Playbook persisted to Database. Regime: CHOPPY | Risk: AGGRESSIVE
+2026-09-01 09:30:00,798 [INFO] 
+⚡ [09:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 09:30:00,798 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 09:30:00,798 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 09:30:17,356 [INFO] 🎯 Setup: ITC [LONG] Price: ₹264.35 | ATR: ₹1.57 | SL: ₹262.0 | TP: ₹268.28 | Est Gain: ₹35.37
+2026-09-01 09:30:21,412 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1054.0 | ATR: ₹4.19 | SL: ₹1047.71 | TP: ₹1064.47 | Est Gain: ₹20.94
+2026-09-01 09:30:23,416 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.25 | ATR: ₹0.79 | SL: ₹182.06 | TP: ₹185.22 | Est Gain: ₹25.61
+2026-09-01 09:30:24,045 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.05 | ATR: ₹0.85 | SL: ₹261.78 | TP: ₹265.18 | Est Gain: ₹19.17
+2026-09-01 09:30:24,797 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹326.6 | ATR: ₹1.19 | SL: ₹324.81 | TP: ₹329.58 | Est Gain: ₹20.86
+2026-09-01 09:30:25,527 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹234.5 | ATR: ₹0.84 | SL: ₹233.24 | TP: ₹236.6 | Est Gain: ₹21.0
+2026-09-01 09:30:25,669 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 09:30:25,670 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 09:30:25,670 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 09:30:26,133 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 09:30:26,254 [INFO] 🚀 Dispatched ITC EXECUTE LONG (70 shares) to Trade Ledger.
+2026-09-01 09:30:26,296 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (102 shares) to Trade Ledger.
+2026-09-01 09:30:26,354 [INFO] 🚀 Dispatched ONGC EXECUTE LONG (79 shares) to Trade Ledger.
+2026-09-01 09:30:26,400 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (17 shares) to Trade Ledger.
+2026-09-01 09:30:26,461 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (57 shares) to Trade Ledger.
+2026-09-01 09:45:00,037 [INFO] 
+⚡ [09:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 09:45:00,038 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 09:45:00,039 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 09:45:11,938 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1052.4 | ATR: ₹4.02 | SL: ₹1046.37 | TP: ₹1062.45 | Est Gain: ₹20.1
+2026-09-01 09:45:12,627 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2925.5 | ATR: ₹30.15 | SL: ₹2970.72 | TP: ₹2850.12 | Est Gain: ₹75.38
+2026-09-01 09:45:14,007 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.67 | ATR: ₹0.81 | SL: ₹182.45 | TP: ₹185.69 | Est Gain: ₹26.26
+2026-09-01 09:45:14,509 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹261.9 | ATR: ₹0.92 | SL: ₹260.52 | TP: ₹264.2 | Est Gain: ₹20.7
+2026-09-01 09:45:15,023 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹325.6 | ATR: ₹1.22 | SL: ₹323.77 | TP: ₹328.65 | Est Gain: ₹21.35
+2026-09-01 09:45:15,571 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹233.97 | ATR: ₹0.83 | SL: ₹232.72 | TP: ₹236.04 | Est Gain: ₹20.7
+2026-09-01 09:45:15,684 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 09:45:15,685 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 09:45:15,686 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 09:45:16,136 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 09:45:16,178 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 09:45:16,222 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (102 shares) to Trade Ledger.
+2026-09-01 09:45:16,285 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (57 shares) to Trade Ledger.
+2026-09-01 09:45:16,336 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (71 shares) to Trade Ledger.
+2026-09-01 09:45:16,368 [INFO] 🚀 Dispatched ONGC EXECUTE LONG (79 shares) to Trade Ledger.
+2026-09-01 10:00:00,050 [INFO] 
+⚡ [10:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 10:00:00,050 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 10:00:00,051 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 10:00:03,233 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹701.85 | ATR: ₹3.1 | SL: ₹697.2 | TP: ₹709.6 | Est Gain: ₹23.25
+2026-09-01 10:00:09,399 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13411.0 | ATR: ₹45.78 | SL: ₹13342.33 | TP: ₹13525.45 | Est Gain: ₹114.45
+2026-09-01 10:00:11,096 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1052.0 | ATR: ₹3.91 | SL: ₹1046.13 | TP: ₹1061.78 | Est Gain: ₹19.56
+2026-09-01 10:00:11,802 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2920.6 | ATR: ₹29.82 | SL: ₹2965.33 | TP: ₹2846.05 | Est Gain: ₹74.55
+2026-09-01 10:00:13,499 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹182.95 | ATR: ₹0.81 | SL: ₹181.73 | TP: ₹184.97 | Est Gain: ₹26.26
+2026-09-01 10:00:14,038 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹262.1 | ATR: ₹0.93 | SL: ₹260.71 | TP: ₹264.43 | Est Gain: ₹20.97
+2026-09-01 10:00:14,594 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹325.5 | ATR: ₹1.18 | SL: ₹323.73 | TP: ₹328.45 | Est Gain: ₹20.65
+2026-09-01 10:00:15,121 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹233.7 | ATR: ₹0.81 | SL: ₹232.48 | TP: ₹235.72 | Est Gain: ₹20.2
+2026-09-01 10:00:15,230 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 10:00:15,230 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 10:00:15,231 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 10:00:15,643 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 10:00:15,690 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 10:00:15,715 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 10:00:15,724 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 10:00:15,760 [INFO] 🚀 Dispatched HDFCBANK EXECUTE LONG (26 shares) to Trade Ledger.
+2026-09-01 10:00:15,813 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (71 shares) to Trade Ledger.
+2026-09-01 10:15:00,528 [INFO] 
+⚡ [10:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 10:15:00,528 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 10:15:00,530 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 10:15:03,380 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹706.5 | ATR: ₹3.25 | SL: ₹701.62 | TP: ₹714.62 | Est Gain: ₹24.36
+2026-09-01 10:15:09,062 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13413.0 | ATR: ₹45.44 | SL: ₹13344.84 | TP: ₹13526.6 | Est Gain: ₹113.6
+2026-09-01 10:15:10,751 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1052.0 | ATR: ₹3.8 | SL: ₹1046.3 | TP: ₹1061.5 | Est Gain: ₹19.0
+2026-09-01 10:15:11,466 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2906.9 | ATR: ₹29.59 | SL: ₹2951.29 | TP: ₹2832.93 | Est Gain: ₹73.97
+2026-09-01 10:15:13,127 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹182.55 | ATR: ₹0.78 | SL: ₹181.38 | TP: ₹184.5 | Est Gain: ₹25.35
+2026-09-01 10:15:13,761 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹262.25 | ATR: ₹0.91 | SL: ₹260.88 | TP: ₹264.52 | Est Gain: ₹20.43
+2026-09-01 10:15:14,282 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹325.45 | ATR: ₹1.14 | SL: ₹323.74 | TP: ₹328.3 | Est Gain: ₹19.95
+2026-09-01 10:15:14,801 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹233.94 | ATR: ₹0.8 | SL: ₹232.74 | TP: ₹235.94 | Est Gain: ₹20.0
+2026-09-01 10:15:14,909 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 10:15:14,909 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 10:15:14,909 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 10:15:15,204 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 10:15:15,243 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 10:15:15,281 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 10:15:15,308 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 10:15:15,330 [INFO] 🚀 Dispatched HDFCBANK EXECUTE LONG (26 shares) to Trade Ledger.
+2026-09-01 10:15:15,369 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (71 shares) to Trade Ledger.
+2026-09-01 10:30:00,065 [INFO] 
+⚡ [10:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 10:30:00,066 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 10:30:00,066 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 10:30:02,691 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹708.85 | ATR: ₹3.24 | SL: ₹703.99 | TP: ₹716.95 | Est Gain: ₹24.3
+2026-09-01 10:30:07,724 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13414.0 | ATR: ₹43.83 | SL: ₹13348.25 | TP: ₹13523.58 | Est Gain: ₹109.58
+2026-09-01 10:30:09,216 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1054.8 | ATR: ₹3.73 | SL: ₹1049.2 | TP: ₹1064.12 | Est Gain: ₹18.64
+2026-09-01 10:30:09,757 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2903.6 | ATR: ₹28.19 | SL: ₹2945.88 | TP: ₹2833.12 | Est Gain: ₹70.48
+2026-09-01 10:30:10,414 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.05 | ATR: ₹1.12 | SL: ₹182.73 | TP: ₹178.25 | Est Gain: ₹36.4
+2026-09-01 10:30:11,588 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.14 | ATR: ₹0.77 | SL: ₹181.98 | TP: ₹185.06 | Est Gain: ₹24.96
+2026-09-01 10:30:12,276 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹262.45 | ATR: ₹0.86 | SL: ₹261.16 | TP: ₹264.6 | Est Gain: ₹19.35
+2026-09-01 10:30:12,960 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹325.5 | ATR: ₹1.1 | SL: ₹323.85 | TP: ₹328.25 | Est Gain: ₹19.25
+2026-09-01 10:30:13,559 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹234.07 | ATR: ₹0.78 | SL: ₹232.9 | TP: ₹236.02 | Est Gain: ₹19.5
+2026-09-01 10:30:13,672 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 10:30:13,672 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 10:30:13,672 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 10:30:14,086 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 10:30:14,117 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 10:30:14,180 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 10:30:14,232 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (103 shares) to Trade Ledger.
+2026-09-01 10:30:14,238 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 10:30:14,254 [INFO] 🚀 Dispatched HDFCBANK EXECUTE LONG (26 shares) to Trade Ledger.
+2026-09-01 10:45:00,184 [INFO] 
+⚡ [10:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 10:45:00,185 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 10:45:00,185 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 10:45:02,916 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹710.1 | ATR: ₹3.2 | SL: ₹705.3 | TP: ₹718.1 | Est Gain: ₹24.0
+2026-09-01 10:45:08,091 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13365.0 | ATR: ₹44.49 | SL: ₹13298.26 | TP: ₹13476.23 | Est Gain: ₹111.23
+2026-09-01 10:45:09,667 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1052.8 | ATR: ₹3.64 | SL: ₹1047.34 | TP: ₹1061.9 | Est Gain: ₹18.2
+2026-09-01 10:45:10,192 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2893.8 | ATR: ₹27.34 | SL: ₹2934.81 | TP: ₹2825.45 | Est Gain: ₹68.35
+2026-09-01 10:45:10,692 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.45 | ATR: ₹1.07 | SL: ₹183.05 | TP: ₹178.77 | Est Gain: ₹34.84
+2026-09-01 10:45:11,881 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.24 | ATR: ₹0.74 | SL: ₹182.13 | TP: ₹185.09 | Est Gain: ₹24.05
+2026-09-01 10:45:12,367 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹262.55 | ATR: ₹0.83 | SL: ₹261.31 | TP: ₹264.62 | Est Gain: ₹18.63
+2026-09-01 10:45:12,830 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹326.35 | ATR: ₹1.11 | SL: ₹324.69 | TP: ₹329.12 | Est Gain: ₹19.39
+2026-09-01 10:45:13,333 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹234.11 | ATR: ₹0.75 | SL: ₹232.99 | TP: ₹235.99 | Est Gain: ₹18.8
+2026-09-01 10:45:13,442 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 10:45:13,443 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 10:45:13,443 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 10:45:13,747 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 10:45:13,758 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-09-01 10:45:13,809 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 10:45:13,849 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 10:45:13,897 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (102 shares) to Trade Ledger.
+2026-09-01 10:45:13,953 [INFO] 🚀 Dispatched HDFCBANK EXECUTE LONG (26 shares) to Trade Ledger.
+2026-09-01 11:00:00,904 [INFO] 
+⚡ [11:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 11:00:00,904 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 11:00:00,904 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 11:00:03,585 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹710.9 | ATR: ₹3.18 | SL: ₹706.13 | TP: ₹718.85 | Est Gain: ₹23.85
+2026-09-01 11:00:05,155 [INFO] 🎯 Setup: HINDUNILVR [SHORT] Price: ₹1995.5 | ATR: ₹7.57 | SL: ₹2006.86 | TP: ₹1976.58 | Est Gain: ₹18.92
+2026-09-01 11:00:07,057 [INFO] 🎯 Setup: KOTAKBANK [LONG] Price: ₹422.75 | ATR: ₹1.48 | SL: ₹420.53 | TP: ₹426.45 | Est Gain: ₹18.5
+2026-09-01 11:00:09,000 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13408.0 | ATR: ₹45.17 | SL: ₹13340.25 | TP: ₹13520.92 | Est Gain: ₹112.92
+2026-09-01 11:00:10,398 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1055.0 | ATR: ₹3.57 | SL: ₹1049.64 | TP: ₹1063.92 | Est Gain: ₹17.84
+2026-09-01 11:00:10,895 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2897.5 | ATR: ₹26.89 | SL: ₹2937.84 | TP: ₹2830.28 | Est Gain: ₹67.22
+2026-09-01 11:00:11,402 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.11 | ATR: ₹1.03 | SL: ₹182.66 | TP: ₹178.54 | Est Gain: ₹33.41
+2026-09-01 11:00:12,399 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.33 | ATR: ₹0.71 | SL: ₹182.27 | TP: ₹185.11 | Est Gain: ₹23.14
+2026-09-01 11:00:12,901 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹262.6 | ATR: ₹0.81 | SL: ₹261.39 | TP: ₹264.62 | Est Gain: ₹18.18
+2026-09-01 11:00:13,447 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹325.5 | ATR: ₹1.12 | SL: ₹323.82 | TP: ₹328.3 | Est Gain: ₹19.6
+2026-09-01 11:00:13,992 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹234.4 | ATR: ₹0.72 | SL: ₹233.32 | TP: ₹236.2 | Est Gain: ₹18.0
+2026-09-01 11:00:14,100 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 11:00:14,101 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 11:00:14,102 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 11:00:14,498 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 11:00:14,506 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-09-01 11:00:14,546 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 11:00:14,577 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (103 shares) to Trade Ledger.
+2026-09-01 11:00:14,599 [INFO] 🚀 Dispatched HDFCBANK EXECUTE LONG (26 shares) to Trade Ledger.
+2026-09-01 11:00:14,618 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (102 shares) to Trade Ledger.
+2026-09-01 11:15:00,500 [INFO] 
+⚡ [11:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 11:15:00,500 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 11:15:00,501 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 11:15:03,410 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹713.4 | ATR: ₹3.12 | SL: ₹708.72 | TP: ₹721.2 | Est Gain: ₹23.4
+2026-09-01 11:15:04,823 [INFO] 🎯 Setup: HINDUNILVR [SHORT] Price: ₹1992.5 | ATR: ₹7.33 | SL: ₹2003.49 | TP: ₹1974.17 | Est Gain: ₹18.33
+2026-09-01 11:15:07,000 [INFO] 🎯 Setup: KOTAKBANK [LONG] Price: ₹425.65 | ATR: ₹1.61 | SL: ₹423.23 | TP: ₹429.67 | Est Gain: ₹20.1
+2026-09-01 11:15:08,066 [INFO] 🎯 Setup: AXISBANK [SHORT] Price: ₹1273.2 | ATR: ₹6.02 | SL: ₹1282.23 | TP: ₹1258.15 | Est Gain: ₹15.05
+2026-09-01 11:15:09,227 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13412.0 | ATR: ₹43.94 | SL: ₹13346.09 | TP: ₹13521.85 | Est Gain: ₹109.85
+2026-09-01 11:15:10,134 [INFO] 🎯 Setup: TITAN [LONG] Price: ₹5066.5 | ATR: ₹19.95 | SL: ₹5036.57 | TP: ₹5116.38 | Est Gain: ₹49.88
+2026-09-01 11:15:10,754 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1055.9 | ATR: ₹3.46 | SL: ₹1050.71 | TP: ₹1064.55 | Est Gain: ₹17.3
+2026-09-01 11:15:11,273 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2896.3 | ATR: ₹25.4 | SL: ₹2934.4 | TP: ₹2832.8 | Est Gain: ₹63.5
+2026-09-01 11:15:11,938 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.25 | ATR: ₹0.98 | SL: ₹182.72 | TP: ₹178.8 | Est Gain: ₹31.85
+2026-09-01 11:15:13,204 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹186.51 | ATR: ₹0.95 | SL: ₹185.08 | TP: ₹188.88 | Est Gain: ₹30.81
+2026-09-01 11:15:14,039 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹262.7 | ATR: ₹0.77 | SL: ₹261.55 | TP: ₹264.62 | Est Gain: ₹17.28
+2026-09-01 11:15:14,613 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹326.7 | ATR: ₹1.17 | SL: ₹324.94 | TP: ₹329.62 | Est Gain: ₹20.44
+2026-09-01 11:15:15,303 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹235.04 | ATR: ₹0.74 | SL: ₹233.93 | TP: ₹236.89 | Est Gain: ₹18.5
+2026-09-01 11:15:15,445 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 11:15:15,446 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 11:15:15,446 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 11:15:15,850 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 11:15:15,877 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-09-01 11:15:15,896 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 11:15:15,925 [INFO] 🚀 Dispatched TITAN EXECUTE LONG (3 shares) to Trade Ledger.
+2026-09-01 11:15:15,970 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 11:15:16,043 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (100 shares) to Trade Ledger.
+2026-09-01 11:30:00,954 [INFO] 
+⚡ [11:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 11:30:00,954 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 11:30:00,954 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 11:30:04,576 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹714.45 | ATR: ₹3.07 | SL: ₹709.85 | TP: ₹722.12 | Est Gain: ₹23.01
+2026-09-01 11:30:06,253 [INFO] 🎯 Setup: HINDUNILVR [SHORT] Price: ₹1992.5 | ATR: ₹6.91 | SL: ₹2002.87 | TP: ₹1975.22 | Est Gain: ₹17.28
+2026-09-01 11:30:07,525 [INFO] 🎯 Setup: BHARTIARTL [SHORT] Price: ₹1865.9 | ATR: ₹9.26 | SL: ₹1879.79 | TP: ₹1842.75 | Est Gain: ₹23.15
+2026-09-01 11:30:11,109 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13401.0 | ATR: ₹43.38 | SL: ₹13335.93 | TP: ₹13509.45 | Est Gain: ₹108.45
+2026-09-01 11:30:13,109 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1056.9 | ATR: ₹3.27 | SL: ₹1052.0 | TP: ₹1065.08 | Est Gain: ₹16.36
+2026-09-01 11:30:13,824 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2894.7 | ATR: ₹24.17 | SL: ₹2930.95 | TP: ₹2834.27 | Est Gain: ₹60.43
+2026-09-01 11:30:14,405 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.15 | ATR: ₹0.92 | SL: ₹182.53 | TP: ₹178.85 | Est Gain: ₹29.9
+2026-09-01 11:30:15,507 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹186.35 | ATR: ₹1.05 | SL: ₹184.78 | TP: ₹188.97 | Est Gain: ₹34.06
+2026-09-01 11:30:16,123 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.15 | ATR: ₹0.81 | SL: ₹261.94 | TP: ₹265.17 | Est Gain: ₹18.18
+2026-09-01 11:30:16,790 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹326.05 | ATR: ₹1.14 | SL: ₹324.34 | TP: ₹328.9 | Est Gain: ₹19.95
+2026-09-01 11:30:20,834 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 11:30:20,834 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 11:30:20,835 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 11:30:21,331 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 11:30:21,394 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 11:30:21,449 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 11:30:21,474 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (100 shares) to Trade Ledger.
+2026-09-01 11:30:21,512 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (103 shares) to Trade Ledger.
+2026-09-01 11:30:21,553 [INFO] 🚀 Dispatched BHARTIARTL EXECUTE SHORT (9 shares) to Trade Ledger.
+2026-09-01 11:45:00,099 [INFO] 
+⚡ [11:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 11:45:00,099 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 11:45:00,099 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 11:45:03,051 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹712.85 | ATR: ₹3.06 | SL: ₹708.26 | TP: ₹720.5 | Est Gain: ₹22.95
+2026-09-01 11:45:04,597 [INFO] 🎯 Setup: HINDUNILVR [SHORT] Price: ₹1989.8 | ATR: ₹6.83 | SL: ₹2000.04 | TP: ₹1972.72 | Est Gain: ₹17.08
+2026-09-01 11:45:08,040 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2580.0 | ATR: ₹10.62 | SL: ₹2595.93 | TP: ₹2553.45 | Est Gain: ₹26.55
+2026-09-01 11:45:08,628 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13392.0 | ATR: ₹42.85 | SL: ₹13327.73 | TP: ₹13499.12 | Est Gain: ₹107.12
+2026-09-01 11:45:09,165 [INFO] 🎯 Setup: SUNPHARMA [SHORT] Price: ₹1940.6 | ATR: ₹9.33 | SL: ₹1954.59 | TP: ₹1917.27 | Est Gain: ₹23.33
+2026-09-01 11:45:10,294 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1055.9 | ATR: ₹3.15 | SL: ₹1051.18 | TP: ₹1063.78 | Est Gain: ₹15.76
+2026-09-01 11:45:11,041 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2888.1 | ATR: ₹23.58 | SL: ₹2923.47 | TP: ₹2829.15 | Est Gain: ₹58.95
+2026-09-01 11:45:11,715 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.21 | ATR: ₹0.87 | SL: ₹182.52 | TP: ₹179.03 | Est Gain: ₹28.34
+2026-09-01 11:45:12,795 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹185.86 | ATR: ₹1.08 | SL: ₹184.24 | TP: ₹188.56 | Est Gain: ₹35.1
+2026-09-01 11:45:13,563 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.0 | ATR: ₹0.8 | SL: ₹261.8 | TP: ₹265.0 | Est Gain: ₹18.0
+2026-09-01 11:45:14,117 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹326.8 | ATR: ₹1.15 | SL: ₹325.07 | TP: ₹329.68 | Est Gain: ₹20.16
+2026-09-01 11:45:14,743 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 11:45:14,743 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 11:45:14,743 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 11:45:15,198 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 11:45:15,263 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 11:45:15,293 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 11:45:15,325 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 11:45:15,374 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 11:45:15,428 [INFO] 🚀 Dispatched ASIANPAINT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 12:00:00,992 [INFO] 
+⚡ [12:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 12:00:00,992 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 12:00:00,992 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 12:00:03,757 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹711.15 | ATR: ₹3.04 | SL: ₹706.59 | TP: ₹718.75 | Est Gain: ₹22.8
+2026-09-01 12:00:05,400 [INFO] 🎯 Setup: HINDUNILVR [SHORT] Price: ₹1989.6 | ATR: ₹6.65 | SL: ₹1999.57 | TP: ₹1972.97 | Est Gain: ₹16.63
+2026-09-01 12:00:05,912 [INFO] 🎯 Setup: SBIN [SHORT] Price: ₹1041.4 | ATR: ₹3.11 | SL: ₹1046.07 | TP: ₹1033.62 | Est Gain: ₹15.56
+2026-09-01 12:00:08,768 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2578.3 | ATR: ₹10.16 | SL: ₹2593.54 | TP: ₹2552.9 | Est Gain: ₹25.4
+2026-09-01 12:00:09,282 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13395.0 | ATR: ₹41.86 | SL: ₹13332.21 | TP: ₹13499.65 | Est Gain: ₹104.65
+2026-09-01 12:00:11,469 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2876.2 | ATR: ₹23.46 | SL: ₹2911.39 | TP: ₹2817.55 | Est Gain: ₹58.65
+2026-09-01 12:00:12,026 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.75 | ATR: ₹0.87 | SL: ₹183.06 | TP: ₹179.57 | Est Gain: ₹28.34
+2026-09-01 12:00:12,985 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹186.37 | ATR: ₹1.09 | SL: ₹184.74 | TP: ₹189.09 | Est Gain: ₹35.36
+2026-09-01 12:00:13,615 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.0 | ATR: ₹0.78 | SL: ₹261.83 | TP: ₹264.95 | Est Gain: ₹17.55
+2026-09-01 12:00:14,134 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹327.45 | ATR: ₹1.14 | SL: ₹325.74 | TP: ₹330.3 | Est Gain: ₹19.95
+2026-09-01 12:00:14,670 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 12:00:14,670 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 12:00:14,670 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 12:00:15,013 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 12:00:15,032 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 12:00:15,093 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 12:00:15,123 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 12:00:15,163 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 12:00:15,201 [INFO] 🚀 Dispatched ASIANPAINT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 12:15:00,997 [INFO] 
+⚡ [12:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 12:15:00,998 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 12:15:00,998 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 12:15:03,773 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹711.7 | ATR: ₹2.95 | SL: ₹707.28 | TP: ₹719.08 | Est Gain: ₹22.14
+2026-09-01 12:15:05,208 [INFO] 🎯 Setup: HINDUNILVR [SHORT] Price: ₹1993.5 | ATR: ₹6.53 | SL: ₹2003.3 | TP: ₹1977.17 | Est Gain: ₹16.33
+2026-09-01 12:15:08,226 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2574.9 | ATR: ₹9.82 | SL: ₹2589.63 | TP: ₹2550.35 | Est Gain: ₹24.55
+2026-09-01 12:15:08,760 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹13301.0 | ATR: ₹47.3 | SL: ₹13230.05 | TP: ₹13419.25 | Est Gain: ₹118.25
+2026-09-01 12:15:10,985 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.41 | ATR: ₹0.83 | SL: ₹182.66 | TP: ₹179.34 | Est Gain: ₹26.91
+2026-09-01 12:15:12,006 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹186.48 | ATR: ₹1.07 | SL: ₹184.88 | TP: ₹189.16 | Est Gain: ₹34.84
+2026-09-01 12:15:12,438 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.2 | ATR: ₹0.77 | SL: ₹262.05 | TP: ₹265.12 | Est Gain: ₹17.28
+2026-09-01 12:15:13,022 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹328.0 | ATR: ₹1.12 | SL: ₹326.32 | TP: ₹330.8 | Est Gain: ₹19.6
+2026-09-01 12:15:13,525 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 12:15:13,525 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 12:15:13,526 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 12:15:13,912 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 12:15:13,922 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-09-01 12:15:13,930 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 12:15:13,984 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 12:15:14,022 [INFO] 🚀 Dispatched ASIANPAINT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 12:15:14,044 [INFO] 🚀 Dispatched HDFCBANK EXECUTE LONG (26 shares) to Trade Ledger.
+2026-09-01 12:30:00,013 [INFO] 
+⚡ [12:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 12:30:00,015 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 12:30:00,015 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 12:30:04,374 [INFO] 🎯 Setup: HINDUNILVR [SHORT] Price: ₹1991.3 | ATR: ₹6.26 | SL: ₹2000.69 | TP: ₹1975.65 | Est Gain: ₹15.65
+2026-09-01 12:30:07,841 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2574.4 | ATR: ₹9.29 | SL: ₹2588.34 | TP: ₹2551.18 | Est Gain: ₹23.22
+2026-09-01 12:30:10,853 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.5 | ATR: ₹0.8 | SL: ₹182.7 | TP: ₹179.5 | Est Gain: ₹26.0
+2026-09-01 12:30:11,807 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹186.3 | ATR: ₹1.04 | SL: ₹184.74 | TP: ₹188.9 | Est Gain: ₹33.8
+2026-09-01 12:30:12,321 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.55 | ATR: ₹0.75 | SL: ₹262.43 | TP: ₹265.43 | Est Gain: ₹16.92
+2026-09-01 12:30:12,942 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹327.95 | ATR: ₹1.08 | SL: ₹326.33 | TP: ₹330.65 | Est Gain: ₹18.9
+2026-09-01 12:30:13,470 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹235.52 | ATR: ₹0.69 | SL: ₹234.49 | TP: ₹237.25 | Est Gain: ₹17.3
+2026-09-01 12:30:13,579 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 12:30:13,583 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 12:30:13,584 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 12:30:13,882 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 12:30:13,908 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (100 shares) to Trade Ledger.
+2026-09-01 12:30:13,948 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 12:30:13,966 [INFO] 🚀 Dispatched ASIANPAINT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 12:30:14,031 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (57 shares) to Trade Ledger.
+2026-09-01 12:30:14,094 [INFO] 🚀 Dispatched ONGC EXECUTE LONG (79 shares) to Trade Ledger.
+2026-09-01 12:45:00,986 [INFO] 
+⚡ [12:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 12:45:00,986 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 12:45:00,986 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 12:45:08,565 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2573.3 | ATR: ₹8.81 | SL: ₹2586.52 | TP: ₹2551.28 | Est Gain: ₹22.02
+2026-09-01 12:45:11,101 [INFO] 🎯 Setup: ADANIENT [SHORT] Price: ₹2868.6 | ATR: ₹20.28 | SL: ₹2899.02 | TP: ₹2817.9 | Est Gain: ₹50.7
+2026-09-01 12:45:11,782 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.4 | ATR: ₹0.77 | SL: ₹182.56 | TP: ₹179.47 | Est Gain: ₹25.09
+2026-09-01 12:45:12,782 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹186.14 | ATR: ₹1.0 | SL: ₹184.64 | TP: ₹188.64 | Est Gain: ₹32.5
+2026-09-01 12:45:13,328 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.4 | ATR: ₹0.74 | SL: ₹262.29 | TP: ₹265.25 | Est Gain: ₹16.65
+2026-09-01 12:45:13,897 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹328.05 | ATR: ₹1.04 | SL: ₹326.49 | TP: ₹330.65 | Est Gain: ₹18.2
+2026-09-01 12:45:14,585 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹235.48 | ATR: ₹0.65 | SL: ₹234.5 | TP: ₹237.1 | Est Gain: ₹16.2
+2026-09-01 12:45:14,691 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 12:45:14,691 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 12:45:14,691 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 12:45:14,954 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 12:45:14,971 [INFO] 🚀 Dispatched ADANIENT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 12:45:15,010 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (100 shares) to Trade Ledger.
+2026-09-01 12:45:15,071 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 12:45:15,101 [INFO] 🚀 Dispatched ASIANPAINT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 12:45:15,116 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (57 shares) to Trade Ledger.
+2026-09-01 13:00:00,068 [INFO] 
+⚡ [01:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 13:00:00,069 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 13:00:00,069 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 13:00:07,580 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2574.1 | ATR: ₹8.38 | SL: ₹2586.67 | TP: ₹2553.15 | Est Gain: ₹20.95
+2026-09-01 13:00:08,236 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12991.0 | ATR: ₹73.09 | SL: ₹12881.36 | TP: ₹13173.73 | Est Gain: ₹182.73
+2026-09-01 13:00:10,727 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.28 | ATR: ₹0.72 | SL: ₹182.36 | TP: ₹179.48 | Est Gain: ₹23.4
+2026-09-01 13:00:11,845 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹185.5 | ATR: ₹0.99 | SL: ₹184.01 | TP: ₹187.97 | Est Gain: ₹32.11
+2026-09-01 13:00:12,502 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.35 | ATR: ₹0.71 | SL: ₹262.29 | TP: ₹265.12 | Est Gain: ₹15.93
+2026-09-01 13:00:13,024 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹328.05 | ATR: ₹1.03 | SL: ₹326.5 | TP: ₹330.62 | Est Gain: ₹17.99
+2026-09-01 13:00:13,587 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹235.64 | ATR: ₹0.63 | SL: ₹234.69 | TP: ₹237.21 | Est Gain: ₹15.7
+2026-09-01 13:00:13,696 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 13:00:13,697 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 13:00:13,697 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 13:00:14,154 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 13:00:14,220 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 13:00:14,253 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (100 shares) to Trade Ledger.
+2026-09-01 13:00:14,273 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (102 shares) to Trade Ledger.
+2026-09-01 13:00:14,290 [INFO] 🚀 Dispatched ASIANPAINT EXECUTE SHORT (6 shares) to Trade Ledger.
+2026-09-01 13:00:14,309 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (57 shares) to Trade Ledger.
+2026-09-01 13:15:00,280 [INFO] 
+⚡ [01:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 13:15:00,281 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 13:15:00,281 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 13:15:08,217 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12869.0 | ATR: ₹77.66 | SL: ₹12752.51 | TP: ₹13063.15 | Est Gain: ₹194.15
+2026-09-01 13:15:10,890 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.89 | ATR: ₹0.7 | SL: ₹181.94 | TP: ₹179.14 | Est Gain: ₹22.75
+2026-09-01 13:15:11,925 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹185.25 | ATR: ₹0.97 | SL: ₹183.79 | TP: ₹187.68 | Est Gain: ₹31.59
+2026-09-01 13:15:12,439 [INFO] 🎯 Setup: POWERGRID [LONG] Price: ₹263.1 | ATR: ₹0.7 | SL: ₹262.05 | TP: ₹264.85 | Est Gain: ₹15.75
+2026-09-01 13:15:12,987 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹327.35 | ATR: ₹1.01 | SL: ₹325.84 | TP: ₹329.88 | Est Gain: ₹17.71
+2026-09-01 13:15:13,513 [INFO] 🎯 Setup: ONGC [LONG] Price: ₹235.4 | ATR: ₹0.62 | SL: ₹234.47 | TP: ₹236.95 | Est Gain: ₹15.5
+2026-09-01 13:15:13,625 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-01 13:15:13,626 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 13:15:13,626 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 13:15:13,968 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 13:15:13,999 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-09-01 13:15:14,029 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 13:15:14,101 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (103 shares) to Trade Ledger.
+2026-09-01 13:15:14,146 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (57 shares) to Trade Ledger.
+2026-09-01 13:15:14,206 [INFO] 🚀 Dispatched POWERGRID EXECUTE LONG (71 shares) to Trade Ledger.
+2026-09-01 13:30:00,158 [INFO] 
+⚡ [01:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 13:30:00,158 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 13:30:00,158 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 13:30:09,037 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12935.0 | ATR: ₹83.11 | SL: ₹12810.33 | TP: ₹13142.77 | Est Gain: ₹207.77
+2026-09-01 13:30:11,679 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.1 | ATR: ₹0.69 | SL: ₹182.13 | TP: ₹179.38 | Est Gain: ₹22.36
+2026-09-01 13:30:13,005 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹185.0 | ATR: ₹0.94 | SL: ₹183.59 | TP: ₹187.35 | Est Gain: ₹30.55
+2026-09-01 13:30:13,956 [INFO] 🎯 Setup: NTPC [LONG] Price: ₹327.25 | ATR: ₹0.97 | SL: ₹325.8 | TP: ₹329.68 | Est Gain: ₹17.01
+2026-09-01 13:30:14,531 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-09-01 13:30:14,532 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 13:30:14,533 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 13:30:14,853 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 13:30:14,880 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-09-01 13:30:14,914 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 13:30:14,976 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (103 shares) to Trade Ledger.
+2026-09-01 13:30:14,994 [INFO] 🚀 Dispatched NTPC EXECUTE LONG (57 shares) to Trade Ledger.
+2026-09-01 13:45:00,923 [INFO] 
+⚡ [01:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 13:45:00,923 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 13:45:00,924 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 13:45:08,893 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12981.0 | ATR: ₹83.53 | SL: ₹12855.7 | TP: ₹13189.83 | Est Gain: ₹208.83
+2026-09-01 13:45:11,378 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.79 | ATR: ₹0.7 | SL: ₹181.84 | TP: ₹179.04 | Est Gain: ₹22.75
+2026-09-01 13:45:12,567 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹184.5 | ATR: ₹0.92 | SL: ₹183.12 | TP: ₹186.8 | Est Gain: ₹29.9
+2026-09-01 13:45:14,150 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-01 13:45:14,151 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 13:45:14,151 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 13:45:14,566 [INFO] 📊 Market Regime: CHOPPY | Account Capital: ₹100000.0
+2026-09-01 13:45:14,593 [INFO] 🛑 Skipping MARUTI: In active Cooldown penalty box.
+2026-09-01 13:45:14,624 [INFO] 🛑 Skipping TATASTEEL: In active Cooldown penalty box.
+2026-09-01 13:45:14,654 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (103 shares) to Trade Ledger.
+2026-09-01 14:00:00,196 [INFO] 
+⚡ [02:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 14:00:00,197 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 14:00:00,197 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 14:00:10,094 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12944.0 | ATR: ₹81.71 | SL: ₹12821.43 | TP: ₹13148.27 | Est Gain: ₹204.27
+2026-09-01 14:00:12,917 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹181.1 | ATR: ₹0.7 | SL: ₹182.15 | TP: ₹179.35 | Est Gain: ₹22.75
+2026-09-01 14:00:14,544 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹184.05 | ATR: ₹0.9 | SL: ₹182.7 | TP: ₹186.3 | Est Gain: ₹29.25
+2026-09-01 14:00:16,062 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-01 14:00:16,062 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 14:00:16,062 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 14:00:16,634 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹100000.0
+2026-09-01 14:00:16,665 [INFO] ⚡ MARUTI [LONG]: Counter-trend but high alpha (0.82%). Allocating 50% defensive size.
+2026-09-01 14:00:16,703 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 14:00:16,712 [INFO] ⚡ TATASTEEL [LONG]: Counter-trend but high alpha (0.55%). Allocating 50% defensive size.
+2026-09-01 14:00:16,725 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (67 shares) to Trade Ledger.
+2026-09-01 14:00:16,737 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-09-01 14:15:00,143 [INFO] 
+⚡ [02:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 14:15:00,143 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 14:15:00,143 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 14:15:08,556 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12895.0 | ATR: ₹81.66 | SL: ₹12772.51 | TP: ₹13099.15 | Est Gain: ₹204.15
+2026-09-01 14:15:11,302 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.7 | ATR: ₹0.7 | SL: ₹181.75 | TP: ₹178.95 | Est Gain: ₹22.75
+2026-09-01 14:15:12,482 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.65 | ATR: ₹0.88 | SL: ₹182.33 | TP: ₹185.85 | Est Gain: ₹28.6
+2026-09-01 14:15:14,047 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-01 14:15:14,047 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 14:15:14,048 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 14:15:14,372 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹100000.0
+2026-09-01 14:15:14,401 [INFO] ⚡ MARUTI [LONG]: Counter-trend but high alpha (0.84%). Allocating 50% defensive size.
+2026-09-01 14:15:14,434 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 14:15:14,466 [INFO] ⚡ TATASTEEL [LONG]: Counter-trend but high alpha (0.56%). Allocating 50% defensive size.
+2026-09-01 14:15:14,495 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (68 shares) to Trade Ledger.
+2026-09-01 14:15:14,525 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-09-01 14:30:00,959 [INFO] 
+⚡ [02:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 14:30:00,959 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 14:30:00,959 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 14:30:08,762 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12888.0 | ATR: ₹79.04 | SL: ₹12769.44 | TP: ₹13085.6 | Est Gain: ₹197.6
+2026-09-01 14:30:11,082 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.8 | ATR: ₹0.67 | SL: ₹181.81 | TP: ₹179.12 | Est Gain: ₹21.84
+2026-09-01 14:30:12,178 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.56 | ATR: ₹0.86 | SL: ₹182.27 | TP: ₹185.71 | Est Gain: ₹27.95
+2026-09-01 14:30:13,819 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-01 14:30:13,820 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 14:30:13,820 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 14:30:14,149 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹100000.0
+2026-09-01 14:30:14,182 [INFO] ⚡ MARUTI [LONG]: Counter-trend but high alpha (0.87%). Allocating 50% defensive size.
+2026-09-01 14:30:14,199 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 14:30:14,230 [INFO] ⚡ TATASTEEL [LONG]: Counter-trend but high alpha (0.59%). Allocating 50% defensive size.
+2026-09-01 14:30:14,238 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (68 shares) to Trade Ledger.
+2026-09-01 14:30:14,262 [INFO] 🛑 Skipping WIPRO: In active Cooldown penalty box.
+2026-09-01 14:45:00,692 [INFO] 
+⚡ [02:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 14:45:00,692 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 14:45:00,692 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 14:45:08,761 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12907.0 | ATR: ₹75.96 | SL: ₹12793.06 | TP: ₹13096.9 | Est Gain: ₹189.9
+2026-09-01 14:45:10,972 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.49 | ATR: ₹0.65 | SL: ₹181.47 | TP: ₹178.87 | Est Gain: ₹21.06
+2026-09-01 14:45:11,894 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.37 | ATR: ₹0.84 | SL: ₹182.11 | TP: ₹185.47 | Est Gain: ₹27.3
+2026-09-01 14:45:13,309 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-01 14:45:13,309 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 14:45:13,309 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 14:45:13,848 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹100000.0
+2026-09-01 14:45:13,857 [INFO] ⚡ MARUTI [LONG]: Counter-trend but high alpha (0.90%). Allocating 50% defensive size.
+2026-09-01 14:45:13,885 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 14:45:13,917 [INFO] ⚡ TATASTEEL [LONG]: Counter-trend but high alpha (0.60%). Allocating 50% defensive size.
+2026-09-01 14:45:13,926 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (68 shares) to Trade Ledger.
+2026-09-01 14:45:13,969 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (138 shares) to Trade Ledger.
+2026-09-01 15:00:00,409 [INFO] 
+⚡ [03:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 15:00:00,409 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 15:00:00,410 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 15:00:09,866 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12905.0 | ATR: ₹72.25 | SL: ₹12796.62 | TP: ₹13085.62 | Est Gain: ₹180.62
+2026-09-01 15:00:12,721 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.72 | ATR: ₹0.64 | SL: ₹181.68 | TP: ₹179.12 | Est Gain: ₹20.8
+2026-09-01 15:00:14,074 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹183.5 | ATR: ₹0.81 | SL: ₹182.28 | TP: ₹185.53 | Est Gain: ₹26.39
+2026-09-01 15:00:16,030 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-01 15:00:16,030 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 15:00:16,030 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 15:00:16,379 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹100000.0
+2026-09-01 15:00:16,390 [INFO] ⚡ MARUTI [LONG]: Counter-trend but high alpha (0.94%). Allocating 50% defensive size.
+2026-09-01 15:00:16,423 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 15:00:16,430 [INFO] ⚡ TATASTEEL [LONG]: Counter-trend but high alpha (0.63%). Allocating 50% defensive size.
+2026-09-01 15:00:16,456 [INFO] 🚀 Dispatched TATASTEEL EXECUTE LONG (68 shares) to Trade Ledger.
+2026-09-01 15:00:16,516 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (138 shares) to Trade Ledger.
+2026-09-01 15:15:00,332 [INFO] 
+⚡ [03:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 15:15:00,332 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 15:15:00,332 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 15:15:09,601 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12920.0 | ATR: ₹65.2 | SL: ₹12822.2 | TP: ₹13083.0 | Est Gain: ₹163.0
+2026-09-01 15:15:12,165 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.87 | ATR: ₹0.58 | SL: ₹181.74 | TP: ₹179.42 | Est Gain: ₹18.85
+2026-09-01 15:15:14,589 [INFO] ✅ Successfully persisted top 2 setups to database.
+2026-09-01 15:15:14,591 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 15:15:14,591 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+2026-09-01 15:15:14,876 [INFO] 📊 Market Regime: BEARISH | Account Capital: ₹100000.0
+2026-09-01 15:15:14,884 [INFO] ⚡ MARUTI [LONG]: Counter-trend but high alpha (0.97%). Allocating 50% defensive size.
+2026-09-01 15:15:14,911 [INFO] 🚀 Dispatched MARUTI EXECUTE LONG (1 shares) to Trade Ledger.
+2026-09-01 15:15:14,940 [INFO] 🚀 Dispatched WIPRO EXECUTE SHORT (138 shares) to Trade Ledger.
+2026-09-01 15:30:00,309 [INFO] 
+⚡ [03:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-01 15:30:00,309 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-01 15:30:00,309 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-01 15:30:08,020 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12920.0 | ATR: ₹69.45 | SL: ₹12815.83 | TP: ₹13093.62 | Est Gain: ₹173.62
+2026-09-01 15:30:11,193 [INFO] 🎯 Setup: WIPRO [SHORT] Price: ₹180.87 | ATR: ₹0.63 | SL: ₹181.81 | TP: ₹179.3 | Est Gain: ₹20.41
+2026-09-01 15:30:13,264 [INFO] ✅ Successfully persisted top 2 setups to database.
+2026-09-01 15:30:13,265 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-01 15:30:13,265 [INFO] ⚡ Tactical Copilot evaluating fresh setups...
+
+
+Day 4
+
+
+2026-09-09 08:38:14,759 [INFO] 🤖 Quantitative Multi-Agent Market Daemon Initialized.
+2026-09-09 08:38:14,770 [INFO] ⚠️ No Daily Playbook found for today. Triggering Macro CIO Sweep on startup...
+2026-09-09 08:38:14,770 [INFO] 🌅 [CIO Agent] Initiating Pre-Market Macro Strategy & News Sweep...
+2026-09-09 08:38:23,197 [INFO] ✅ Macro Playbook persisted to Database. Regime: BEARISH | Risk: DEFENSIVE
+2026-09-09 08:38:23,197 [INFO] 📰 Top Catalyst: Stock market today: Trade guide for Sensex, Nifty 50, crude oil to gold | Seven stocks to buy
+2026-09-09 08:38:23,197 [INFO] 🟢 Approved Sectors: Banking, Pharma
+2026-09-09 08:38:23,197 [INFO] 🔴 Banned Sectors: IT, Auto, Metals, Energy, FMCG
+2026-09-09 09:30:00,636 [INFO] 
+⚡ [09:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 09:30:00,640 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 09:30:00,641 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 09:30:18,534 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12612.0 | ATR: ₹33.73 | SL: ₹12561.41 | TP: ₹12696.33 | Est Gain: ₹84.33
+2026-09-09 09:30:23,005 [INFO] ✅ Successfully persisted top 1 setups to database.
+2026-09-09 09:30:23,007 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 09:30:23,007 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 09:30:23,387 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹0.00
+2026-09-09 09:30:23,411 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 09:45:00,167 [INFO] 
+⚡ [09:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 09:45:00,167 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 09:45:00,168 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 09:45:02,440 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2204.0 | ATR: ₹10.05 | SL: ₹2188.93 | TP: ₹2229.12 | Est Gain: ₹25.12
+2026-09-09 09:45:07,416 [INFO] 🎯 Setup: ASIANPAINT [LONG] Price: ₹2467.1 | ATR: ₹7.11 | SL: ₹2456.43 | TP: ₹2484.88 | Est Gain: ₹17.78
+2026-09-09 09:45:07,903 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12594.0 | ATR: ₹33.75 | SL: ₹12543.38 | TP: ₹12678.38 | Est Gain: ₹84.38
+2026-09-09 09:45:09,138 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1046.6 | ATR: ₹3.19 | SL: ₹1041.81 | TP: ₹1054.57 | Est Gain: ₹15.94
+2026-09-09 09:45:10,787 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹185.89 | ATR: ₹0.67 | SL: ₹184.88 | TP: ₹187.56 | Est Gain: ₹21.71
+2026-09-09 09:45:12,089 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 09:45:12,090 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 09:45:12,091 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 09:45:12,381 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹0.00
+2026-09-09 09:45:12,397 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 09:45:12,416 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 09:45:12,424 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 09:45:12,450 [INFO] 🛑 Skipping ASIANPAINT: Sector 'FMCG' is BANNED by Macro CIO Playbook.
+2026-09-09 09:45:13,124 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (17 shares) to Trade Ledger.
+2026-09-09 10:00:00,817 [INFO] 
+⚡ [10:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 10:00:00,819 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 10:00:00,820 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 10:00:02,926 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2203.0 | ATR: ₹10.39 | SL: ₹2187.41 | TP: ₹2228.97 | Est Gain: ₹25.97
+2026-09-09 10:00:07,385 [INFO] 🎯 Setup: ASIANPAINT [LONG] Price: ₹2462.7 | ATR: ₹7.0 | SL: ₹2452.2 | TP: ₹2480.2 | Est Gain: ₹17.5
+2026-09-09 10:00:07,905 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12597.0 | ATR: ₹33.27 | SL: ₹12547.09 | TP: ₹12680.17 | Est Gain: ₹83.17
+2026-09-09 10:00:09,367 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1044.7 | ATR: ₹3.27 | SL: ₹1039.8 | TP: ₹1052.88 | Est Gain: ₹16.36
+2026-09-09 10:00:10,300 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹168.06 | ATR: ₹0.69 | SL: ₹167.03 | TP: ₹169.78 | Est Gain: ₹24.08
+2026-09-09 10:00:11,129 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹184.7 | ATR: ₹0.75 | SL: ₹183.57 | TP: ₹186.57 | Est Gain: ₹24.31
+2026-09-09 10:00:12,443 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 10:00:12,443 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 10:00:12,443 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 10:00:12,819 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-59.50
+2026-09-09 10:00:12,850 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 10:00:12,881 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 10:00:12,912 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 10:00:12,943 [INFO] 🛑 Skipping WIPRO: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 10:00:12,953 [INFO] 🛑 Skipping ASIANPAINT: Sector 'FMCG' is BANNED by Macro CIO Playbook.
+2026-09-09 10:15:00,668 [INFO] 
+⚡ [10:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 10:15:00,669 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 10:15:00,669 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 10:15:02,854 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2206.3 | ATR: ₹10.07 | SL: ₹2191.2 | TP: ₹2231.48 | Est Gain: ₹25.18
+2026-09-09 10:15:07,459 [INFO] 🎯 Setup: ASIANPAINT [LONG] Price: ₹2464.8 | ATR: ₹6.93 | SL: ₹2454.41 | TP: ₹2482.12 | Est Gain: ₹17.32
+2026-09-09 10:15:07,925 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12574.0 | ATR: ₹33.32 | SL: ₹12524.02 | TP: ₹12657.3 | Est Gain: ₹83.3
+2026-09-09 10:15:09,157 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1043.2 | ATR: ₹3.26 | SL: ₹1038.31 | TP: ₹1051.35 | Est Gain: ₹16.3
+2026-09-09 10:15:10,836 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹184.51 | ATR: ₹0.76 | SL: ₹183.37 | TP: ₹186.41 | Est Gain: ₹24.7
+2026-09-09 10:15:12,319 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 10:15:12,319 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 10:15:12,319 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 10:15:12,581 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-59.50
+2026-09-09 10:15:12,590 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 10:15:12,615 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 10:15:12,645 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 10:15:12,676 [INFO] 🛑 Skipping ASIANPAINT: Sector 'FMCG' is BANNED by Macro CIO Playbook.
+2026-09-09 10:15:12,708 [INFO] 🛑 Skipping BAJFINANCE: In active Cooldown penalty box.
+2026-09-09 10:30:00,643 [INFO] 
+⚡ [10:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 10:30:00,644 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 10:30:00,645 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 10:30:02,702 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2207.3 | ATR: ₹9.83 | SL: ₹2192.56 | TP: ₹2231.88 | Est Gain: ₹24.58
+2026-09-09 10:30:08,374 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12582.0 | ATR: ₹34.23 | SL: ₹12530.66 | TP: ₹12667.58 | Est Gain: ₹85.58
+2026-09-09 10:30:09,778 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1049.0 | ATR: ₹3.57 | SL: ₹1043.64 | TP: ₹1057.92 | Est Gain: ₹17.84
+2026-09-09 10:30:11,427 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹187.02 | ATR: ₹0.9 | SL: ₹185.67 | TP: ₹189.27 | Est Gain: ₹29.25
+2026-09-09 10:30:11,907 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.7 | ATR: ₹0.89 | SL: ₹269.03 | TP: ₹265.47 | Est Gain: ₹20.07
+2026-09-09 10:30:12,750 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 10:30:12,751 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 10:30:12,751 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 10:30:13,087 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-59.50
+2026-09-09 10:30:13,118 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 10:30:13,150 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 10:30:13,181 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 10:30:13,213 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 10:30:13,221 [INFO] 🛑 Skipping BAJFINANCE: In active Cooldown penalty box.
+2026-09-09 10:45:00,115 [INFO] 
+⚡ [10:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 10:45:00,115 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 10:45:00,116 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 10:45:02,117 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2201.6 | ATR: ₹10.11 | SL: ₹2186.43 | TP: ₹2226.88 | Est Gain: ₹25.28
+2026-09-09 10:45:02,568 [INFO] 🎯 Setup: HDFCBANK [LONG] Price: ₹693.35 | ATR: ₹2.01 | SL: ₹690.34 | TP: ₹698.38 | Est Gain: ₹15.09
+2026-09-09 10:45:05,283 [INFO] 🎯 Setup: KOTAKBANK [LONG] Price: ₹414.0 | ATR: ₹1.13 | SL: ₹412.31 | TP: ₹416.82 | Est Gain: ₹16.92
+2026-09-09 10:45:06,867 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12570.0 | ATR: ₹33.21 | SL: ₹12520.18 | TP: ₹12653.02 | Est Gain: ₹83.02
+2026-09-09 10:45:08,138 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1047.6 | ATR: ₹3.5 | SL: ₹1042.35 | TP: ₹1056.35 | Est Gain: ₹17.5
+2026-09-09 10:45:09,747 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.48 | ATR: ₹0.96 | SL: ₹187.04 | TP: ₹190.88 | Est Gain: ₹31.2
+2026-09-09 10:45:10,199 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹266.95 | ATR: ₹0.9 | SL: ₹268.3 | TP: ₹264.7 | Est Gain: ₹20.25
+2026-09-09 10:45:11,024 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 10:45:11,024 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 10:45:11,024 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 10:45:11,287 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-59.50
+2026-09-09 10:45:11,310 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 10:45:11,342 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 10:45:11,351 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 10:45:11,373 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 10:45:12,277 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (17 shares) to Trade Ledger.
+2026-09-09 11:00:00,272 [INFO] 
+⚡ [11:00 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 11:00:00,272 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 11:00:00,273 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 11:00:02,727 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2200.4 | ATR: ₹9.64 | SL: ₹2185.94 | TP: ₹2224.5 | Est Gain: ₹24.1
+2026-09-09 11:00:05,978 [INFO] 🎯 Setup: ITC [LONG] Price: ₹261.8 | ATR: ₹0.69 | SL: ₹260.76 | TP: ₹263.53 | Est Gain: ₹15.57
+2026-09-09 11:00:06,496 [INFO] 🎯 Setup: KOTAKBANK [LONG] Price: ₹414.65 | ATR: ₹1.11 | SL: ₹412.98 | TP: ₹417.42 | Est Gain: ₹16.62
+2026-09-09 11:00:07,016 [INFO] 🎯 Setup: LT [LONG] Price: ₹3995.8 | ATR: ₹13.23 | SL: ₹3975.96 | TP: ₹4028.88 | Est Gain: ₹33.08
+2026-09-09 11:00:08,378 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12577.0 | ATR: ₹32.77 | SL: ₹12527.84 | TP: ₹12658.92 | Est Gain: ₹81.92
+2026-09-09 11:00:09,886 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1054.0 | ATR: ₹3.87 | SL: ₹1048.19 | TP: ₹1063.67 | Est Gain: ₹19.34
+2026-09-09 11:00:11,780 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.89 | ATR: ₹1.0 | SL: ₹187.39 | TP: ₹191.39 | Est Gain: ₹32.5
+2026-09-09 11:00:12,347 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.25 | ATR: ₹0.9 | SL: ₹268.6 | TP: ₹265.0 | Est Gain: ₹20.25
+2026-09-09 11:00:13,319 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 11:00:13,319 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 11:00:13,320 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 11:00:13,626 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-59.50
+2026-09-09 11:00:13,639 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 11:00:14,595 [INFO] 🚀 Dispatched LT EXECUTE LONG (4 shares) to Trade Ledger.
+2026-09-09 11:00:14,605 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 11:00:14,616 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 11:00:14,627 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 11:15:00,443 [INFO] 
+⚡ [11:15 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 11:15:00,443 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 11:15:00,443 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 11:15:04,592 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2199.0 | ATR: ₹9.18 | SL: ₹2185.23 | TP: ₹2221.95 | Est Gain: ₹22.95
+2026-09-09 11:15:07,816 [INFO] 🎯 Setup: KOTAKBANK [LONG] Price: ₹414.5 | ATR: ₹1.08 | SL: ₹412.88 | TP: ₹417.2 | Est Gain: ₹16.2
+2026-09-09 11:15:08,314 [INFO] 🎯 Setup: LT [LONG] Price: ₹3987.7 | ATR: ₹13.18 | SL: ₹3967.93 | TP: ₹4020.65 | Est Gain: ₹32.95
+2026-09-09 11:15:09,463 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12596.0 | ATR: ₹32.5 | SL: ₹12547.25 | TP: ₹12677.25 | Est Gain: ₹81.25
+2026-09-09 11:15:09,924 [INFO] 🎯 Setup: SUNPHARMA [LONG] Price: ₹1872.8 | ATR: ₹6.01 | SL: ₹1863.78 | TP: ₹1887.83 | Est Gain: ₹15.03
+2026-09-09 11:15:10,389 [INFO] 🎯 Setup: TITAN [SHORT] Price: ₹4979.0 | ATR: ₹12.74 | SL: ₹4998.11 | TP: ₹4947.15 | Est Gain: ₹31.85
+2026-09-09 11:15:10,855 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1057.1 | ATR: ₹3.92 | SL: ₹1051.22 | TP: ₹1066.9 | Est Gain: ₹19.6
+2026-09-09 11:15:11,699 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.99 | ATR: ₹0.59 | SL: ₹167.11 | TP: ₹169.47 | Est Gain: ₹20.72
+2026-09-09 11:15:12,530 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.25 | ATR: ₹1.01 | SL: ₹186.74 | TP: ₹190.78 | Est Gain: ₹32.89
+2026-09-09 11:15:13,879 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 11:15:13,879 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 11:15:13,879 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 11:15:14,157 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 2/3 | Today's PnL: ₹-59.50
+2026-09-09 11:15:14,167 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 11:15:14,190 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 11:15:14,198 [INFO] 🛑 Skipping TITAN: Sector 'FMCG' is BANNED by Macro CIO Playbook.
+2026-09-09 11:15:14,205 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 11:30:00,905 [INFO] 
+⚡ [11:30 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 11:30:00,905 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 11:30:00,905 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 11:30:02,905 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2196.7 | ATR: ₹8.84 | SL: ₹2183.44 | TP: ₹2218.8 | Est Gain: ₹22.1
+2026-09-09 11:30:06,104 [INFO] 🎯 Setup: KOTAKBANK [LONG] Price: ₹414.6 | ATR: ₹1.06 | SL: ₹413.01 | TP: ₹417.25 | Est Gain: ₹15.9
+2026-09-09 11:30:06,568 [INFO] 🎯 Setup: LT [LONG] Price: ₹3975.8 | ATR: ₹13.43 | SL: ₹3955.66 | TP: ₹4009.38 | Est Gain: ₹33.58
+2026-09-09 11:30:07,820 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12601.0 | ATR: ₹31.32 | SL: ₹12554.02 | TP: ₹12679.3 | Est Gain: ₹78.3
+2026-09-09 11:30:09,051 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1057.3 | ATR: ₹3.91 | SL: ₹1051.43 | TP: ₹1067.08 | Est Gain: ₹19.56
+2026-09-09 11:30:09,852 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.84 | ATR: ₹0.58 | SL: ₹166.97 | TP: ₹169.29 | Est Gain: ₹20.3
+2026-09-09 11:30:10,687 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹187.91 | ATR: ₹0.97 | SL: ₹186.45 | TP: ₹190.34 | Est Gain: ₹31.59
+2026-09-09 11:30:11,971 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 11:30:11,973 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 11:30:11,973 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 11:30:12,272 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-114.70
+2026-09-09 11:30:12,307 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 11:30:12,317 [INFO] 🛑 Skipping LT: In active Cooldown penalty box.
+2026-09-09 11:30:12,327 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 11:30:12,353 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 11:30:12,359 [INFO] 🛑 Skipping WIPRO: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 11:45:00,149 [INFO] 
+⚡ [11:45 AM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 11:45:00,149 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 11:45:00,149 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 11:45:02,179 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2202.7 | ATR: ₹8.89 | SL: ₹2189.36 | TP: ₹2224.92 | Est Gain: ₹22.22
+2026-09-09 11:45:06,829 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12613.0 | ATR: ₹30.23 | SL: ₹12567.66 | TP: ₹12688.58 | Est Gain: ₹75.58
+2026-09-09 11:45:08,044 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1048.5 | ATR: ₹4.2 | SL: ₹1042.2 | TP: ₹1059.0 | Est Gain: ₹21.0
+2026-09-09 11:45:08,848 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.75 | ATR: ₹0.56 | SL: ₹166.91 | TP: ₹169.15 | Est Gain: ₹19.6
+2026-09-09 11:45:09,730 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.0 | ATR: ₹0.94 | SL: ₹186.59 | TP: ₹190.35 | Est Gain: ₹30.55
+2026-09-09 11:45:10,989 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 11:45:10,989 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 11:45:10,989 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 11:45:11,232 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-12.70
+2026-09-09 11:45:11,241 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 11:45:11,261 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 11:45:11,294 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 11:45:12,276 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (17 shares) to Trade Ledger.
+2026-09-09 11:45:12,297 [INFO] 🛑 Skipping WIPRO: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 12:00:00,181 [INFO] 
+⚡ [12:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 12:00:00,181 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 12:00:00,181 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 12:00:02,211 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2200.0 | ATR: ₹8.88 | SL: ₹2186.68 | TP: ₹2222.2 | Est Gain: ₹22.2
+2026-09-09 12:00:05,326 [INFO] 🎯 Setup: KOTAKBANK [LONG] Price: ₹415.2 | ATR: ₹1.02 | SL: ₹413.67 | TP: ₹417.75 | Est Gain: ₹15.3
+2026-09-09 12:00:06,878 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12587.0 | ATR: ₹30.07 | SL: ₹12541.9 | TP: ₹12662.17 | Est Gain: ₹75.17
+2026-09-09 12:00:08,119 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1049.2 | ATR: ₹4.05 | SL: ₹1043.12 | TP: ₹1059.33 | Est Gain: ₹20.26
+2026-09-09 12:00:08,920 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.57 | ATR: ₹0.55 | SL: ₹166.75 | TP: ₹168.94 | Est Gain: ₹19.18
+2026-09-09 12:00:09,796 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹186.85 | ATR: ₹0.96 | SL: ₹185.41 | TP: ₹189.25 | Est Gain: ₹31.2
+2026-09-09 12:00:10,640 [INFO] 🎯 Setup: NTPC [SHORT] Price: ₹333.65 | ATR: ₹1.32 | SL: ₹335.63 | TP: ₹330.35 | Est Gain: ₹23.1
+2026-09-09 12:00:11,110 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 12:00:11,111 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 12:00:11,111 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 12:00:11,385 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-12.70
+2026-09-09 12:00:11,417 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 12:00:11,450 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 12:00:11,460 [INFO] 🛑 Skipping NTPC: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 12:00:11,472 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 12:15:00,158 [INFO] 
+⚡ [12:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 12:15:00,158 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 12:15:00,160 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 12:15:02,317 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2201.1 | ATR: ₹8.43 | SL: ₹2188.45 | TP: ₹2222.17 | Est Gain: ₹21.07
+2026-09-09 12:15:06,882 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12582.0 | ATR: ₹28.99 | SL: ₹12538.51 | TP: ₹12654.48 | Est Gain: ₹72.48
+2026-09-09 12:15:08,100 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1046.8 | ATR: ₹3.98 | SL: ₹1040.83 | TP: ₹1056.75 | Est Gain: ₹19.9
+2026-09-09 12:15:08,988 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.25 | ATR: ₹0.53 | SL: ₹166.46 | TP: ₹168.57 | Est Gain: ₹18.48
+2026-09-09 12:15:09,836 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.34 | ATR: ₹0.99 | SL: ₹186.85 | TP: ₹190.81 | Est Gain: ₹32.11
+2026-09-09 12:15:10,280 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹265.45 | ATR: ₹0.89 | SL: ₹266.78 | TP: ₹263.22 | Est Gain: ₹20.07
+2026-09-09 12:15:11,108 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 12:15:11,109 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 12:15:11,109 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 12:15:11,385 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-12.70
+2026-09-09 12:15:11,407 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 12:15:11,414 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 12:15:11,422 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 12:15:11,452 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 12:30:00,280 [INFO] 
+⚡ [12:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 12:30:00,280 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 12:30:00,280 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 12:30:02,585 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2202.2 | ATR: ₹8.11 | SL: ₹2190.03 | TP: ₹2222.47 | Est Gain: ₹20.27
+2026-09-09 12:30:05,495 [INFO] 🎯 Setup: ITC [LONG] Price: ₹261.75 | ATR: ₹0.69 | SL: ₹260.71 | TP: ₹263.48 | Est Gain: ₹15.57
+2026-09-09 12:30:07,548 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12600.0 | ATR: ₹29.06 | SL: ₹12556.41 | TP: ₹12672.65 | Est Gain: ₹72.65
+2026-09-09 12:30:08,949 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1048.2 | ATR: ₹3.92 | SL: ₹1042.32 | TP: ₹1058.0 | Est Gain: ₹19.6
+2026-09-09 12:30:09,907 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.35 | ATR: ₹0.52 | SL: ₹166.57 | TP: ₹168.65 | Est Gain: ₹18.2
+2026-09-09 12:30:10,771 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.28 | ATR: ₹0.97 | SL: ₹186.82 | TP: ₹190.71 | Est Gain: ₹31.59
+2026-09-09 12:30:11,303 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹266.65 | ATR: ₹0.96 | SL: ₹268.09 | TP: ₹264.25 | Est Gain: ₹21.6
+2026-09-09 12:30:12,182 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 12:30:12,182 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 12:30:12,182 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 12:30:12,463 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-12.70
+2026-09-09 12:30:12,474 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 12:30:12,505 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 12:30:12,514 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 12:30:12,524 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 12:45:00,406 [INFO] 
+⚡ [12:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 12:45:00,406 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 12:45:00,406 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 12:45:02,392 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2209.2 | ATR: ₹8.14 | SL: ₹2196.99 | TP: ₹2229.55 | Est Gain: ₹20.35
+2026-09-09 12:45:05,190 [INFO] 🎯 Setup: ITC [LONG] Price: ₹262.35 | ATR: ₹0.69 | SL: ₹261.31 | TP: ₹264.08 | Est Gain: ₹15.57
+2026-09-09 12:45:07,256 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12646.0 | ATR: ₹31.06 | SL: ₹12599.41 | TP: ₹12723.65 | Est Gain: ₹77.65
+2026-09-09 12:45:08,455 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1051.6 | ATR: ₹3.98 | SL: ₹1045.63 | TP: ₹1061.55 | Est Gain: ₹19.9
+2026-09-09 12:45:09,361 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.84 | ATR: ₹0.53 | SL: ₹167.05 | TP: ₹169.16 | Est Gain: ₹18.48
+2026-09-09 12:45:10,175 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹189.32 | ATR: ₹1.0 | SL: ₹187.82 | TP: ₹191.82 | Est Gain: ₹32.5
+2026-09-09 12:45:10,693 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹266.95 | ATR: ₹0.97 | SL: ₹268.4 | TP: ₹264.52 | Est Gain: ₹21.87
+2026-09-09 12:45:11,565 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 12:45:11,565 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 12:45:11,566 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 12:45:11,834 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-12.70
+2026-09-09 12:45:11,850 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 12:45:11,865 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 12:45:11,896 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 12:45:11,925 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 13:00:00,807 [INFO] 
+⚡ [01:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 13:00:00,807 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 13:00:00,808 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 13:00:02,952 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2212.0 | ATR: ₹7.88 | SL: ₹2200.18 | TP: ₹2231.7 | Est Gain: ₹19.7
+2026-09-09 13:00:07,407 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2474.9 | ATR: ₹6.75 | SL: ₹2485.03 | TP: ₹2458.03 | Est Gain: ₹16.87
+2026-09-09 13:00:07,869 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12649.0 | ATR: ₹29.77 | SL: ₹12604.34 | TP: ₹12723.42 | Est Gain: ₹74.42
+2026-09-09 13:00:09,128 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1051.0 | ATR: ₹3.87 | SL: ₹1045.19 | TP: ₹1060.67 | Est Gain: ₹19.34
+2026-09-09 13:00:10,019 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.85 | ATR: ₹0.5 | SL: ₹167.1 | TP: ₹169.1 | Est Gain: ₹17.5
+2026-09-09 13:00:10,920 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹189.75 | ATR: ₹1.01 | SL: ₹188.24 | TP: ₹192.28 | Est Gain: ₹32.89
+2026-09-09 13:00:11,397 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.15 | ATR: ₹0.96 | SL: ₹268.59 | TP: ₹264.75 | Est Gain: ₹21.6
+2026-09-09 13:00:12,273 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 13:00:12,273 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 13:00:12,274 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 13:00:12,547 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-12.70
+2026-09-09 13:00:12,560 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 13:00:12,573 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 13:00:12,586 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 13:00:12,598 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 13:15:00,429 [INFO] 
+⚡ [01:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 13:15:00,433 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 13:15:00,433 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 13:15:02,686 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2211.2 | ATR: ₹7.67 | SL: ₹2199.69 | TP: ₹2230.38 | Est Gain: ₹19.18
+2026-09-09 13:15:07,060 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2470.6 | ATR: ₹6.62 | SL: ₹2480.53 | TP: ₹2454.05 | Est Gain: ₹16.55
+2026-09-09 13:15:07,545 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12645.0 | ATR: ₹29.0 | SL: ₹12601.5 | TP: ₹12717.5 | Est Gain: ₹72.5
+2026-09-09 13:15:08,749 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1049.2 | ATR: ₹3.79 | SL: ₹1043.52 | TP: ₹1058.67 | Est Gain: ₹18.94
+2026-09-09 13:15:09,644 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.56 | ATR: ₹0.5 | SL: ₹166.81 | TP: ₹168.81 | Est Gain: ₹17.5
+2026-09-09 13:15:10,487 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹189.5 | ATR: ₹0.99 | SL: ₹188.01 | TP: ₹191.97 | Est Gain: ₹32.11
+2026-09-09 13:15:10,954 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹266.7 | ATR: ₹0.96 | SL: ₹268.14 | TP: ₹264.3 | Est Gain: ₹21.6
+2026-09-09 13:15:11,841 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 13:15:11,841 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 13:15:11,842 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 13:15:12,127 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-2.50
+2026-09-09 13:15:12,142 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 13:15:12,173 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 13:15:12,206 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 13:15:12,216 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 13:15:12,907 [INFO] 🚀 Dispatched BAJFINANCE EXECUTE LONG (17 shares) to Trade Ledger.
+2026-09-09 13:30:00,853 [INFO] 
+⚡ [01:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 13:30:00,854 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 13:30:00,854 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 13:30:02,952 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2215.4 | ATR: ₹7.55 | SL: ₹2204.08 | TP: ₹2234.28 | Est Gain: ₹18.88
+2026-09-09 13:30:08,184 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12654.0 | ATR: ₹28.43 | SL: ₹12611.35 | TP: ₹12725.08 | Est Gain: ₹71.08
+2026-09-09 13:30:09,616 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1046.9 | ATR: ₹3.7 | SL: ₹1041.35 | TP: ₹1056.15 | Est Gain: ₹18.5
+2026-09-09 13:30:10,515 [INFO] 🎯 Setup: WIPRO [LONG] Price: ₹167.71 | ATR: ₹0.48 | SL: ₹166.99 | TP: ₹168.91 | Est Gain: ₹16.8
+2026-09-09 13:30:11,407 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.93 | ATR: ₹0.96 | SL: ₹187.49 | TP: ₹191.33 | Est Gain: ₹31.2
+2026-09-09 13:30:11,904 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹268.15 | ATR: ₹1.02 | SL: ₹269.68 | TP: ₹265.6 | Est Gain: ₹22.95
+2026-09-09 13:30:13,019 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 13:30:13,019 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 13:30:13,019 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 13:30:13,306 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-2.50
+2026-09-09 13:30:13,318 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 13:30:13,330 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 13:30:13,358 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 13:30:13,367 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 13:45:00,254 [INFO] 
+⚡ [01:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 13:45:00,255 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 13:45:00,256 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 13:45:02,162 [INFO] 🎯 Setup: TCS [LONG] Price: ₹2212.2 | ATR: ₹7.37 | SL: ₹2201.14 | TP: ₹2230.62 | Est Gain: ₹18.42
+2026-09-09 13:45:06,591 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12645.0 | ATR: ₹28.68 | SL: ₹12601.98 | TP: ₹12716.7 | Est Gain: ₹71.7
+2026-09-09 13:45:07,886 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1046.2 | ATR: ₹3.58 | SL: ₹1040.83 | TP: ₹1055.15 | Est Gain: ₹17.9
+2026-09-09 13:45:09,403 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹189.25 | ATR: ₹0.93 | SL: ₹187.85 | TP: ₹191.57 | Est Gain: ₹30.16
+2026-09-09 13:45:09,879 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.8 | ATR: ₹1.0 | SL: ₹269.3 | TP: ₹265.3 | Est Gain: ₹22.5
+2026-09-09 13:45:10,758 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 13:45:10,758 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 13:45:10,759 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 13:45:11,037 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-2.50
+2026-09-09 13:45:11,064 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 13:45:11,098 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 13:45:11,108 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 13:45:11,114 [INFO] 🛑 Skipping TCS: Sector 'IT' is BANNED by Macro CIO Playbook.
+2026-09-09 14:00:00,033 [INFO] 
+⚡ [02:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 14:00:00,033 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 14:00:00,033 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 14:00:08,835 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12632.0 | ATR: ₹29.42 | SL: ₹12587.87 | TP: ₹12705.55 | Est Gain: ₹73.55
+2026-09-09 14:00:11,882 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹189.19 | ATR: ₹0.9 | SL: ₹187.84 | TP: ₹191.44 | Est Gain: ₹29.25
+2026-09-09 14:00:12,387 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.8 | ATR: ₹0.96 | SL: ₹269.24 | TP: ₹265.4 | Est Gain: ₹21.6
+2026-09-09 14:00:13,283 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-09 14:00:13,283 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 14:00:13,283 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 14:00:13,582 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 1/3 | Today's PnL: ₹-2.50
+2026-09-09 14:00:13,605 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 14:00:13,638 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 14:00:13,650 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 14:15:00,588 [INFO] 
+⚡ [02:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 14:15:00,588 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 14:15:00,588 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 14:15:07,283 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12644.0 | ATR: ₹29.18 | SL: ₹12600.23 | TP: ₹12716.95 | Est Gain: ₹72.95
+2026-09-09 14:15:10,383 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.86 | ATR: ₹0.87 | SL: ₹187.56 | TP: ₹191.04 | Est Gain: ₹28.34
+2026-09-09 14:15:10,892 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.55 | ATR: ₹0.92 | SL: ₹268.93 | TP: ₹265.25 | Est Gain: ₹20.7
+2026-09-09 14:15:11,794 [INFO] ✅ Successfully persisted top 3 setups to database.
+2026-09-09 14:15:11,795 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 14:15:11,795 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 14:15:12,056 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-70.50
+2026-09-09 14:15:12,065 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 14:15:12,090 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 14:15:12,122 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 14:30:00,032 [INFO] 
+⚡ [02:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 14:30:00,033 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 14:30:00,034 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 14:30:07,036 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12669.0 | ATR: ₹30.38 | SL: ₹12623.43 | TP: ₹12744.95 | Est Gain: ₹75.95
+2026-09-09 14:30:08,345 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1046.2 | ATR: ₹3.47 | SL: ₹1041.0 | TP: ₹1054.88 | Est Gain: ₹17.36
+2026-09-09 14:30:10,030 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.68 | ATR: ₹0.85 | SL: ₹187.41 | TP: ₹190.81 | Est Gain: ₹27.69
+2026-09-09 14:30:10,560 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.25 | ATR: ₹0.89 | SL: ₹268.58 | TP: ₹265.02 | Est Gain: ₹20.07
+2026-09-09 14:30:11,477 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-09-09 14:30:11,479 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 14:30:11,480 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 14:30:11,777 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-70.50
+2026-09-09 14:30:11,787 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 14:30:11,798 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 14:30:11,810 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 14:30:11,810 [INFO] 🛑 Skipping BAJFINANCE: Hit 2 loss strikes today. Locked for the session.
+2026-09-09 14:45:00,718 [INFO] 
+⚡ [02:45 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 14:45:00,718 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 14:45:00,720 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 14:45:08,228 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12650.0 | ATR: ₹31.64 | SL: ₹12602.54 | TP: ₹12729.1 | Est Gain: ₹79.1
+2026-09-09 14:45:09,681 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1042.6 | ATR: ₹3.51 | SL: ₹1037.33 | TP: ₹1051.38 | Est Gain: ₹17.56
+2026-09-09 14:45:11,567 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.24 | ATR: ₹0.83 | SL: ₹187.0 | TP: ₹190.31 | Est Gain: ₹26.91
+2026-09-09 14:45:12,102 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹266.65 | ATR: ₹0.88 | SL: ₹267.97 | TP: ₹264.45 | Est Gain: ₹19.8
+2026-09-09 14:45:13,046 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-09-09 14:45:13,046 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 14:45:13,047 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 14:45:13,355 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-70.50
+2026-09-09 14:45:13,383 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 14:45:13,414 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 14:45:13,444 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 14:45:13,445 [INFO] 🛑 Skipping BAJFINANCE: Hit 2 loss strikes today. Locked for the session.
+2026-09-09 15:00:00,431 [INFO] 
+⚡ [03:00 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 15:00:00,431 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 15:00:00,431 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 15:00:07,719 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12641.0 | ATR: ₹31.8 | SL: ₹12593.3 | TP: ₹12720.5 | Est Gain: ₹79.5
+2026-09-09 15:00:09,166 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1041.6 | ATR: ₹3.4 | SL: ₹1036.5 | TP: ₹1050.1 | Est Gain: ₹17.0
+2026-09-09 15:00:11,005 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.12 | ATR: ₹0.79 | SL: ₹186.94 | TP: ₹190.09 | Est Gain: ₹25.61
+2026-09-09 15:00:11,639 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹267.0 | ATR: ₹0.87 | SL: ₹268.31 | TP: ₹264.82 | Est Gain: ₹19.62
+2026-09-09 15:00:12,804 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-09-09 15:00:12,805 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 15:00:12,805 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 15:00:13,193 [INFO] 📊 Market Regime: CHOPPY | Active Positions: 0/3 | Today's PnL: ₹-70.50
+2026-09-09 15:00:13,223 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 15:00:13,235 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 15:00:13,246 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 15:00:13,247 [INFO] 🛑 Skipping BAJFINANCE: Hit 2 loss strikes today. Locked for the session.
+2026-09-09 15:15:00,198 [INFO] 
+⚡ [03:15 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 15:15:00,199 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 15:15:00,199 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 15:15:07,123 [INFO] 🎯 Setup: ASIANPAINT [SHORT] Price: ₹2482.0 | ATR: ₹6.26 | SL: ₹2491.39 | TP: ₹2466.35 | Est Gain: ₹15.65
+2026-09-09 15:15:07,582 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12611.0 | ATR: ₹31.8 | SL: ₹12563.3 | TP: ₹12690.5 | Est Gain: ₹79.5
+2026-09-09 15:15:08,751 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1040.1 | ATR: ₹3.2 | SL: ₹1035.3 | TP: ₹1048.1 | Est Gain: ₹16.0
+2026-09-09 15:15:10,321 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.14 | ATR: ₹0.73 | SL: ₹187.04 | TP: ₹189.96 | Est Gain: ₹23.66
+2026-09-09 15:15:10,794 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹265.9 | ATR: ₹0.84 | SL: ₹267.16 | TP: ₹263.8 | Est Gain: ₹18.9
+2026-09-09 15:15:11,699 [INFO] ✅ Successfully persisted top 5 setups to database.
+2026-09-09 15:15:11,700 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 15:15:11,700 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 15:15:11,974 [INFO] 📊 Market Regime: BEARISH | Active Positions: 0/3 | Today's PnL: ₹-70.50
+2026-09-09 15:15:12,007 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 15:15:12,037 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 15:15:12,045 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 15:15:12,046 [INFO] 🛑 Skipping BAJFINANCE: Hit 2 loss strikes today. Locked for the session.
+2026-09-09 15:15:12,054 [INFO] 🛑 Skipping ASIANPAINT: Sector 'FMCG' is BANNED by Macro CIO Playbook.
+2026-09-09 15:30:00,993 [INFO] 
+⚡ [03:30 PM IST] 15-Minute Candle Close: Triggering Quantitative Cycle...
+2026-09-09 15:30:00,994 [INFO]  -> Scanning Universe with PyTorch Alpha Engine...
+2026-09-09 15:30:00,994 [INFO] ⚙️ Initiating Alpha Engine scan across 24 tickers...
+2026-09-09 15:30:07,664 [INFO] 🎯 Setup: MARUTI [LONG] Price: ₹12611.0 | ATR: ₹32.32 | SL: ₹12562.52 | TP: ₹12691.8 | Est Gain: ₹80.8
+2026-09-09 15:30:08,816 [INFO] 🎯 Setup: BAJFINANCE [LONG] Price: ₹1040.1 | ATR: ₹3.41 | SL: ₹1034.98 | TP: ₹1048.62 | Est Gain: ₹17.04
+2026-09-09 15:30:10,468 [INFO] 🎯 Setup: TATASTEEL [LONG] Price: ₹188.14 | ATR: ₹0.78 | SL: ₹186.97 | TP: ₹190.09 | Est Gain: ₹25.35
+2026-09-09 15:30:10,962 [INFO] 🎯 Setup: POWERGRID [SHORT] Price: ₹266.25 | ATR: ₹0.88 | SL: ₹267.57 | TP: ₹264.05 | Est Gain: ₹19.8
+2026-09-09 15:30:11,799 [INFO] ✅ Successfully persisted top 4 setups to database.
+2026-09-09 15:30:11,799 [INFO]  -> Running Tactical Copilot Execution & Sizing...
+2026-09-09 15:30:11,800 [INFO] ⚡ Tactical Copilot evaluating fresh setups with Breaking News Guard...
+2026-09-09 15:30:12,054 [INFO] 📊 Market Regime: BEARISH | Active Positions: 0/3 | Today's PnL: ₹-70.50
+2026-09-09 15:30:12,086 [INFO] 🛑 Skipping MARUTI: Sector 'Auto' is BANNED by Macro CIO Playbook.
+2026-09-09 15:30:12,118 [INFO] 🛑 Skipping TATASTEEL: Sector 'Metals' is BANNED by Macro CIO Playbook.
+2026-09-09 15:30:12,129 [INFO] 🛑 Skipping POWERGRID: Sector 'Energy' is BANNED by Macro CIO Playbook.
+2026-09-09 15:30:12,130 [INFO] 🛑 Skipping BAJFINANCE: Hit 2 loss strikes today. Locked for the session.
+2026-09-09 15:31:00,190 [INFO] 🛑 [03:31 PM] Market Closed. Resetting Daily State Flags.
